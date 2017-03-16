@@ -10,6 +10,8 @@
 
 var bodyParser = require('body-parser');
 
+var express = require('express');
+
 // express framework for handling http requests
 var app = express();
 
