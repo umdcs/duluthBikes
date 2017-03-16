@@ -5,49 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="87dp"
-        android:text="Map"
-        android:layout_marginTop="87dp"
-        android:onClick="displayMap"/>
+
 
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="7dp">
+        android:background="@color/colorPrimary">
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_margin="1dp"
-            android:text="Button1" />
+    <Button
+        android:id="@+id/dropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick=""
+        android:text="DropMenu" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_margin="1dp"
-            android:text="Button2" />
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="displayMap"
+        android:text="Start" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_margin="1dp"
-            android:text="Button3" />
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick=""
+        android:text="Stop"/>
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_margin="1dp"
-            android:text="Button4" />
+    <Button
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick=""
+        android:text="Camera?"/>
+
 
     </LinearLayout>
+
+    <fragment class="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/fragmentMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
