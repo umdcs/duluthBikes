@@ -5,4 +5,5 @@ package com.example.sam.duluthbikes;
  */
 
 public class Model {
+
 }
