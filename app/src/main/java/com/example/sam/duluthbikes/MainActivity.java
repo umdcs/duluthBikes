@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private TextView mLatitudeText;
     private TextView mLongitudeText;
     private Button button1;
+    private int myRequestCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +84,13 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public void onConnected(Bundle connectionHint) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-        }
 
+        ActivityCompat.requestPermissions(
+                this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                myRequestCode);
+        return;
+        }
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
@@ -119,9 +125,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public void setLastLocation(Location curr) {
         mLastLocation = curr;
     }
-
-    public void displayLocation() {
-        setLastLocation(mLastLocation);
-    }
+    public void displayLocation() { setLastLocation(mLastLocation); }
 }
 
