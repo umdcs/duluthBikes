@@ -17,7 +17,7 @@ public interface ModelViewPresenterComponents {
     }
 
     interface Model {
-        String getLocation();
+        Location getLocation();
         void setLocation(Location curr);
     }
 }
