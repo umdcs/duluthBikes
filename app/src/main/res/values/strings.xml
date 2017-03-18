@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">DuluthBikes</string>
     <string name="title_activity_maps">Duluth Bikes</string>
+
+    <string-array name="Options">
+        <item>Events</item>
+        <item>Reports</item>
+        <item>Get a Discount</item>
+        <item>Tours</item>
+        <item>About</item>
+    </string-array>
+
 </resources>
