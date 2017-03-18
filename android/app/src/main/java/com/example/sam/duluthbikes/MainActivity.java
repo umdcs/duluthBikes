@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
        // mLatitudeText = (EditText) findViewById(R.id.lat);
        // button1 = (Button) findViewById(R.id.button1);
 
-        mLatitudeText = (TextView) findViewById(R.id.lati);
+        mLatitudeText = (TextView) findViewById(R.id.lat);
         mLongitudeText = (TextView) findViewById(R.id.lon);
 
         button1 = (Button) findViewById(R.id.displayCoords);
