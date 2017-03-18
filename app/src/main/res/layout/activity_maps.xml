@@ -11,19 +11,15 @@
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical">
 
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="FINISH!"/>
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="STATS"/>
-
-
 
         <fragment
             android:id="@+id/map"
@@ -31,16 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:context="com.example.sam.duluthbikes.MapsActivity" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-        <Button
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PAUSE"/>
-    </LinearLayout>
-    </LinearLayout>
+            android:orientation="vertical">
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAUSE"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
