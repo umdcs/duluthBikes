@@ -59,7 +59,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
- * Created by Sam on 3/13/2017.
+ * Main Activity Class
  */
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener{
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         button1 = (Button) findViewById(R.id.displayCoords);
 
+        // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -101,29 +102,43 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         startActivity(intent);
     }
 
-
+    // connect to mGoogleAPIClient on start
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
     }
 
+    //disconnect from mGoogleApiClient on Stop
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
     }
 
+
+    /**
+     * Get the last known location of a user's device
+     * https://developer.android.com/training/location/retrieve-current.html
+     * @param bundle
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+
+        //check if the app is allowed to access location
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
+            // request permission to access location
             ActivityCompat.requestPermissions(
                     this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     myRequestCode);
             return;
         }
+
+        // get the last location
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+        //save the last location's latitude and longitude in a string
         if (mLastLocation != null) {
             String lat;
             lat = String.valueOf(mLastLocation.getLatitude());
@@ -157,13 +172,18 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     }
 
-
+    /**
+     * Creates the location request and sets parameters
+     * https://developer.android.com/training/location/change-location-settings.html
+     */
     protected void createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
+
+
 
     public Location getLastLocation(){ return mLastLocation; }
     public void setLastLocation(Location curr) { mLastLocation = curr; }
