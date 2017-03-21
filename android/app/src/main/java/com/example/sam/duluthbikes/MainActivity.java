@@ -187,7 +187,9 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     public Location getLastLocation(){ return mLastLocation; }
     public void setLastLocation(Location curr) { mLastLocation = curr; }
-    public void displayLocation() { setLastLocation(mLastLocation); }
+
+    //called by display location button
+    public void displayLocation(View view) { setLastLocation(mLastLocation); }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
