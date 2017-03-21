@@ -78,13 +78,13 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         setContentView(R.layout.activity_main);
 
         //Clark
-       // mLatitudeText = (EditText) findViewById(R.id.lat);
+       //mLatitudeText = (EditText) findViewById(R.id.lat);
        // button1 = (Button) findViewById(R.id.button1);
 
         mLatitudeText = (TextView) findViewById(R.id.lat);
         mLongitudeText = (TextView) findViewById(R.id.lon);
 
-        button1 = (Button) findViewById(R.id.displayCoords);
+        //button1 = (Button) findViewById(R.id.displayCoords);
 
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
@@ -96,11 +96,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         }
     }
 
-
-    public void displayMap(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-    }
 
     // connect to mGoogleAPIClient on start
     protected void onStart() {
@@ -167,6 +162,19 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     }
     */
 
+
+    //called by Start button
+    public void displayMap(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("CURRLOCATION", getLastLocation());
+        startActivity(intent);
+    }
+
+    //called by get coordinates button
+    public void displayLocation(View view) {
+        setLastLocation(mLastLocation);
+    }
+
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -187,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     public Location getLastLocation(){ return mLastLocation; }
     public void setLastLocation(Location curr) { mLastLocation = curr; }
-    public void displayLocation() { setLastLocation(mLastLocation); }
+    //public void displayLocation() { setLastLocation(mLastLocation); }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
