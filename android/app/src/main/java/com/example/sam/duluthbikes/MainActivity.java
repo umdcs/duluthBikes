@@ -8,19 +8,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.widget.TextViewCompat;
 
 import android.location.Location;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -35,30 +27,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
-import org.w3c.dom.Text;
-
-import android.location.*;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
  * Main Activity Class
@@ -114,14 +84,25 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    /**
+     * Required by OnMapReadyCallback interface
+     * Called when the map is ready to be used.
+     * https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
     }
 
 
     /**
+     * Required by GoogleApiClient.ConnectionCallbacks interface
+     * After calling connect(), this method will be invoked asynchronously when the connect request has successfully completed.
+     * https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks
+     *
      * Get the last known location of a user's device
      * https://developer.android.com/training/location/retrieve-current.html
      * @param bundle
@@ -147,6 +128,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
 
+            //put a market in the last location and zoom camera
             LatLng currlocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currlocation));
@@ -158,21 +140,40 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    //not called for now
+    /**
+     * Required by GoogleApiClient.ConnectionCallbacks interface
+     * https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks
+     * Called when the client is temporarily in a disconnected state.
+     */
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+
+    /**
+     * Required by OnConnectionFailedListener
+     * https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.OnConnectionFailedListener
+     * Called when there was an error connecting the client to the service.
+     * @param connectionResult
+     */
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
+
+    //Called wby Start button
     public void displayMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
 
     //called by get coordinates button
     public void displayLocation(View view) {
         setLastLocation(mLastLocation);
     }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
 
 
     /**
@@ -191,9 +192,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public Location getLastLocation(){ return mLastLocation; }
     public void setLastLocation(Location curr) { mLastLocation = curr; }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    }
 
 
 }
