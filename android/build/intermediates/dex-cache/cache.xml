@@ -106,7 +106,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="372225def520c40764e19f7a6c182985965a3126">
+        sha1="c0a7cf62059c8f5f2ea95a0ed28173cca42f1a52">
         <dex dex="C:\Users\Sam\Desktop\CS4531\DuluthBikes\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_5ed20bab7f2726960ad2e420a33938ef6c492c9f\classes.dex" />
     </item>
     <item

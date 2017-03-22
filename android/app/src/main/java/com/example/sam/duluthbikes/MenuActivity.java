@@ -92,6 +92,9 @@ public class MenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             Intent aboutIntent = new Intent(this, AboutActivity.class);
             startActivity(aboutIntent);
+        } else if (id == R.id.nav_location) {
+            Intent locationIntent = new Intent(this, LocationActivity.class);
+            startActivity(locationIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
