@@ -35,6 +35,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.w3c.dom.Text;
@@ -62,29 +64,32 @@ import com.google.android.gms.maps.model.PolylineOptions;
  * Main Activity Class
  */
 
-public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener{
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,
+                        ConnectionCallbacks, OnConnectionFailedListener{
 
     Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private TextView mLatitudeText;
     private TextView mLongitudeText;
+    private GoogleMap mMap;
 
     private Button button1;
     private int myRequestCode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Clark
-       //mLatitudeText = (EditText) findViewById(R.id.lat);
-       // button1 = (Button) findViewById(R.id.button1);
-
         mLatitudeText = (TextView) findViewById(R.id.lat);
         mLongitudeText = (TextView) findViewById(R.id.lon);
 
-        //button1 = (Button) findViewById(R.id.displayCoords);
+
+        //Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        //.findFragmentById(R.id.map);
+        //mapFragment.getMapAsync((OnMapReadyCallback) this);
 
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
@@ -135,38 +140,19 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         //save the last location's latitude and longitude in a string
         if (mLastLocation != null) {
-            String lat;
-            lat = String.valueOf(mLastLocation.getLatitude());
-            lat += (String.valueOf(mLastLocation.getLongitude()));
-            mLatitudeText.setText(lat);
-        }
-    }
-    /** Sams code
-    public void onConnected(Bundle connectionHint) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+            //String lat;
+            //lat = String.valueOf(mLastLocation.getLatitude());
+            //lat += (String.valueOf(mLastLocation.getLongitude()));
+            //mLatitudeText.setText(lat);
 
-        ActivityCompat.requestPermissions(
-                this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                myRequestCode);
-        return;
-        }
-
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        if(mLastLocation != null) {
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
         }
     }
-    */
 
-
-    //called by Start button
+    //not called for now
     public void displayMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("CURRLOCATION", getLastLocation());
         startActivity(intent);
     }
 
@@ -179,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     public void onConnectionSuspended(int i) {
 
     }
+
 
     /**
      * Creates the location request and sets parameters
@@ -200,6 +187,18 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in current location
+        LatLng duluth = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(duluth).title("Marker in current Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(duluth));
+       // MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
+        //  googleMap.setMapStyle(style);
     }
 }
 

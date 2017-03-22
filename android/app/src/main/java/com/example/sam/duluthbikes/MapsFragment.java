@@ -4,15 +4,22 @@ package com.example.sam.duluthbikes;
  * Created by Sam on 3/15/2017.
  */
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.location.LocationServices;
+
 
 public class MapsFragment extends Fragment {
+
 
     public static MapsFragment newInstance() {
         return new MapsFragment();
@@ -22,4 +29,7 @@ public class MapsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.activity_maps, container, false);
     }
+
+
+
 }
