@@ -118,31 +118,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // checks for permissions at runtime
-        // https://developers.google.com/android/guides/permissions
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Check Permissions Now
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.INTERNET}, myRequestCode);
-        }
-
     }
 
-
-/**
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mGoogleApiClient.connect();
-        }
-
-        else {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.INTERNET}, 10);
-        }
-
-    } */
 
     /**
      * Get the last known location of a user's device
@@ -158,9 +135,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             // request permission to access location
             ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    myRequestCode);
+                    this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, myRequestCode);
             return;
         }
 
