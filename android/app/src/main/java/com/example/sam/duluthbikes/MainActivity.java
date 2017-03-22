@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
     private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private TextView mLatitudeText;
-    private TextView mLongitudeText;
 
     private Button button1;
     private int myRequestCode;
@@ -77,14 +76,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Clark
-       // mLatitudeText = (EditText) findViewById(R.id.lat);
-       // button1 = (Button) findViewById(R.id.button1);
-
         mLatitudeText = (TextView) findViewById(R.id.lat);
-        mLongitudeText = (TextView) findViewById(R.id.lon);
-
-        button1 = (Button) findViewById(R.id.displayCoords);
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -131,32 +123,11 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             mLatitudeText.setText(lat);
         }
     }
-    /** Sams code
-    public void onConnected(Bundle connectionHint) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-        ActivityCompat.requestPermissions(
-                this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                myRequestCode);
-        return;
-        }
-
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        if(mLastLocation != null) {
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-        }
-    }
-    */
 
     @Override
     public void onConnectionSuspended(int i) {
 
     }
-
 
     protected void createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
