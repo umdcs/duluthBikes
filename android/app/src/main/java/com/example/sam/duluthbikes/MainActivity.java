@@ -21,12 +21,12 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 /**
- * Main Activity Class
+ * Created by Sam on 3/13/2017.
  */
 
 public class MainActivity extends AppCompatActivity implements ConnectionCallbacks, OnConnectionFailedListener {
 
-    Location mLastLocation;
+    private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private TextView mLatitudeText;
 
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
         mLatitudeText = (TextView) findViewById(R.id.lat);
 
-        // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -56,43 +55,29 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         startActivity(intent);
     }
 
-    // connect to mGoogleAPIClient on start
+
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
     }
 
-    //disconnect from mGoogleApiClient on Stop
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
     }
 
-
-    /**
-     * Get the last known location of a user's device
-     * https://developer.android.com/training/location/retrieve-current.html
-     * @param bundle
-     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
-        //check if the app is allowed to access location
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // request permission to access location
             ActivityCompat.requestPermissions(
                     this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     myRequestCode);
             return;
         }
-
-        // get the last location
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        //save the last location's latitude and longitude in a string
         if (mLastLocation != null) {
             String lat;
             lat = String.valueOf(mLastLocation.getLatitude());
@@ -106,10 +91,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
 
     }
 
-    /**
-     * Creates the location request and sets parameters
-     * https://developer.android.com/training/location/change-location-settings.html
-     */
     protected void createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
@@ -117,18 +98,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-
-
     public Location getLastLocation(){ return mLastLocation; }
 
     public void setLastLocation(Location curr) { mLastLocation = curr; }
 
-    //called by display location button
-    public void displayLocation(View view) { setLastLocation(mLastLocation); }
+    public void displayLocation() { setLastLocation(mLastLocation); }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
-

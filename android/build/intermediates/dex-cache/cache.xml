@@ -7,8 +7,13 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
+<<<<<<< HEAD
         sha1="052ed94f4bd1b3e7e88ff07dedcfe0bd5f71ea6d">
         <dex dex="C:\Users\Sam\Desktop\CS4531\DuluthBikes\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_5ed20bab7f2726960ad2e420a33938ef6c492c9f\classes.dex" />
+=======
+        sha1="3fc66186a62d7b49b8bc5a49cde3c150cb9f53c9">
+        <dex dex="C:\Users\Ruta\Desktop\Git\DuluthBikes\DuluthBikes\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_7494840b4e7e4489ce58b60d178ee0247f8414aa\classes.dex" />
+>>>>>>> 8d38ff4badf7418d0d3846562de93c0f2b59e291
     </item>
 
 </items>
