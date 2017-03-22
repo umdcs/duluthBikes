@@ -7,15 +7,16 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lat"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/lon"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -49,21 +50,20 @@
             android:onClick="displayLocation"
             android:text="Display Coords"/>
 
-        <Button
-            android:id="@+id/camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:onClick="onStart"
-            android:text="Connect"/>
 
     </LinearLayout>
 
-    
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.sam.duluthbikes.MainActivity" />
 
-    <fragment class="com.google.android.gms.maps.MapFragment"
-        android:id="@+id/fragmentMaps"
+    <!--<fragment class="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/FirstMap"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/> -->
 
 </LinearLayout>

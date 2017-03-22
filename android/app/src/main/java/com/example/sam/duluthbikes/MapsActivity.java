@@ -1,34 +1,46 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
 
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
+    private Marker mCurrLocationMarker;
+    private LocationRequest mLocationRequest;
     private int myRequestCode;
 
     @Override
@@ -36,18 +48,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+       // SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+         //       .findFragmentById(R.id.map);
+        //mapFragment.getMapAsync(this);
     }
 
 
@@ -63,15 +68,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         // Add a marker in Duluth
-        LatLng duluth = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(duluth).title("Marker in Duluth"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(duluth));
-        MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
-        googleMap.setMapStyle(style);
+      //  LatLng duluth = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+       // mMap.addMarker(new MarkerOptions().position(duluth).title("Marker in Duluth"));
+       // mMap.moveCamera(CameraUpdateFactory.newLatLng(duluth));
+       // MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
+        //googleMap.setMapStyle(style);
+
     }
+
+    // initialize google PLay services using builder
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -87,15 +104,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
+       // if (mLastLocation != null) {
+         //   LatLng duluth = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+          //  mMap.addMarker(new MarkerOptions().position(duluth).title("Marker in Duluth"));
+          //  mMap.moveCamera(CameraUpdateFactory.newLatLng(duluth));
+           // MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
+           // googleMap.setMapStyle(style);
+       // }
+
+
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
+
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
 }
