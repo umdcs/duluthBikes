@@ -62,6 +62,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
  * Main Activity Class
+ * Displays a map with your current location and allows to start tracking
  */
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -72,8 +73,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView mLatitudeText;
     private TextView mLongitudeText;
     private GoogleMap mMap;
-
-    private Button button1;
     private int myRequestCode;
 
 
@@ -119,30 +118,31 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // checks for permissions at runtime
+        // https://developers.google.com/android/guides/permissions
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.INTERNET}, myRequestCode);
+        }
+
+    }
+
+
+/**
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
-
             mGoogleApiClient.connect();
         }
+
         else {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.INTERNET}, 10);
-            if (ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                mMap.setMyLocationEnabled(true);
-            }
         }
 
-        // Add a marker in current location
-        /**  if (mLastLocation != null) {
-         LatLng currlocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-         mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
-         mMap.moveCamera(CameraUpdateFactory.newLatLng(currlocation));
-         MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
-         googleMap.setMapStyle(style);
-         // } */
-    }
+    } */
 
     /**
      * Get the last known location of a user's device
@@ -173,7 +173,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
 
             LatLng currlocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            //mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
+            mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currlocation));
             //MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
             //googleMap.setMapStyle(style);
