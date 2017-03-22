@@ -32,7 +32,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".MenuActivity"
             android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,14 +40,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
-            android:name=".MapsActivity"></activity>
+
         <activity android:name=".GoogleMapsApiClientExample" />
 
-        <!-- Define the intent service -->
+        <!-- Define the intent service
         <service
             android:name=".FetchAddressIntentService"
-            android:exported="false"/>
+            android:exported="false"/> -->
+
+        <activity android:name=".MainActivity" />
+
+        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".DiscountActivity"></activity>
+        <activity android:name=".EventsActivity"></activity>
+       <!-- <activity android:name=".MapsActivity"></activity>-->
+        <activity android:name=".ReportActivity"></activity>
+        <activity android:name=".ToursActivity"></activity>
+        <activity android:name=".LocationActivity" />
 
     </application>
 
