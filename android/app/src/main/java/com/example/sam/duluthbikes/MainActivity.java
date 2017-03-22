@@ -64,10 +64,10 @@ import com.google.android.gms.maps.model.PolylineOptions;
  * Main Activity Class
  */
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
                         ConnectionCallbacks, OnConnectionFailedListener{
 
-    Location mLastLocation;
+    private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private TextView mLatitudeText;
     private TextView mLongitudeText;
@@ -87,9 +87,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-        //.findFragmentById(R.id.map);
-        //mapFragment.getMapAsync((OnMapReadyCallback) this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
@@ -114,6 +114,35 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onStop();
     }
 
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+
+            mGoogleApiClient.connect();
+        }
+        else {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.INTERNET}, 10);
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+            }
+        }
+
+        // Add a marker in current location
+        /**  if (mLastLocation != null) {
+         LatLng currlocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+         mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
+         mMap.moveCamera(CameraUpdateFactory.newLatLng(currlocation));
+         MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
+         googleMap.setMapStyle(style);
+         // } */
+    }
 
     /**
      * Get the last known location of a user's device
@@ -140,14 +169,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //save the last location's latitude and longitude in a string
         if (mLastLocation != null) {
-            //String lat;
-            //lat = String.valueOf(mLastLocation.getLatitude());
-            //lat += (String.valueOf(mLastLocation.getLongitude()));
-            //mLatitudeText.setText(lat);
-
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+
+            LatLng currlocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            //mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currlocation));
+            //MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
+            //googleMap.setMapStyle(style);
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.0f));
+
         }
+
     }
 
     //not called for now
@@ -182,23 +215,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public Location getLastLocation(){ return mLastLocation; }
     public void setLastLocation(Location curr) { mLastLocation = curr; }
-    //public void displayLocation() { setLastLocation(mLastLocation); }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Add a marker in current location
-        LatLng duluth = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(duluth).title("Marker in current Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(duluth));
-       // MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
-        //  googleMap.setMapStyle(style);
-    }
 }
 
