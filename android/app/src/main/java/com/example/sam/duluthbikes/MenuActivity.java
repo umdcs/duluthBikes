@@ -81,14 +81,17 @@ public class MenuActivity extends AppCompatActivity
             Intent eventIntent = new Intent(this, EventsActivity.class);
             startActivity(eventIntent);
         } else if (id == R.id.nav_report) {
-
+            Intent reportIntent = new Intent(this, ReportActivity.class);
+            startActivity(reportIntent);
         } else if (id == R.id.nav_discount) {
-
+            Intent discountIntent = new Intent(this, DiscountActivity.class);
+            startActivity(discountIntent);
         } else if (id == R.id.nav_tours) {
             Intent tourIntent = new Intent(this, ToursActivity.class);
             startActivity(tourIntent);
         } else if (id == R.id.nav_about) {
-
+            Intent aboutIntent = new Intent(this, AboutActivity.class);
+            startActivity(aboutIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

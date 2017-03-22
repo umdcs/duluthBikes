@@ -6,6 +6,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="THIS IS REPORT PAGE"/>
+        android:text="THIS IS DISCOUNT PAGE"/>
 
 </LinearLayout>
