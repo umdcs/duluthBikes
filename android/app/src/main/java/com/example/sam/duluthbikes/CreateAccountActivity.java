@@ -38,7 +38,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_create);
+        setContentView(R.layout.activity_account_create);
         duplicateCode = 200;
     }
     private void storeUser(String userName, Context context) {
