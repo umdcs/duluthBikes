@@ -174,11 +174,14 @@ app.get('/users', function(req, res) {
 		if(key == name){
 			profileObj = JSON.stringify(users[key]);
 			found = true;
-												}
-											}
+		}
+	}
 
-											if(found)
-												return res.send(profileObj)
-											else
-																						return res.sendStatus(400)
+
+	if(found)
+		return res.send(profileObj)
+
+		else
+
+		return res.sendStatus(400)
 																					})
