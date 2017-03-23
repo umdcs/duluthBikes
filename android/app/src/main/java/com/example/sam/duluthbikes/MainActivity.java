@@ -5,11 +5,25 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,6 +39,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.util.Log;
+
+
 /**
  * Main Activity Class
  * Displays a map with your current location and allows to start tracking
@@ -32,6 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, ConnectionCallbacks, OnConnectionFailedListener {
 
+    public static String userName = null;
     private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private TextView mLatitudeText;
@@ -177,5 +195,42 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public Location getLastLocation(){ return mLastLocation; }
 
     public void setLastLocation(Location curr) { mLastLocation = curr; }
+    /**
+     * Gets the account username from file.
+     * @param filePath The filepath of the file the username is stored on
+     * @return username The username of the account
+     * @throws IOException Just in case there's an issue with the buffered reader
+     */
+    public String getUserName (String filePath) throws IOException {
+        File file = new File(filePath);
+        FileInputStream fin = new FileInputStream(file);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+        StringBuilder sb = new StringBuilder();
+        String line = reader.readLine();
+        sb.append(line);
+        String username = sb.toString();
+        reader.close();
+        fin.close();
 
+        return username;
+    }
+
+    /**
+     * Checks if a user account exists, otherwise starts the CreateAccount activity.
+     */
+    public void initializeUser() {
+        File file = this.getFileStreamPath("account.txt");
+        if(file == null || !file.exists()) {
+            Intent createAccount = new Intent(this, CreateAccountActivity.class);
+            startActivity(createAccount);
+        }
+        else {
+            try {
+                userName = getUserName(file.toString());
+                Log.d("username on main", userName);
+            } catch (java.lang.Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
