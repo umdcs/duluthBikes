@@ -90,7 +90,7 @@ app.listen(app.get("port"), function () {
 })
 
 
-.get('/users', function(req, res) {
+app.get('/users', function(req, res) {
 	
 		if (!req.body) return res.sendStatus(400)
 	
