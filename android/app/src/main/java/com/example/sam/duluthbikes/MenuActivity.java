@@ -93,7 +93,7 @@ public class MenuActivity extends AppCompatActivity
             Intent aboutIntent = new Intent(this, AboutActivity.class);
             startActivity(aboutIntent);
         } else if (id == R.id.nav_location) {
-            Intent locationIntent = new Intent(this, LocationActivity.class);
+            Intent locationIntent = new Intent(this, PracticeMaps.class);
             startActivity(locationIntent);
         }
 
