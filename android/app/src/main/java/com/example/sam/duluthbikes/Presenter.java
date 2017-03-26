@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 /**
+<<<<<<< HEAD
  * Created by Sam on 3/26/2017.
  */
 
