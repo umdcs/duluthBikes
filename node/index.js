@@ -23,7 +23,7 @@ var app = express();
 var routeHistory = [];
 
 // setting the port for the app system to use
-app.set("port",8080);
+app.set("port",23405);
 
 // this section tells the body parser what type of data to expect
 // for now it is mainly json
@@ -49,7 +49,7 @@ app.get('/', function(request, response) {
 
 	response.write('</body></html>');
 
-	respnse.end();
+	response.end();
 
 	console.log('DashBoard request received!');
 });
@@ -62,7 +62,7 @@ app.post('/postroute', function(request, response) {
 	var routeData = {'lat':request.body.lat,
 			 'lang':request.body.lang};
 
-	var date = {'Date':"time stamp from phone"};
+	var date = {'Date':request.body.time};
 
 	routeHistory.unshift(date);
 	routeHistory.unshift(routeData);
