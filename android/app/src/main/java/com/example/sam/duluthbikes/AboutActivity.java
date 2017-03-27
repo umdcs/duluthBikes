@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Sam on 3/22/2017.
  */
 
-public class AboutActivity extends AppCompatActivity implements ModelViewPresenterComponents.View{
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,8 +15,5 @@ public class AboutActivity extends AppCompatActivity implements ModelViewPresent
         setContentView(R.layout.activity_about);
     }
 
-    @Override
-    public void notifyUpdated() {
 
-    }
 }

@@ -11,11 +11,15 @@ import java.io.IOException;
 public interface ModelViewPresenterComponents {
 
     interface View {
-        void notifyUpdated();
+
+        public void locationChanged(Location location);
     }
 
     interface PresenterContract {
 
+        public void updateMapLocation();
+
+        public void clickStart();
     }
 
     interface Model {

@@ -54,141 +54,18 @@ import java.util.ArrayList;
  */
 
 public class MainActivity extends FragmentActivity
-        implements OnMapReadyCallback, ConnectionCallbacks, OnConnectionFailedListener,LocationListener {
+        implements OnMapReadyCallback,ModelViewPresenterComponents.View {
 
+
+    private Presenter mPresenter;
     public static String userName = null;
     private Location mLastLocation;
-    private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
     private TextView mLatitudeText;
     private TextView mLongitudeText;
     private GoogleMap mMap;
     private int myRequestCode;
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions = null;
-
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, String>{
-        @Override
-        protected String doInBackground(String... params){
-
-            HttpURLConnection serverConnection = null;
-            InputStream inputStream = null;
-
-            try{
-                /* The Java URL class is used to hold the URI */
-                URL url = new URL(params[0]);
-
-                /* We can open a connection to this URL now */
-                serverConnection = (HttpURLConnection) url.openConnection();
-
-                /* The second parameter, params[1] contains the TYPE of the HTTP
-                 * request. It can be GET, POST, PUT or DELETE.
-                 */
-                serverConnection.setRequestMethod(params[1]);
-
-                /* If the TYPE is POST, PUT or DELETE then we need to take
-                 * the third parameter params[2] which contains the JSON data
-                 * we need to place in the body of the HTTP message, and write
-                 * that JSON data as a string to the network connection to the
-                 * HTTP server.
-                 */
-                if (params[1].equals("POST") ||
-                        params[1].equals("PUT") ||
-                        params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
-
-                    /* Various server parameters need to set on HTTP connections that indicate the type
-                     * of data that will be sent. In our case, we are sending JSON as output so need to
-                     * set the Content-Type header attribute.
-                     */
-                    serverConnection.setDoOutput(true);
-                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-                    /* Since params[2] contains the JSON String to send, we must also calculate the
-                     * byte length of this data and set the Content-Length header attribute as well.
-                     */
-                    serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
-
-                    /* Finally, the JSON data can be written out to the server by using
-                     * a DataOutputStream that is created with the server's output stream.
-                     */
-                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    /* Write the json string data to the network */
-                    out.writeBytes(params[2].toString());
-
-                    /* flush and close the output stream buffer */
-                    out.flush();
-                    out.close();
-                }
-
-                /* ************************
-                 * HTTP RESPONSE Section
-                 * All requests are followed by a response with HTTP
-                 *
-                 * Get the response code and determine what to do.
-                 */
-                int responseCode = serverConnection.getResponseCode();
-
-                Log.d("Debug: ", "HTTP Response Code : " + responseCode);
-
-                /* Get the input stream (what's coming from our server to the Android client)
-                 * process the JSON data that's contained with it.
-                 */
-                inputStream = serverConnection.getInputStream();
-
-                /* This implementation is built so that ALL Responses send back a JSON data, as either
-                 * the data you want from a GET Request or as confirmation of receiving the data
-                 * on a POST, PUT, or DELETE Request.
-                 */
-                StringBuilder sb = new StringBuilder();
-                String line;
-                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-
-                /* At this point, the StringBuilder sb contains all the data that was in the
-                 * body of the Response. Since we expect JSON to be in this, the string hopefully
-                 * contains valid JSON data.  We need to return this string out of this
-                 * function and the onPostExecute function will process it.
-                 */
-                return sb.toString();
-
-            }catch (MalformedURLException e){
-                e.printStackTrace();
-            }catch (IOException e){
-                e.printStackTrace();
-            }finally {
-                serverConnection.disconnect();
-            }
-            return "shouldnt ever get here ";
-        }
-        protected void onPostExecute(String latLong){
-
-            JSONArray routeData = null;
-
-            try{
-                routeData = new JSONArray(latLong);
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void notifyRouteUpdate(){
-        JSONObject route = null;
-        try{
-            route = new JSONObject();
-            route.put("lat",mLastLocation.getLatitude());
-            route.put("lang",mLastLocation.getLongitude());
-            route.put("time",mLastLocation.getTime());
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postroute","POST",route.toString());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,34 +75,28 @@ public class MainActivity extends FragmentActivity
         mLatitudeText = (TextView) findViewById(R.id.lat);
         mLongitudeText = (TextView) findViewById(R.id.lon);
 
+        mPresenter = new Presenter(this.getApplicationContext(),this,this);
+        mPresenter.clickStart();
+
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
 
-        createLocationRequest();
-
-        ////////////////////////////////////////////////////////////
-        // Create an instance of GoogleAPIClient
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
     }
 
 
     // connect to mGoogleAPIClient on start
     protected void onStart() {
-        mGoogleApiClient.connect();
+
+
         super.onStart();
     }
 
     //disconnect from mGoogleApiClient on Stop
     protected void onStop() {
-        mGoogleApiClient.disconnect();
+
         super.onStop();
     }
 
@@ -238,91 +109,11 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-    }
-
-    /**
-     * Required by GoogleApiClient.ConnectionCallbacks interface
-     * After calling connect(), this method will be invoked asynchronously when the connect request has successfully completed.
-     * https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks
-     *
-     * Get the last known location of a user's device
-     * https://developer.android.com/training/location/retrieve-current.html
-     * @param bundle
-     */
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-        //check if the app is allowed to access location
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // request permission to access location
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    myRequestCode);
-            return;
-        }
-
-        // get the last location
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        notifyRouteUpdate();
-
-
-        PendingResult<Status> pendingResult = LocationServices.FusedLocationApi
-                .requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
-
-        //save the last location's latitude and longitude in a string
-        if (mLastLocation != null) {
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-
-            //put a market in the last location and zoom camera
-            LatLng currlocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(currlocation).title("Marker in current Location"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(currlocation));
-            //MapStyleOptions style = MapStyleOptions.loadRawResourceStyle(this, R.raw.stylenight);
-            //googleMap.setMapStyle(style);
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.0f));
-        }
-
-
-    }
-
-    /**
-     *  Required by GoogleApiClient.ConnectionCallbacks interface
-     *  https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks
-     *  Called when the client is temporarily in a disconnected state.
-     */
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location){
-        notifyRouteUpdate();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(mLastLocation.getLatitude(),
-                mLastLocation.getLongitude())));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f));
-
-    }
-
-    /**
-     * Required by OnConnectionFailedListener
-     * https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.OnConnectionFailedListener
-     * Called when there was an error connecting the client to the service.
-     * @param connectionResult
-     */
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
 
-    //Called wby Start button
+
+    //Called by Start button
     public void displayMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
@@ -331,17 +122,6 @@ public class MainActivity extends FragmentActivity
     //called by get coordinates button
     public void displayLocation(View view) {
         setLastLocation(mLastLocation);
-    }
-
-    /**
-     * Creates the location request and sets parameters
-     * https://developer.android.com/training/location/change-location-settings.html
-     */
-    protected void createLocationRequest() {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     public Location getLastLocation(){ return mLastLocation; }
@@ -384,5 +164,15 @@ public class MainActivity extends FragmentActivity
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void locationChanged(Location location) {
+        setLastLocation(location);
+        LatLng latLng =
+                new LatLng(getLastLocation().getLatitude(),getLastLocation().getLongitude());
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f));
     }
 }

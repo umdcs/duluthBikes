@@ -1,5 +1,6 @@
 package com.example.sam.duluthbikes;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,8 +16,9 @@ public class DiscountActivity extends AppCompatActivity implements ModelViewPres
         setContentView(R.layout.activity_discount);
     }
 
+
     @Override
-    public void notifyUpdated() {
+    public void locationChanged(Location location) {
 
     }
 }
