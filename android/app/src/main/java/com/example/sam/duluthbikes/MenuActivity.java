@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -81,6 +82,11 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    public void startMainActivity(View view){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -124,7 +130,7 @@ public class MenuActivity extends AppCompatActivity
             Intent startIntent = new Intent(this, MapsActivity.class);
             startActivity(startIntent);
         } else if (id == R.id.nav_events) {
-            Intent eventIntent = new Intent(this, MainActivity.class);
+            Intent eventIntent = new Intent(this, EventsActivity.class);
             startActivity(eventIntent);
         } else if (id == R.id.nav_report) {
             Intent reportIntent = new Intent(this, ReportActivity.class);
@@ -147,4 +153,5 @@ public class MenuActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
