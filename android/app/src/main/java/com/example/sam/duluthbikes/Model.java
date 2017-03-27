@@ -3,6 +3,7 @@ package com.example.sam.duluthbikes;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -19,12 +20,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +28,8 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,15 +37,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.example.sam.duluthbikes.MainActivity.userName;
+
 /**
  * Created by Sam on 3/26/2017.
  */
 
 public class Model
         implements ModelViewPresenterComponents.Model,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+            GoogleApiClient.ConnectionCallbacks,
+            GoogleApiClient.OnConnectionFailedListener,
+            LocationListener{
 
     private ModelViewPresenterComponents.PresenterContract mPresenter;
     private Location mLastLocation;
@@ -94,21 +94,54 @@ public class Model
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postroute","POST",route.toString());
     }
 
+    /**
+     * Gets the account username from file.
+     * @param filePath The filepath of the file the username is stored on
+     * @return username The username of the account
+     * @throws IOException Just in case there's an issue with the buffered reader
+     */
     @Override
     public String getUserName(String filePath) throws IOException {
-        return null;
+        File file = new File(filePath);
+        FileInputStream fin = new FileInputStream(file);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+        StringBuilder sb = new StringBuilder();
+        String line = reader.readLine();
+        sb.append(line);
+        String username = sb.toString();
+        reader.close();
+        fin.close();
+
+        return username;
     }
 
+    /**
+     * Checks if a user account exists, otherwise starts the CreateAccount activity.
+     */
     @Override
     public void initializeUser() {
+        File file = mContext.getFileStreamPath("account.txt");
+        if(file == null || !file.exists()) {
+            Intent createAccount = new Intent(mContext, CreateAccountActivity.class);
+            mContext.startActivity(createAccount);
+        }
+        else {
+            try {
+                userName = getUserName(file.toString());
+                Log.d("username on main", userName);
+            } catch (java.lang.Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setInterval(2000);
+        mLocationRequest.setFastestInterval(500);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(3.0f);
     }
 
 
