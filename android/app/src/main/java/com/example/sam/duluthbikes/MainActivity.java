@@ -1,13 +1,11 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
-import android.app.IntentService;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Bundle;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -25,7 +23,6 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -183,9 +180,9 @@ public class MainActivity extends FragmentActivity
         JSONObject route = null;
         try{
             route = new JSONObject();
-            route.put("lat",getLastLocation().getLatitude());
-            route.put("lang",getLastLocation().getLongitude());
-            route.put("time",getLastLocation().getTime());
+            route.put("lat",mLastLocation.getLatitude());
+            route.put("lang",mLastLocation.getLongitude());
+            route.put("time",mLastLocation.getTime());
         }catch (JSONException e){
             e.printStackTrace();
         }

@@ -124,7 +124,7 @@ public class MenuActivity extends AppCompatActivity
             Intent startIntent = new Intent(this, MapsActivity.class);
             startActivity(startIntent);
         } else if (id == R.id.nav_events) {
-            Intent eventIntent = new Intent(this, EventsActivity.class);
+            Intent eventIntent = new Intent(this, MainActivity.class);
             startActivity(eventIntent);
         } else if (id == R.id.nav_report) {
             Intent reportIntent = new Intent(this, ReportActivity.class);
