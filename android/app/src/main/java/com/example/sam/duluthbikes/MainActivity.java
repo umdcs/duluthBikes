@@ -5,16 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,19 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-
 
 /**
  * Main Activity Class
@@ -46,7 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends FragmentActivity
         implements OnMapReadyCallback,ModelViewPresenterComponents.View {
 
-
+    //variable declaration area
     private Presenter mPresenter;
     public static String userName = null;
     private Location mLastLocation;
@@ -64,7 +47,7 @@ public class MainActivity extends FragmentActivity
         mLatitudeText = (TextView) findViewById(R.id.lat);
         mLongitudeText = (TextView) findViewById(R.id.lon);
 
-        points = new ArrayList<LatLng>();
+        points = new ArrayList<>();
 
         polylineOptions = new PolylineOptions()
                 .width(5)
@@ -79,6 +62,7 @@ public class MainActivity extends FragmentActivity
 
         mapFragment.getMapAsync(this);
 
+
     }
 
      /**
@@ -92,8 +76,6 @@ public class MainActivity extends FragmentActivity
         mMap = googleMap;
     }
 
-
-
     //Called by Start button
     public void displayMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
@@ -105,8 +87,8 @@ public class MainActivity extends FragmentActivity
         setLastLocation(mLastLocation);
     }
 
+    //get location and set location methods
     public Location getLastLocation(){ return mLastLocation; }
-
     public void setLastLocation(Location curr) { mLastLocation = curr; }
 
     @Override
@@ -115,6 +97,13 @@ public class MainActivity extends FragmentActivity
         LatLng latLng =
                 new LatLng(getLastLocation().getLatitude(),getLastLocation().getLongitude());
         points.add(latLng);
+
+        if(mMap.isMyLocationEnabled()==false){
+            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED){
+                mMap.setMyLocationEnabled(true);
+            }
+        }
 
         polylineOptions.add(latLng);
         Polyline polyline = mMap.addPolyline(polylineOptions);

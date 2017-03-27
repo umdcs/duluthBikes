@@ -297,13 +297,6 @@ public class Model
         }
         protected void onPostExecute(String latLong){
 
-            JSONArray routeData = null;
-
-            try{
-                routeData = new JSONArray(latLong);
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
         }
     }
 
