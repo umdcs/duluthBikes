@@ -1,7 +1,6 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,8 +31,6 @@ public class MainActivity extends FragmentActivity
     private Presenter mPresenter;
     public static String userName = null;
     private Location mLastLocation;
-    private TextView mLatitudeText;
-    private TextView mLongitudeText;
     private GoogleMap mMap;
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions;
@@ -43,9 +39,6 @@ public class MainActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mLatitudeText = (TextView) findViewById(R.id.lat);
-        mLongitudeText = (TextView) findViewById(R.id.lon);
 
         points = new ArrayList<>();
 
@@ -76,12 +69,6 @@ public class MainActivity extends FragmentActivity
         mMap = googleMap;
     }
 
-    //Called by Start button
-    public void displayMap(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-    }
-
     //called by get coordinates button
     public void displayLocation(View view) {
         setLastLocation(mLastLocation);
@@ -99,7 +86,7 @@ public class MainActivity extends FragmentActivity
         points.add(latLng);
 
         if(mMap.isMyLocationEnabled()==false){
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED){
                 mMap.setMyLocationEnabled(true);
             }

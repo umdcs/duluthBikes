@@ -127,7 +127,7 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_start) {
-            Intent startIntent = new Intent(this, MapsActivity.class);
+            Intent startIntent = new Intent(this, MainActivity.class);
             startActivity(startIntent);
         } else if (id == R.id.nav_events) {
             Intent eventIntent = new Intent(this, EventsActivity.class);
@@ -144,9 +144,6 @@ public class MenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             Intent aboutIntent = new Intent(this, AboutActivity.class);
             startActivity(aboutIntent);
-        } else if (id == R.id.nav_location) {
-            Intent locationIntent = new Intent(this, PracticeMaps.class);
-            startActivity(locationIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
