@@ -34,6 +34,7 @@ public class MainActivity extends FragmentActivity
     private GoogleMap mMap;
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions;
+    private LocationData locationData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class MainActivity extends FragmentActivity
 
         mPresenter = new Presenter(this.getApplicationContext(),this,this);
         mPresenter.clickStart();
+
+
 
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -92,7 +95,9 @@ public class MainActivity extends FragmentActivity
             }
         }
 
-        polylineOptions.add(latLng);
+        locationData.getOurInstance(this.getBaseContext()).addPoint(latLng);
+
+        polylineOptions.addAll(locationData.getOurInstance(this.getBaseContext()).getPoints());
         Polyline polyline = mMap.addPolyline(polylineOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f));
