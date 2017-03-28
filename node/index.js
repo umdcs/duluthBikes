@@ -14,6 +14,8 @@ var express = require('express');
 
 // express framework for handling http requests
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 
 /*
@@ -54,6 +56,13 @@ app.get('/', function(request, response) {
 	console.log('DashBoard request received!');
 });
 
+app.get('/maps',function(request,response){
+	response.sendFile(__dirname +'/maps.html');
+});
+
+
+
+
 
 app.post('/postroute', function(request, response) {
 	
@@ -80,14 +89,26 @@ app.get('/getRouteData', function(request,response) {
 
 
 
+
+
+
+
+
+io.on('connection',function(socket){
+	console.log('a socket io connection');
+});
+
+
+
 // this last section is to start the app and start listening on 
 // the given port for requests
 //
 
 
-app.listen(app.get("port"), function () {
-	console.log('duluth bikes node listening on port: ', app.get("port"));
-})
+
+http.listen(app.get("port"),function(){
+	console.log('duluth bikes node listening on port:',app.get("port"));
+});
 
 
 app.get('/users', function(req, res) {
