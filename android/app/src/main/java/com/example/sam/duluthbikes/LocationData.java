@@ -1,8 +1,10 @@
 package com.example.sam.duluthbikes;
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -13,12 +15,12 @@ import java.util.ArrayList;
 public class LocationData {
     private static LocationData ourInstance;
     private static Context mContext;
-    private ArrayList<LatLng> points;
+    private PolylineOptions mPolylineOptions;
 
     private LocationData(Context context) {
 
         mContext = context;
-        points = getPoints();
+        mPolylineOptions = getPoints();
     }
 
     public static LocationData getOurInstance(Context context){
@@ -28,12 +30,14 @@ public class LocationData {
         return ourInstance;
     }
 
-    public ArrayList<LatLng> getPoints(){
-        if(points==null)points = new ArrayList<>();
-        return points;
+    public PolylineOptions getPoints(){
+        if(mPolylineOptions==null)mPolylineOptions = new PolylineOptions()
+                .width(5)
+                .color(Color.BLUE);
+        return mPolylineOptions;
     }
 
     public void addPoint(LatLng p){
-        points.add(p);
+        mPolylineOptions.add(p);
     }
 }

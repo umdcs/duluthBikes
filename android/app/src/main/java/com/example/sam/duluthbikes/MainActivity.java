@@ -97,7 +97,7 @@ public class MainActivity extends FragmentActivity
 
         locationData.getOurInstance(this.getBaseContext()).addPoint(latLng);
 
-        polylineOptions.addAll(locationData.getOurInstance(this.getBaseContext()).getPoints());
+        polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
         Polyline polyline = mMap.addPolyline(polylineOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f));
