@@ -33,7 +33,7 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     }
 
     @Override
-    public void endRideButton() { mModel.stopLocationUpdates(); }
+    public void pauseRideButton() { mModel.stopLocationUpdates(); }
 
     @Override
     public void connectApi() { mModel.connectApiOnResume(); }

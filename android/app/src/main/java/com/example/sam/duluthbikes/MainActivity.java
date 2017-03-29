@@ -62,8 +62,12 @@ public class MainActivity extends FragmentActivity
 
     }
 
-    public void endRide(View view) {
-        mPresenter.endRideButton();
+    /**
+     * Method for pausing the current ride, will start a new activity. 
+     * @param view
+     */
+    public void pauseRide(View view) {
+        mPresenter.pauseRideButton();
         Intent startIntent = new Intent(this, EndOfRouteActivity.class);
         startActivity(startIntent);
     }

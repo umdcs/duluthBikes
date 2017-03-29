@@ -21,7 +21,7 @@ public interface ModelViewPresenterComponents {
 
         public void clickStart();
         
-        public void endRideButton();
+        public void pauseRideButton();
 
         public void connectApi();
     }
