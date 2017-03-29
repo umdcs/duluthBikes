@@ -12,18 +12,18 @@
         android:background="@drawable/nav_bar_drawable">
 
         <Button
-            android:id="@+id/stop"
+            android:id="@+id/pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Stop"
+            android:layout_margin="10dp"
+            android:text="Pause"
             android:onClick="endRide"/>
 
         <Button
             android:id="@+id/displayStats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
             android:text="Display Statitistics"/>
 
     </LinearLayout>

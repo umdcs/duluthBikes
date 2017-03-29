@@ -197,7 +197,6 @@ public class Model
 
     @Override
     public void onLocationChanged(Location location){
-
         setLocation(location);
         notifyRouteUpdate();
         mPresenter.updateMapLocation();
