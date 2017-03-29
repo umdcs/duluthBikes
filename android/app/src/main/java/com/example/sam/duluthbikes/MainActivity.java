@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -59,6 +60,18 @@ public class MainActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
 
+    }
+
+    public void endRide(View view) {
+        mPresenter.endRideButton();
+        Intent startIntent = new Intent(this, EndOfRouteActivity.class);
+        startActivity(startIntent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.connectApi();
     }
 
      /**

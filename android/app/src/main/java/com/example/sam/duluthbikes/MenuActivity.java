@@ -64,6 +64,7 @@ public class MenuActivity extends AppCompatActivity
         return username;
     }
 
+
     /**
      * Checks if a user account exists, otherwise starts the CreateAccount activity.
      */

@@ -76,6 +76,17 @@ public class Model
     }
 
 
+    /**
+     * Method to stop location services
+     */
+    public void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
+
+    public void connectApiOnResume() {
+        mGoogleApiClient.connect();
+    }
 
     @Override
     public void notifyRouteUpdate() {
