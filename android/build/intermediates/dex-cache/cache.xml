@@ -2,112 +2,13 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\12f9e9fdda7487b094cc9fec27f86dcab7324448\output\jars\classes.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\Sam\Desktop\CS4531\DuluthBikes\android\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_14dda95dc6a3fd097dada43335694f15276c00ba.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\dc3f6f699b5b73d52b1b16e4350112158a3ff6d1\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_e4f7d176b1f9f192bfeffa42544f6ab386c110d0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\cddc737f77c6022a4020d20cc9d232fe1ef847c5\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="93c1199fcb0a34b980e6fff8350daff62e696ec2">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_f94aae173ef85c859ec056dea09cd550248894ac.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\6ebf20e2cf5db91434fefbace18c3850bc5f69ba\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="9ab787a20aae245b5b3651ae0b9c38459eb37715">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_b5eae9d3791096c5a8fc9ebff881d774ff47a47b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\eddbd6476fc06495ddaa43242ef63244262f59a4\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_c1ee3be8e5d3572319f6ca37c51bc136ca1f1d28.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\48b3dfb6c50f4c4d103e55b5fe2ff1c3cb95fc5a\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="425c7b17887e5c3f8cbdf67ba171bc246f29b42c">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_25ce255490b2b75f281139862cfe1942c2584f20.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\46de312adbf1097b9533d142df68006b063a441c\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="93c10d68ab5ea070f15782ae6d3a28d1f1d8f45e">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_b9db94228d5d3b999de17dc20a8b4ae7666b75f1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\3d7c5e82b388cfef7edf9c1832ddf435abd622c0\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="518768f3200963fbfec652f498da2c9d39245234">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_75b3ca1d56e2f9c2e91e3ebb2e7108153c3a0812.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\79b602b170bf67fc0101193431ac8974256f2929\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d6a04527c17597019dad82777c5094a3d60d1c33">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_54875695e714b9ae227beca0fa0bd45fecaf9081.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\69445e6d4ef3cf609fdd8fbab137764046360844\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_f901b7b108993285fe1979eebe78b148d91faf0f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\890d0930c228ee3b6c36ecb10a38982c763481de\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_35f7ced5df906bcd75facba0c10b8ff38a5f0d08.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\clark\.android\build-cache\358aeb02ca69088c7e58f40f29af107e9bd389a0\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
-        <dex dex="C:\Users\clark\Documents\duluthBikes\DuluthBikes\android\app\build\intermediates\pre-dexed\debug\classes_a00520b9e94b3b6c14b96d3aa56d2a3a5e003e02.jar" />
+        sha1="5f8f7dd2593fb5612e307d36bb7ed788b99523da">
+        <dex dex="C:\Users\Sam\Desktop\CS4531\DuluthBikes\android\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_5ed20bab7f2726960ad2e420a33938ef6c492c9f\classes.dex" />
     </item>
 
 </items>

@@ -31,4 +31,14 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     public void clickStart(){
         mModel = new Model(mContext,mActivity,this);
     }
+
+    @Override
+    public void pauseRideButton() { mModel.stopLocationUpdates(); }
+
+    @Override
+    public void finishRideButton() { mModel.disconnectApiOnFinish(); }
+
+    @Override
+    public void connectApi() { mModel.connectApiOnResume(); }
+
 }

@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -59,6 +60,28 @@ public class MainActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
 
+    }
+
+    /**
+     * Method for pausing the current ride, will start a new activity.
+     * @param view
+     */
+    public void pauseRide(View view) {
+        mPresenter.pauseRideButton();
+        Intent pauseIntent = new Intent(this, PauseActivity.class);
+        startActivity(pauseIntent);
+    }
+
+    public void endRide(View view) {
+        mPresenter.finishRideButton();
+        Intent endIntent = new Intent(this,EndRideActivity.class);
+        startActivity(endIntent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.connectApi();
     }
 
      /**

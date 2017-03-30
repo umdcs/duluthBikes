@@ -5,8 +5,8 @@
     <!--The list of clickable buttons for the drawer -->
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_start"
-            android:title="Start Riding" />
+            android:id="@+id/nav_home"
+            android:title="Home" />
         <item
             android:id="@+id/nav_events"
             android:title="Events" />

@@ -20,6 +20,12 @@ public interface ModelViewPresenterComponents {
         public void updateMapLocation();
 
         public void clickStart();
+        
+        public void pauseRideButton();
+
+        public void finishRideButton();
+
+        public void connectApi();
     }
 
     interface Model {
@@ -38,6 +44,12 @@ public interface ModelViewPresenterComponents {
 
         //Initializes user
         void initializeUser();
+
+        void stopLocationUpdates();
+
+        void disconnectApiOnFinish();
+
+        void connectApiOnResume();
     }
 }
 

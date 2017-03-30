@@ -76,6 +76,22 @@ public class Model
     }
 
 
+    /**
+     * Method to stop location services
+     */
+    public void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
+
+    public void disconnectApiOnFinish() {
+        if(mGoogleApiClient.isConnected())
+            mGoogleApiClient.disconnect();
+    }
+
+    public void connectApiOnResume() {
+        mGoogleApiClient.connect();
+    }
 
     @Override
     public void notifyRouteUpdate() {
@@ -186,7 +202,6 @@ public class Model
 
     @Override
     public void onLocationChanged(Location location){
-
         setLocation(location);
         notifyRouteUpdate();
         mPresenter.updateMapLocation();
