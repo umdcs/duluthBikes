@@ -17,7 +17,6 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-
 /*
  * varaible area for any required varaibles we might use
  */
@@ -33,6 +32,13 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(bodyParser.json());
+
+
+//********MangoDB*******
+// Connect to the mongo module
+var mongodb = require('./mongoDB.js')();
+
+
 
 // this next section is for our GET, POST, PUT, DELETE routes
 // the first one is the default dashboard route
@@ -53,15 +59,19 @@ app.get('/', function(request, response) {
 
 	response.end();
 
+	//when using Mongo
+	//see the whole collection for debugging
+	//
+	//var str = mongodb.printDatabase('RideHistory', function(result) {
+		//res.send('<HTML><BODY>' + JSON.stringify(result, null, 2) + '</BODY></HTML>');
+    //});
+	
 	console.log('DashBoard request received!');
 });
 
 app.get('/maps',function(request,response){
 	response.sendFile(__dirname +'/maps.html');
 });
-
-
-
 
 
 app.post('/postroute', function(request, response) {
@@ -73,6 +83,10 @@ app.post('/postroute', function(request, response) {
 
 	var date = {'Date':request.body.time};
 
+	//Mongo
+	//mongodb.insertRoute(routeData);
+	//mongodb.insertDate(date);
+	
 	routeHistory.unshift(date);
 	routeHistory.unshift(routeData);
 
@@ -83,6 +97,9 @@ app.post('/postroute', function(request, response) {
 
 app.get('/getRouteData', function(request,response) {
 	console.log('Get Request: getRouteData');
+	
+		//Mongo
+		//mongodb.getRoutes(some argument);
 
 	response.json(routeData);
 });
@@ -169,6 +186,7 @@ app.get('/users', function(req, res) {
 			console.log("userName = " + quotesUser);
 			users[req.body.Username] = newUser;
 
+	
 			res.send(req.body);
 	})
 
