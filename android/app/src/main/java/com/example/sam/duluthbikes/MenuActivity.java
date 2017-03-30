@@ -9,16 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Created by Sam on 3/22/2017.
@@ -43,44 +36,6 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-    /**
-     * Gets the account username from file.
-     * @param filePath The filepath of the file the username is stored on
-     * @return username The username of the account
-     * @throws IOException Just in case there's an issue with the buffered reader
-     */
-    public String getUserName (String filePath) throws IOException {
-        File file = new File(filePath);
-        FileInputStream fin = new FileInputStream(file);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-        StringBuilder sb = new StringBuilder();
-        String line = reader.readLine();
-        sb.append(line);
-        String username = sb.toString();
-        reader.close();
-        fin.close();
-
-        return username;
-    }
-
-
-    /**
-     * Checks if a user account exists, otherwise starts the CreateAccount activity.
-     */
-    public void initializeUser() {
-        File file = this.getFileStreamPath("account.txt");
-        if (file == null || !file.exists()) {
-            Intent createAccount = new Intent(this, CreateAccountActivity.class);
-            startActivity(createAccount);
-        } else {
-            try {
-                userName = getUserName(file.toString());
-                Log.d("username on main", userName);
-            } catch (java.lang.Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void startMainActivity(View view){
@@ -127,8 +82,8 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_start) {
-            Intent startIntent = new Intent(this, MainActivity.class);
+        if (id == R.id.nav_home) {
+            Intent startIntent = new Intent(this, MenuActivity.class);
             startActivity(startIntent);
         } else if (id == R.id.nav_events) {
             Intent eventIntent = new Intent(this, EventsActivity.class);

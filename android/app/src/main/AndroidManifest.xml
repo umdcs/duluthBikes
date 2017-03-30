@@ -47,7 +47,8 @@
         <activity android:name=".EventsActivity"></activity>
         <activity android:name=".ReportActivity"></activity>
         <activity android:name=".ToursActivity"></activity>
-        <activity android:name=".EndOfRouteActivity"></activity>
+        <activity android:name=".EndRideActivity"></activity>
+        <activity android:name=".PauseActivity"></activity>
 
 
     </application>

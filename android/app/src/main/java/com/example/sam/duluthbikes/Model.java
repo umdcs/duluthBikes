@@ -84,6 +84,11 @@ public class Model
                 mGoogleApiClient, this);
     }
 
+    public void disconnectApiOnFinish() {
+        if(mGoogleApiClient.isConnected())
+            mGoogleApiClient.disconnect();
+    }
+
     public void connectApiOnResume() {
         mGoogleApiClient.connect();
     }

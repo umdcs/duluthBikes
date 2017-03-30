@@ -23,6 +23,8 @@ public interface ModelViewPresenterComponents {
         
         public void pauseRideButton();
 
+        public void finishRideButton();
+
         public void connectApi();
     }
 
@@ -44,6 +46,8 @@ public interface ModelViewPresenterComponents {
         void initializeUser();
 
         void stopLocationUpdates();
+
+        void disconnectApiOnFinish();
 
         void connectApiOnResume();
     }
