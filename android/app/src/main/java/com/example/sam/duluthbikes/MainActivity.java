@@ -126,7 +126,7 @@ public class MainActivity extends FragmentActivity
         polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
         LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
         CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),0);
-        mMap.animateCamera(cu);
+        mMap.moveCamera(cu);
         mMap.addPolyline(polylineOptions);
     }
 }
