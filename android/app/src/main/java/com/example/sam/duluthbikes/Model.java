@@ -152,9 +152,9 @@ public class Model
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setFastestInterval(500);
+        mLocationRequest.setInterval(500);
+        mLocationRequest.setFastestInterval(100);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setSmallestDisplacement(3.0f);
     }
 
 

@@ -10,11 +10,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -45,7 +48,7 @@ public class MainActivity extends FragmentActivity
         points = new ArrayList<>();
 
         polylineOptions = new PolylineOptions()
-                .width(5)
+                .width(8)
                 .color(Color.BLUE);
 
         mPresenter = new Presenter(this.getApplicationContext(),this,this);
@@ -115,14 +118,15 @@ public class MainActivity extends FragmentActivity
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED){
                 mMap.setMyLocationEnabled(true);
+                mMap.setMaxZoomPreference(18);
             }
         }
 
         locationData.getOurInstance(this.getBaseContext()).addPoint(latLng);
-
         polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
-        Polyline polyline = mMap.addPolyline(polylineOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f));
+        LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
+        CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),0);
+        mMap.animateCamera(cu);
+        mMap.addPolyline(polylineOptions);
     }
 }
