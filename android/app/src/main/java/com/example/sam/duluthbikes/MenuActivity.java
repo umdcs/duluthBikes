@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,9 @@ public class MenuActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_activity);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); // R.id.toolbar = in menu_bar.xml
         //setSupportActionBar(toolbar);
 
@@ -81,25 +85,32 @@ public class MenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.nav_home) {
-            Intent startIntent = new Intent(this, MenuActivity.class);
-            startActivity(startIntent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new HomeFragment())
+                    .commit();
         } else if (id == R.id.nav_events) {
-            Intent eventIntent = new Intent(this, EventsActivity.class);
-            startActivity(eventIntent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new EventsFragment())
+                    .commit();
         } else if (id == R.id.nav_report) {
-            Intent reportIntent = new Intent(this, ReportActivity.class);
-            startActivity(reportIntent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new ReportFragment())
+                    .commit();
         } else if (id == R.id.nav_discount) {
-            Intent discountIntent = new Intent(this, DiscountActivity.class);
-            startActivity(discountIntent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new DiscountFragment())
+                    .commit();
         } else if (id == R.id.nav_tours) {
-            Intent tourIntent = new Intent(this, ToursActivity.class);
-            startActivity(tourIntent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new ToursFragment())
+                    .commit();
         } else if (id == R.id.nav_about) {
-            Intent aboutIntent = new Intent(this, AboutActivity.class);
-            startActivity(aboutIntent);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new AboutFragment())
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

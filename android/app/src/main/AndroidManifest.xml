@@ -42,11 +42,11 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-        <activity android:name=".AboutActivity"></activity>
-        <activity android:name=".DiscountActivity"></activity>
-        <activity android:name=".EventsActivity"></activity>
-        <activity android:name=".ReportActivity"></activity>
-        <activity android:name=".ToursActivity"></activity>
+        <activity android:name=".AboutFragment"></activity>
+        <activity android:name=".DiscountFragment"></activity>
+        <activity android:name=".EventsFragment"></activity>
+        <activity android:name=".ReportFragment"></activity>
+        <activity android:name=".ToursFragment"></activity>
         <activity android:name=".EndRideActivity"></activity>
         <activity android:name=".PauseActivity"></activity>
 
