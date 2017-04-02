@@ -39,6 +39,7 @@ public class MainActivity extends FragmentActivity
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions;
     private LocationData locationData;
+    private boolean animate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +49,13 @@ public class MainActivity extends FragmentActivity
         points = new ArrayList<>();
 
         polylineOptions = new PolylineOptions()
-                .width(8)
+                .width(15)
                 .color(Color.BLUE);
 
         mPresenter = new Presenter(this.getApplicationContext(),this,this);
         mPresenter.clickStart();
 
-
+        animate = true;
 
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -125,8 +126,15 @@ public class MainActivity extends FragmentActivity
         locationData.getOurInstance(this.getBaseContext()).addPoint(latLng);
         polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
         LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
-        CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),0);
-        mMap.moveCamera(cu);
+        CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),100);
+
+        if(animate)
+        {
+            animate = false;
+            mMap.animateCamera(cu);
+        }
+        else mMap.moveCamera(cu);
         mMap.addPolyline(polylineOptions);
+
     }
 }

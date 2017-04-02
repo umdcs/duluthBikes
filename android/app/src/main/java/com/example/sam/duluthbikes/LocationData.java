@@ -35,7 +35,7 @@ public class LocationData {
 
     public PolylineOptions getPoints(){
         if(mPolylineOptions==null)mPolylineOptions = new PolylineOptions()
-                    .width(8)
+                    .width(15)
                     .color(Color.BLUE);
 
         return mPolylineOptions;
