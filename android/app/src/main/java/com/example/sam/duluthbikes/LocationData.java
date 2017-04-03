@@ -8,8 +8,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.util.ArrayList;
-
 /**
  * Created by clark on 3/28/2017.
  */
@@ -30,6 +28,12 @@ public class LocationData {
         builder = getBuilder();
         lastLocation = getLastLocation();
         distance = getDistance();
+    }
+
+
+    // TODO: finish reset - this will be called to remove polylines from map after ride is finished.
+    public void resetData() {
+        mPolylineOptions = null;
     }
 
     public static LocationData getOurInstance(Context context){
