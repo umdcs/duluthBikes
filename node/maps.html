@@ -47,16 +47,6 @@
         poly.setMap(map);
 
       }
-
-      // Handles click events on a map, and adds a new point to the Polyline.
-      function addLatLng(event) {
-        var path = poly.getPath();
-
-        // Because path is an MVCArray, we can simply append a new coordinate
-        // and it will automatically appear.
-        path.push(event.latLng);
-
-      }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initMap">
