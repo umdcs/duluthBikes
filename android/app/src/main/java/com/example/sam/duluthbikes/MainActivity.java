@@ -78,7 +78,8 @@ public class MainActivity extends FragmentActivity
 
     public void endRide(View view) {
         mPresenter.finishRideButton();
-        Intent endIntent = new Intent(this,EndRideActivity.class);
+        Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
+        endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         startActivity(endIntent);
     }
 
@@ -123,7 +124,7 @@ public class MainActivity extends FragmentActivity
             }
         }
 
-        locationData.getOurInstance(this.getBaseContext()).addPoint(latLng);
+        locationData.getOurInstance(this.getBaseContext()).addPoint(latLng,location);
         polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
         LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
         CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),100);
@@ -134,7 +135,6 @@ public class MainActivity extends FragmentActivity
             mMap.animateCamera(cu);
         }
         else mMap.moveCamera(cu);
-        mMap.addPolyline(polylineOptions);
-
+        Polyline p = mMap.addPolyline(polylineOptions);
     }
 }

@@ -2,6 +2,7 @@ package com.example.sam.duluthbikes;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -19,11 +20,16 @@ public class LocationData {
     private PolylineOptions mPolylineOptions;
     private LatLngBounds.Builder builder;
 
+    private Location lastLocation;
+    private double distance;
+
     private LocationData(Context context) {
 
         mContext = context;
         mPolylineOptions = getPoints();
         builder = getBuilder();
+        lastLocation = getLastLocation();
+        distance = getDistance();
     }
 
     public static LocationData getOurInstance(Context context){
@@ -46,8 +52,20 @@ public class LocationData {
         return builder;
     }
 
-    public void addPoint(LatLng p){
-        mPolylineOptions.add(p);
+    public Location getLastLocation(){
+        if(lastLocation==null)distance =-1;
+        return lastLocation;
+    }
+
+    public double getDistance(){
+        if(distance==-1)distance=0;
+        return distance;
+    }
+
+    public void addPoint(LatLng p,Location location){
+        if(distance>0)mPolylineOptions.add(p);
         builder.include(p);
+        if(getLastLocation()!=null)distance += getLastLocation().distanceTo(location);
+        lastLocation = location;
     }
 }
