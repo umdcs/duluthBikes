@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">DuluthBikes</string>
+    <string name="title_activity_maps">Duluth Bikes</string>
+
+    <string-array name="Options">
+        <item>Events</item>
+        <item>Reports</item>
+        <item>Get a Discount</item>
+        <item>Tours</item>
+        <item>About</item>
+    </string-array>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
+
+
+</resources>
