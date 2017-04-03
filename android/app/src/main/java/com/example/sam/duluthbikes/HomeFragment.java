@@ -21,5 +21,4 @@ public class HomeFragment extends Fragment {
         myView = inflater.inflate(R.layout.activity_home, container, false);
         return myView;
     }
-
 }
