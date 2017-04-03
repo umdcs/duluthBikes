@@ -45,6 +45,7 @@ var mongodb = require('./mongoDB.js')();
 //
 app.get('/', function(request, response) {
 
+	/*
 	response.writeHead(200, {'Content-Type': 'text/html'});
 
 
@@ -58,13 +59,13 @@ app.get('/', function(request, response) {
 	response.write('</body></html>');
 
 	response.end();
-
+*/
 	//when using Mongo
 	//see the whole collection for debugging
 	//
-	//var str = mongodb.printDatabase('RideHistory', function(result) {
-		//res.send('<HTML><BODY>' + JSON.stringify(result, null, 2) + '</BODY></HTML>');
-    //});
+	var str = printDatabase('RideHistory', function(result) {
+		response.send('<HTML><BODY>' + JSON.stringify(result, null, 2) + '</BODY></HTML>');
+    	});
 	
 	console.log('DashBoard request received!');
 });
@@ -79,12 +80,12 @@ app.post('/postroute', function(request, response) {
 	if (!request.body)return response.sendStatus(400);
 
 	var routeData = {'lat':request.body.lat,
-			 'lang':request.body.lang};
+			 'lng':request.body.lng};
 
 	var date = {'Date':request.body.time};
 
 	//Mongo
-	//mongodb.insertRoute(routeData);
+	insertRoute(routeData);
 	//mongodb.insertDate(date);
 	
 	routeHistory.unshift(date);

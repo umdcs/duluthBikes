@@ -11,6 +11,7 @@
 /captures
 .externalNativeBuild
 
+
 /android/*.iml
 /android/.gradle
 /android/local.properties
@@ -21,3 +22,6 @@
 /android/build
 /android/captures
 /android/.externalNativeBuild
+/node/DB/*
+/node/DB
+
