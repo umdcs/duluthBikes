@@ -1,6 +1,5 @@
 package com.example.sam.duluthbikes;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
  * Created by Sam on 3/22/2017.
  */
 
-public class ReportFragment extends Fragment implements ModelViewPresenterComponents.View {
+public class ReportFragment extends Fragment {
 
     View myView;
 
@@ -21,10 +20,5 @@ public class ReportFragment extends Fragment implements ModelViewPresenterCompon
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_report, container, false);
         return myView;
-    }
-
-    @Override
-    public void locationChanged(Location location) {
-
     }
 }
