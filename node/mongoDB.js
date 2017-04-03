@@ -1,6 +1,6 @@
 
 
-var url = 'mongodb://127.0.0.1:27017/db'; //URL needs to be changed
+var url = 'mongodb://127.0.0.1:50432/db'; //URL needs to be changed
 var collections = ['rides']; //Array of known collections ???
 
 var mongojs = require('mongojs');
