@@ -6,19 +6,37 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
- * Created by Sam on 3/22/2017.
+ * Activity to display events
+ * Check:
+ * https://developer.android.com/guide/webapps/webview.html
  */
 
 public class EventsFragment extends Fragment {
 
     View myView;
+    String EventsPage = "http://www.duluthbikes.org/news-events/";
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_events, container, false);
+
+        WebView myWebView = (WebView) myView.findViewById(R.id.webViewEvents);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.setWebViewClient(new newWebClient());
+        myWebView.loadUrl(EventsPage);
+
         return myView;
     }
+
+    private class newWebClient extends WebViewClient {
+
+    }
+
 }
+
