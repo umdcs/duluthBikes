@@ -47,16 +47,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".AboutFragment" />
-        <activity android:name=".DiscountFragment" />
-        <activity android:name=".EventsFragment" />
-        <activity android:name=".ReportFragment" />
-        <activity android:name=".ToursFragment" />
+        <fragment android:name=".AboutFragment" />
+        <fragment android:name=".DiscountFragment" />
+        <fragment android:name=".EventsFragment" />
+        <fragment android:name=".ReportFragment" />
+        <fragment android:name=".ToursFragment" />
         <activity android:name=".EndRideActivity" />
         <activity android:name=".PauseActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login">
+        </activity>
     </application>
 
 </manifest>
