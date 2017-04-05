@@ -44,7 +44,7 @@ app.get('/fullRide',function(req,res){
 		res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
 		+'<H1>Full Rides.</H1>');
 		result.reverse();
-		res.write(JSON.stringify(result));
+		res.write(JSON.stringify(result,['ride']));
 		res.send();
 	});
 	console.log('full ride request');
@@ -96,9 +96,8 @@ app.post('/postfinish',function(req,res){
 
 	if(!req.body)return res.sendStatus(400);
 	
-	var fullRide = {'ride':req.body.ride};
-
-	insertFullRide(fullRide);
+	
+	insertFullRide(req.body.ride);
 
 	console.log('Post Full Ride');
 
@@ -118,13 +117,23 @@ app.get('/getRouteData', function(request,response) {
 
 
 
-
+app.get('/deletealltherides',function(res,req){
+	console.log('deleted all rides atempt');
+	
+	deleteAll('FullRidesRecorded',function(result){
+		if(result==true)console.log("deleted all");
+		else console.log("didnt work");
+		});
+});
+	
 
 
 
 
 io.on('connection',function(socket){
 	console.log('a socket io connection');
+
+	//socket.emit('draw',{ 
 });
 
 

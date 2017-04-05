@@ -72,6 +72,11 @@ module.exports = function() {
 		});
 	};
 
+	deleteAll = function(colName,callback){
+		mongodb.collection(colName).remove({});
+		callback(true);
+	};
+
  	return mongodb;
 
 };
