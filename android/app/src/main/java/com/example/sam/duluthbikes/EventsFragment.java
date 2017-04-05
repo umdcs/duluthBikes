@@ -13,8 +13,7 @@ import android.webkit.WebViewClient;
 
 /**
  * Activity to display events
- * Check:
- * https://developer.android.com/guide/webapps/webview.html
+ * Check: https://developer.android.com/guide/webapps/webview.html
  */
 
 public class EventsFragment extends Fragment {
@@ -32,6 +31,7 @@ public class EventsFragment extends Fragment {
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new newWebClient());
         myWebView.loadUrl(EventsPage);
+        //this allows to navigate back in website using Back key
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
@@ -50,7 +50,6 @@ public class EventsFragment extends Fragment {
                             break;
                     }
                 }
-
                 return false;
             }
         });
@@ -64,7 +63,5 @@ public class EventsFragment extends Fragment {
     private class newWebClient extends WebViewClient {
 
     }
-
-
 
 }
