@@ -77,7 +77,7 @@ public class Model
 
 
     /**
-     * Method to stop location services
+     * Method to stop location services called by Presenters pauseRideButton method
      */
     public void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(

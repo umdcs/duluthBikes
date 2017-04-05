@@ -69,8 +69,8 @@ public class MainActivity extends FragmentActivity
      */
     public void pauseRide(View view) {
         mPresenter.pauseRideButton();
-        Intent pauseIntent = new Intent(this, PauseActivity.class);
-        startActivity(pauseIntent);
+        //Intent pauseIntent = new Intent(this, PauseActivity.class);
+        //startActivity(pauseIntent);
     }
 
     public void endRide(View view) {

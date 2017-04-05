@@ -10,11 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 
 /**
  * Created by Sam on 3/22/2017.
@@ -110,6 +108,10 @@ public class MenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_tours) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new ToursFragment())
+                    .commit();
+        } else if (id == R.id.nav_membership) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new MembershipFragment())
                     .commit();
         } else if (id == R.id.nav_about) {
             fragmentManager.beginTransaction()
