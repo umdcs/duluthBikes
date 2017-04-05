@@ -31,9 +31,9 @@ public class LocationData {
     }
 
 
-    // TODO: finish reset - this will be called to remove polylines from map after ride is finished.
+    // Called when finish button is pressed. Removed polylines from the map
     public void resetData() {
-        mPolylineOptions = null;
+        ourInstance = null;
     }
 
     public static LocationData getOurInstance(Context context){

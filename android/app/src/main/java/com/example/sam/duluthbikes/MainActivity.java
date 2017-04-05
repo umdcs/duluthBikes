@@ -8,9 +8,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -81,8 +79,7 @@ public class MainActivity extends FragmentActivity
         endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         startActivity(endIntent);
 
-        //TODO: Calls resetData() in Model that Removes polylines from map when ride is complete.
-        //locationData.getOurInstance((this.getBaseContext()).resetData());
+        LocationData.getOurInstance(this.getBaseContext()).resetData();
     }
 
     @Override
