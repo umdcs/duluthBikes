@@ -39,39 +39,38 @@ app.use(bodyParser.json());
 var mongodb = require('./mongoDB.js')();
 
 
+app.get('/fullRide',function(req,res){
+	var rides = printRides('FullRidesRecorded',function(result){
+		res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
+		+'<H1>Full Rides.</H1>');
+		result.reverse();
+		res.write(JSON.stringify(result));
+		res.send();
+	});
+	console.log('full ride request');
+}); 
 
 // this next section is for our GET, POST, PUT, DELETE routes
 // the first one is the default dashboard route
 //
 app.get('/', function(request, response) {
 
-	/*
-	response.writeHead(200, {'Content-Type': 'text/html'});
+	
 
-
-	response.write('<!DOCTYPE html><head><title>Duluth Bike DashBoard</title></head><body>');
-	response.write('<H1>Duluth Bike Route Data</H1>');
-
-	response.write('JSON Data:');
-
-	response.write(JSON.stringify(routeHistory));
-
-	response.write('</body></html>');
-
-	response.end();
-*/
 	//when using Mongo
-	//see the whole collection for debugging
-	//
 	var str = printDatabase('RideHistory', function(result) {
-		response.send('<HTML><BODY>' + JSON.stringify(result, null, 2) + '</BODY></HTML>');
+		response.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>' 
+		+ '<H1>Duluth Bikes Route Data.</H1>')
+		result.reverse();
+		response.write(JSON.stringify(result,['point','lat','lng'],'\n') + '</BODY></HTML>');
+		response.send();
     	});
 	
 	console.log('DashBoard request received!');
 });
 
 app.get('/maps',function(request,response){
-	response.sendFile(__dirname +'/maps.html');
+	response.sendFile(__dirname +'/ride.html');
 });
 
 
@@ -80,21 +79,33 @@ app.post('/postroute', function(request, response) {
 	if (!request.body)return response.sendStatus(400);
 
 	var routeData = {'lat':request.body.lat,
-			 'lng':request.body.lng};
+			 'lng':request.body.lang};
 
 	var date = {'Date':request.body.time};
 
 	//Mongo
 	insertRoute(routeData);
 	//mongodb.insertDate(date);
-	
-	routeHistory.unshift(date);
-	routeHistory.unshift(routeData);
 
 	console.log('Post Request: postroute');
 
 	response.sendStatus(200);
 });
+
+app.post('/postfinish',function(req,res){
+
+	if(!req.body)return res.sendStatus(400);
+	
+	var fullRide = {'ride':req.body.ride};
+
+	insertFullRide(fullRide);
+
+	console.log('Post Full Ride');
+
+	res.sendStatus(200);
+});
+
+
 
 app.get('/getRouteData', function(request,response) {
 	console.log('Get Request: getRouteData');

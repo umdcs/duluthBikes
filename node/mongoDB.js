@@ -28,23 +28,47 @@ module.exports = function() {
 		// Collection look ups with find return a MongoDB 'cursor'. More info can be found here
 		// https://docs.mongodb.com/v3.2/reference/glossary/#term-cursor
 		// 
-        	var cursor = mongodb.collection(collectionName).find(function(err, docs) {
+		
+        	var cursor = mongodb.collection(collectionName).find(function(err, docs){
 	    
             	if(err || !docs) {
 			console.log("Cannot print database or database is empty\n");
 	    	}
             	else {
-			console.log(collectionName, docs);
+			//console.log(collectionName, docs);
+			
 			callback(docs);
 	    	}
         	});
 	
 	};
 
+	printRides = function(colName,callback){
+
+		var cursor = mongodb.collection(colName).find(function(err, docs){
+
+		if(err||!docs){
+			console.log("database empty\n");
+		}
+		else{
+			callback(docs);
+		}
+		});
+	};	
+
 	insertRoute = function(routeData){
-		mongodb.collection('RideHistory').save({point: routeData},function(err,result){
+		mongodb.collection('RideHistory').save(
+			{point: routeData},function(err,result){
 			if(err||!result)console.log("point not saved");
 			else console.log("point entered into RideHistory");
+		});
+	};
+
+	insertFullRide = function(fullRide){
+		mongodb.collection('FullRidesRecorded').save(
+			{ride:fullRide},function(err,result){
+			if(err||!result)console.log("ride not saved");
+			else console.log("ride loged in FullRidesRecord");
 		});
 	};
 

@@ -1,0 +1,57 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Duluth Bikes Map</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map-canvas {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+<script>
+var x=0;
+var map;
+var prepath;
+var path = null;
+var current_lat = 28.6667;
+var current_lng = 77.2167;
+var mongodb = require('./mongoDB.js')();
+function initialize() {
+  var myLatLng = new google.maps.LatLng(46.7332,-92.1811);
+  var mapOptions = {
+    zoom: 10,
+    center: myLatLng,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+  var rides = printRides('FullRidesRecorded',function(result){
+	var listRides = JSON.parse(result);
+	var arrayRide = listRides.ride.ride;
+	
+	var poly = new google.maps.PolyLine({arrayRide});
+	poly.set(map);
+  });
+}
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initialize">
+    </script>
+
+
+  <body>
+     <div id='map-canvas'></div>
+  </body>
+</html>
