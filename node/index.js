@@ -133,7 +133,10 @@ app.get('/deletealltherides',function(res,req){
 io.on('connection',function(socket){
 	console.log('a socket io connection');
 
-	//socket.emit('draw',{ 
+	printFullRides('FullRidesRecorded',function(doc){
+
+	socket.emit('FullRidesRecorded',doc)
+	});
 });
 
 
