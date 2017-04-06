@@ -53,7 +53,7 @@ app.get('/fullRide',function(req,res){
 // this next section is for our GET, POST, PUT, DELETE routes
 // the first one is the default dashboard route
 //
-app.get('/', function(request, response) {
+app.get('/raw', function(request, response) {
 
 	
 
@@ -69,8 +69,16 @@ app.get('/', function(request, response) {
 	console.log('DashBoard request received!');
 });
 
-app.get('/maps',function(request,response){
+app.get('/rides',function(request,response){
 	response.sendFile(__dirname +'/ride.html');
+});
+
+app.get('/maps',function(req,res){
+	res.sendFile(__dirname + 'maps.html');
+});
+
+app.get('/',function(req,res){
+	res.sendFile(__dirname + 'duluthbikes.html');
 });
 
 
