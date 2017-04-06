@@ -74,11 +74,11 @@ app.get('/rides',function(request,response){
 });
 
 app.get('/maps',function(req,res){
-	res.sendFile(__dirname + 'maps.html');
+	res.sendFile(__dirname + '/maps.html');
 });
 
 app.get('/',function(req,res){
-	res.sendFile(__dirname + 'duluthbikes.html');
+	res.sendFile(__dirname + '/duluthbikes.html');
 });
 
 
@@ -141,7 +141,7 @@ app.get('/deletealltherides',function(res,req){
 io.on('connection',function(socket){
 	console.log('a socket io connection');
 
-	printFullRides('FullRidesRecorded',function(doc){
+	printRides('FullRidesRecorded',function(doc){
 
 	socket.emit('FullRidesRecorded',doc)
 	});
