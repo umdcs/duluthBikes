@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#710600</color>
+    <color name="colorPrimary">#00717E</color>
     <color name="colorPrimaryDark">#777777</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!-- duluthBikesLightGreen = #7EC252
+         duluthBikesDarkBlue =   #00727F
+
+      -->
+
 </resources>

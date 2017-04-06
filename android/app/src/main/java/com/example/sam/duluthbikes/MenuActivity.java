@@ -22,6 +22,7 @@ public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static String userName = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     public void startMainActivity(View view){
@@ -106,6 +108,10 @@ public class MenuActivity extends AppCompatActivity
         } else if (id == R.id.nav_tours) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new ToursFragment())
+                    .commit();
+        } else if (id == R.id.nav_membership) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new MembershipFragment())
                     .commit();
         } else if (id == R.id.nav_about) {
             fragmentManager.beginTransaction()

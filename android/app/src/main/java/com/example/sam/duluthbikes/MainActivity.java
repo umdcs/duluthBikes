@@ -69,8 +69,8 @@ public class MainActivity extends FragmentActivity
      */
     public void pauseRide(View view) {
         mPresenter.pauseRideButton();
-        Intent pauseIntent = new Intent(this, PauseActivity.class);
-        startActivity(pauseIntent);
+        //Intent pauseIntent = new Intent(this, PauseActivity.class);
+        //startActivity(pauseIntent);
     }
 
     public void endRide(View view) {
@@ -78,9 +78,9 @@ public class MainActivity extends FragmentActivity
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
         endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         startActivity(endIntent);
+        mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getPoints().getPoints());
 
-        //TODO: Calls resetData() in Model that Removes polylines from map when ride is complete.
-        //locationData.getOurInstance((this.getBaseContext()).resetData());
+        LocationData.getOurInstance(this.getBaseContext()).resetData();
     }
 
     @Override
@@ -137,4 +137,7 @@ public class MainActivity extends FragmentActivity
         else mMap.moveCamera(cu);
         Polyline p = mMap.addPolyline(polylineOptions);
     }
+
+
+
 }

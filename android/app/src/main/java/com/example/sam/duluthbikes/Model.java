@@ -20,6 +20,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +35,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import static com.example.sam.duluthbikes.MainActivity.userName;
 
@@ -77,7 +79,7 @@ public class Model
 
 
     /**
-     * Method to stop location services
+     * Method to stop location services called by Presenters pauseRideButton method
      */
     public void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(
@@ -106,6 +108,18 @@ public class Model
         }
 
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postroute","POST",route.toString());
+    }
+
+    @Override
+    public void notifyFinishRoute(List<LatLng> finishRoute){
+        JSONObject fullRide = null;
+        try{
+            fullRide = new JSONObject();
+            fullRide.put("ride",finishRoute);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
     }
 
     /**
