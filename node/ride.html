@@ -36,7 +36,7 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
   socket.on('FullRidesRecorded',function(result){
-	var listRides = JSON.parse(result);
+	//var listRides = JSON.parse(result);
 	var arrayRide = listRides.ride.ride;
 	
 	var poly = new google.maps.PolyLine({arrayRide});
