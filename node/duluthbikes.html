@@ -3,28 +3,57 @@
 <head>
 <meta charset="utf-8">
 <title>Duluth Bikes</title>
-<link href="file:///C|/Users/clark/OneDrive/Documents/spring 2017/Software Engineering/duluthbikes.css" rel="stylesheet" type="text/css">
-<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
-<script>var __adobewebfontsappname__="dreamweaver"</script>
-<script src="http://use.edgefonts.net/source-sans-pro:n4:default;abel:n4:default;source-serif-pro:n3:default.js" type="text/javascript"></script>
-
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+#wrapper {
+        width: auto;
+        height: auto;
+        background-color: rgba(193,193,193,1.00);
+}
+#main{
+        width: 90%;
+        margin-left: 5%;
+        height: 1000px;
+        background-color: #7ec252;
+}
+h1{
+        width: 50%;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align-last: center;
+        padding-top: 1em;
+}
+iframe{
+        width: 50%;
+        height: 400px;
+        margin-left: 2%;
+        float: left;
+	background-color:rgba(193,193,193,1.00);
+}
+button{
+        float: left;
+        width: 15%;
+        margin-left: 10%;
+        margin-bottom: 3%;
+}
+</style>
 </head>
 
 <body>
 <div id="wrapper">
 
-	<main>
+	<div id="main">
 	<h1>Duluth Bikes App Dashboard</h1>
 	<div>
-		<iframe id="map" src="maps.html"></iframe>
+		<iframe id="map" src='http://ukko.d.umn.edu:23405/maps'></iframe>
 	</div>
 	<div>
-	  	<button onClick="changeContent('http://ukko.d.umn.edu:23405/maps')">PolyLines</button>
-		<button onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">Heat Maps</button>
-		<button onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">Raw Data</button>
-		<button onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">Raw Finished</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/maps')">PolyLines</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">Heat Maps</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">Raw Data</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">Raw Finished</button>
 	</div>
-	</main>
+	</div>
 </div>
 <script>
 	function changeContent(theSRC){
