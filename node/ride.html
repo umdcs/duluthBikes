@@ -37,9 +37,14 @@ function initialize() {
 
   socket.on('FullRidesRecorded',function(result){
 	//var listRides = JSON.parse(result);
-	var arrayRide = listRides.ride.ride;
-	
-	var poly = new google.maps.PolyLine({arrayRide});
+	var arrayRide = [];
+	arrayRide = result[0]['ride'];
+	arr = arrayRide;
+	//arrayRide = arrayRide['lat/lng'];
+	var arr = [1,3,5];	
+	var poly = new google.maps.Polyline({
+			path:arrayRide
+		});
 	poly.set(map);
   });
 
