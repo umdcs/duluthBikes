@@ -29,7 +29,17 @@ public class EventsFragment extends Fragment {
 
         myWebView = (WebView) myView.findViewById(R.id.webViewEvents);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new newWebClient());
+        myWebView.setWebViewClient(new newWebClient(){
+            @Override
+            public void onPageFinished(WebView view,String url)
+            {
+                myWebView.loadUrl("javascript:(function() { " +
+                        "document.getElementsByTagName('footer')[0].style.display='none'; " +
+                        "document.getElementsByTagName('header')[0].style.display='none'; " +
+                        "document.getElementById('main-content').style.marginTop='-5em';" +
+                        "})()");
+            }
+        });
         myWebView.loadUrl(EventsPage);
         //this allows to navigate back in website using Back key
         myWebView.setOnKeyListener(new View.OnKeyListener() {
@@ -57,7 +67,6 @@ public class EventsFragment extends Fragment {
 
         return myView;
     }
-
 
 
     private class newWebClient extends WebViewClient {

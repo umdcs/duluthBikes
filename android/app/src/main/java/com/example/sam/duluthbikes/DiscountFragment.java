@@ -29,7 +29,17 @@ public class DiscountFragment extends Fragment {
 
         myWebView = (WebView) myView.findViewById(R.id.webViewDiscount);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new newWebClient());
+        myWebView.setWebViewClient(new newWebClient(){
+            @Override
+            public void onPageFinished(WebView view,String url)
+            {
+                myWebView.loadUrl("javascript:(function() { " +
+                        "document.getElementsByTagName('footer')[0].style.display='none'; " +
+                        "document.getElementsByTagName('header')[0].style.display='none'; " +
+                        "document.getElementById('main-content').style.marginTop='-10em';" +
+                        "})()");
+            }
+        });
         myWebView.loadUrl(DiscountPage);
         //this allows to navigate back in website using Back key
         myWebView.setOnKeyListener(new View.OnKeyListener() {
