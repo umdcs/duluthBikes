@@ -11,10 +11,12 @@
     <!-- To display picture taken -->
     <ImageView
         android:id="@+id/image"
-        android:layout_height="300dp"
         android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:visibility="visible" />
 
     <!-- Capture picture button -->
     <Button
@@ -24,7 +26,6 @@
         android:text="Take a Picture"
         android:layout_marginBottom="79dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="dispatchTakePictureIntent"/>
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

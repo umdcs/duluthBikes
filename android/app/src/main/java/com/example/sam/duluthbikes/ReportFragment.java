@@ -29,6 +29,7 @@ public class ReportFragment extends Fragment {
     ImageView imageView;
     public String imageFileName;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
