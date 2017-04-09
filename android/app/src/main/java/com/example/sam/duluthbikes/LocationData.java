@@ -8,6 +8,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by clark on 3/28/2017.
  */
@@ -17,6 +23,7 @@ public class LocationData {
     private static Context mContext;
     private PolylineOptions mPolylineOptions;
     private LatLngBounds.Builder builder;
+    private JSONArray trip;
 
     private Location lastLocation;
     private double distance;
@@ -28,6 +35,7 @@ public class LocationData {
         builder = getBuilder();
         lastLocation = getLastLocation();
         distance = getDistance();
+        trip = getTrip();
     }
 
 
@@ -66,8 +74,23 @@ public class LocationData {
         return distance;
     }
 
+    public JSONArray getTrip(){
+        if(trip==null)trip = new JSONArray();
+        return trip;
+    }
+
     public void addPoint(LatLng p,Location location){
-        if(distance>0)mPolylineOptions.add(p);
+        if(distance>0){
+            mPolylineOptions.add(p);
+            JSONObject arr = new JSONObject();
+            try {
+                arr.put("lat",location.getLatitude());
+                arr.put("lng",location.getLongitude());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            trip.put(arr);
+        }
         builder.include(p);
         if(getLastLocation()!=null)distance += getLastLocation().distanceTo(location);
         lastLocation = location;

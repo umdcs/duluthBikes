@@ -22,6 +22,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +36,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.sam.duluthbikes.MainActivity.userName;
@@ -111,7 +113,7 @@ public class Model
     }
 
     @Override
-    public void notifyFinishRoute(List<LatLng> finishRoute){
+    public void notifyFinishRoute(JSONArray finishRoute){
         JSONObject fullRide = null;
         try{
             fullRide = new JSONObject();

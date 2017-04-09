@@ -78,7 +78,7 @@ public class MainActivity extends FragmentActivity
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
         endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         startActivity(endIntent);
-        mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getPoints().getPoints());
+        mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip());
 
         LocationData.getOurInstance(this.getBaseContext()).resetData();
     }
