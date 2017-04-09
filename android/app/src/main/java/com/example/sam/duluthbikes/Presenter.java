@@ -48,5 +48,5 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     public void connectApi() { mModel.connectApiOnResume(); }
 
     @Override
-    public void notifyRoute(JSONArray route){mModel.notifyFinishRoute(route);}
+    public void notifyRoute(JSONArray route,JSONArray l){mModel.notifyFinishRoute(route,l);}
 }

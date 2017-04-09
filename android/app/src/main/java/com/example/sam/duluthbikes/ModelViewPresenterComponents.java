@@ -32,7 +32,7 @@ public interface ModelViewPresenterComponents {
 
         public void connectApi();
 
-        public void notifyRoute(JSONArray fullRide);
+        public void notifyRoute(JSONArray fullRide,JSONArray l);
     }
 
     interface Model {
@@ -58,7 +58,7 @@ public interface ModelViewPresenterComponents {
 
         void connectApiOnResume();
 
-        void notifyFinishRoute(JSONArray l);
+        void notifyFinishRoute(JSONArray r,JSONArray l);
     }
 }
 

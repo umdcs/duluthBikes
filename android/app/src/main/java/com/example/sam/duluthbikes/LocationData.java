@@ -24,6 +24,7 @@ public class LocationData {
     private PolylineOptions mPolylineOptions;
     private LatLngBounds.Builder builder;
     private JSONArray trip;
+    private JSONArray latlng;
 
     private Location lastLocation;
     private double distance;
@@ -36,6 +37,7 @@ public class LocationData {
         lastLocation = getLastLocation();
         distance = getDistance();
         trip = getTrip();
+        latlng = getLatlng();
     }
 
 
@@ -79,6 +81,11 @@ public class LocationData {
         return trip;
     }
 
+    public JSONArray getLatlng(){
+        if(latlng==null)latlng = new JSONArray();
+        return latlng;
+    }
+
     public void addPoint(LatLng p,Location location){
         if(distance>0){
             mPolylineOptions.add(p);
@@ -90,6 +97,7 @@ public class LocationData {
                 e.printStackTrace();
             }
             trip.put(arr);
+            latlng.put(p);
         }
         builder.include(p);
         if(getLastLocation()!=null)distance += getLastLocation().distanceTo(location);
