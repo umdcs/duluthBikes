@@ -4,6 +4,8 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public interface ModelViewPresenterComponents {
 
         public void connectApi();
 
-        public void notifyRoute(List<LatLng> fullRide);
+        public void notifyRoute(JSONArray fullRide);
     }
 
     interface Model {
@@ -56,7 +58,7 @@ public interface ModelViewPresenterComponents {
 
         void connectApiOnResume();
 
-        void notifyFinishRoute(List<LatLng> route);
+        void notifyFinishRoute(JSONArray l);
     }
 }
 

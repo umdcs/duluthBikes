@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 /**
@@ -46,5 +48,5 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     public void connectApi() { mModel.connectApiOnResume(); }
 
     @Override
-    public void notifyRoute(List<LatLng> route){mModel.notifyFinishRoute(route);}
+    public void notifyRoute(JSONArray route){mModel.notifyFinishRoute(route);}
 }
