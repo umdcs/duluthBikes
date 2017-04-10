@@ -2,7 +2,12 @@ package com.example.sam.duluthbikes;
 
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONArray;
+
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Sam on 3/26/2017.
@@ -26,6 +31,8 @@ public interface ModelViewPresenterComponents {
         public void finishRideButton();
 
         public void connectApi();
+
+        public void notifyRoute(JSONArray fullRide,JSONArray l);
     }
 
     interface Model {
@@ -50,6 +57,8 @@ public interface ModelViewPresenterComponents {
         void disconnectApiOnFinish();
 
         void connectApiOnResume();
+
+        void notifyFinishRoute(JSONArray r,JSONArray l);
     }
 }
 

@@ -20,7 +20,9 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +36,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.sam.duluthbikes.MainActivity.userName;
 
@@ -108,6 +112,19 @@ public class Model
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postroute","POST",route.toString());
     }
 
+    @Override
+    public void notifyFinishRoute(JSONArray finishRoute,JSONArray list){
+        JSONObject fullRide = null;
+        try{
+            fullRide = new JSONObject();
+            fullRide.put("ride",finishRoute);
+            fullRide.put("LatLng",list);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
+    }
+
     /**
      * Gets the account username from file.
      * @param filePath The filepath of the file the username is stored on
@@ -154,6 +171,7 @@ public class Model
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(3000);
         mLocationRequest.setFastestInterval(100);
+        mLocationRequest.setSmallestDisplacement(1.0f);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -238,7 +256,8 @@ public class Model
                 if (params[1].equals("POST") ||
                         params[1].equals("PUT") ||
                         params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
+                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0]
+                            + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
 
                     /* Various server parameters need to set on HTTP connections that indicate the type
                      * of data that will be sent. In our case, we are sending JSON as output so need to

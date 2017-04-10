@@ -3,13 +3,11 @@
  * duluthbikes app and the corresponding 
  * dashboard 
  *
- *
  */
 
 // Body Parser for icoming http requests 
-
 var bodyParser = require('body-parser');
-
+// require express
 var express = require('express');
 
 // express framework for handling http requests
@@ -44,7 +42,7 @@ app.get('/fullRide',function(req,res){
 		res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
 		+'<H1>Full Rides.</H1>');
 		result.reverse();
-		res.write(JSON.stringify(result,['ride']));
+		res.write(JSON.stringify(result));
 		res.send();
 	});
 	console.log('full ride request');
@@ -53,7 +51,7 @@ app.get('/fullRide',function(req,res){
 // this next section is for our GET, POST, PUT, DELETE routes
 // the first one is the default dashboard route
 //
-app.get('/', function(request, response) {
+app.get('/raw', function(request, response) {
 
 	
 
@@ -69,13 +67,24 @@ app.get('/', function(request, response) {
 	console.log('DashBoard request received!');
 });
 
-app.get('/maps',function(request,response){
+app.get('/rides',function(request,response){
 	response.sendFile(__dirname +'/ride.html');
+	printRides('FullRidesRecorded',function(doc){
+        io.emit('FullRidesRecorded',doc);
+        });
+});
+
+app.get('/maps',function(req,res){
+	res.sendFile(__dirname + '/maps.html');
+});
+
+app.get('/',function(req,res){
+	res.sendFile(__dirname + '/duluthbikes.html');
 });
 
 
 app.post('/postroute', function(request, response) {
-	
+
 	if (!request.body)return response.sendStatus(400);
 
 	var routeData = {'lat':request.body.lat,
@@ -85,7 +94,6 @@ app.post('/postroute', function(request, response) {
 
 	//Mongo
 	insertRoute(routeData);
-	//mongodb.insertDate(date);
 
 	console.log('Post Request: postroute');
 
@@ -94,28 +102,16 @@ app.post('/postroute', function(request, response) {
 
 app.post('/postfinish',function(req,res){
 
-	if(!req.body)return res.sendStatus(400);
-	
-	
-	insertFullRide(req.body.ride);
+	if(!req.body)return res.sendStatus(400);	
+
+	var arr = [];
+	arr = req.body.ride;
+	insertFullRide(arr);
 
 	console.log('Post Full Ride');
 
 	res.sendStatus(200);
 });
-
-
-
-app.get('/getRouteData', function(request,response) {
-	console.log('Get Request: getRouteData');
-	
-		//Mongo
-		//mongodb.getRoutes(some argument);
-
-	response.json(routeData);
-});
-
-
 
 app.get('/deletealltherides',function(res,req){
 	console.log('deleted all rides atempt');
@@ -125,15 +121,13 @@ app.get('/deletealltherides',function(res,req){
 		else console.log("didnt work");
 		});
 });
-	
-
-
-
 
 io.on('connection',function(socket){
 	console.log('a socket io connection');
 
-	//socket.emit('draw',{ 
+	printRides('FullRidesRecorded',function(doc){
+	socket.emit('FullRidesRecorded',doc);
+	});
 });
 
 

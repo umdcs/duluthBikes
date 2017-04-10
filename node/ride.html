@@ -18,32 +18,43 @@
       }
     </style>
   </head>
+<script src="/socket.io/socket.io.js"></script>
 <script>
 var x=0;
 var map;
 var prepath;
 var path = null;
-var current_lat = 28.6667;
-var current_lng = 77.2167;
-var mongodb = require('./mongoDB.js')();
+var socket = io();
 function initialize() {
-  var myLatLng = new google.maps.LatLng(46.7332,-92.1811);
+  var myLatLng = new google.maps.LatLng(46.7867,-92.1005);
   var mapOptions = {
-    zoom: 10,
+    zoom: 11,
     center: myLatLng,
     mapTypeId: google.maps.MapTypeId.TERRAIN
   };
   
   map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
-  var rides = printRides('FullRidesRecorded',function(result){
-	var listRides = JSON.parse(result);
-	var arrayRide = listRides.ride.ride;
-	
-	var poly = new google.maps.PolyLine({arrayRide});
-	poly.set(map);
-  });
 }
+
+socket.on('FullRidesRecorded',function(result){
+	//var listRides = JSON.parse(result);
+	var arrayRide = [];
+	for(var i=0;i<result.length;i++)
+{
+	arrayRide = result[i]['ride'];
+	arr = arrayRide;	
+	var poly = new google.maps.Polyline({
+			strokeColor:'#ff0000',
+			strokeOpacity:1.0,
+			strokeWeight:3,
+			path:arrayRide,
+			map:map
+		});
+}
+});
+ 
+
 
 </script>
 <script async defer
@@ -53,5 +64,6 @@ function initialize() {
 
   <body>
      <div id='map-canvas'></div>
+	<div id='test'></div>
   </body>
 </html>

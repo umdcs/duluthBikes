@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Duluth Bikes</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+#wrapper {
+        width: auto;
+        height: auto;
+        background-color: rgba(193,193,193,1.00);
+}
+#main{
+        width: 90%;
+        margin-left: 5%;
+        height: 585px;
+        background-color: #fff;
+}
+h1{
+        width: 90%;
+        margin-left: 5%;
+	margin-right 5%;
+        text-align-last: center;
+        padding-top: .7em;
+	padding-bottom: .7em;
+	background-color: green;
+}
+iframe{
+        width: 70%;
+        height: 400px;
+        margin-left: 5%;
+        float: left;
+	background-color:rgba(193,193,193,1.00);
+}
+button{
+        float: left;
+        width: 18%;
+        margin-left: 2%;
+        margin-bottom: 10px;
+}
+a{
+	margin-left: 2%;
+}
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="main">
+		<div id="border">
+		<h1>Duluth Bikes<br/>App Dashboard</h1>
+		</div>
+	<div>
+		<iframe id="map" src='http://ukko.d.umn.edu:23405/maps'></iframe>
+	</div>
+	<div>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/maps')">Polylines</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">Heat Maps</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">Raw Data</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">Raw Finished</button>
+	</div>
+	<a href="http://duluthbikes.org">Duluth Bikes</a>
+	</div>
+</div>
+<script>
+	function changeContent(theSRC){
+		document.getElementById('map').src = theSRC;
+	}
+	</script>
+</body>
+</html>

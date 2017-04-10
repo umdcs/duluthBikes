@@ -1,7 +1,7 @@
 
-
-var url = 'mongodb://127.0.0.1:50432/db'; //URL needs to be changed
-var collections = ['rides']; //Array of known collections ???
+//database url
+var url = 'mongodb://127.0.0.1:50432/db'; 
+var collections = ['rides']; 
 
 var mongojs = require('mongojs');
 var assert = require('assert');

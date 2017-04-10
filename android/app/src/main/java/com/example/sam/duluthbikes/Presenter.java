@@ -3,6 +3,12 @@ package com.example.sam.duluthbikes;
 import android.app.Activity;
 import android.content.Context;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONArray;
+
+import java.util.List;
+
 /**
 <<<<<<< HEAD
  * Created by Sam on 3/26/2017.
@@ -41,4 +47,6 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     @Override
     public void connectApi() { mModel.connectApiOnResume(); }
 
+    @Override
+    public void notifyRoute(JSONArray route,JSONArray l){mModel.notifyFinishRoute(route,l);}
 }
