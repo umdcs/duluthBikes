@@ -58,7 +58,7 @@ module.exports = function() {
 
 	insertRoute = function(routeData){
 		mongodb.collection('RideHistory').save(
-			{point: routeData},function(err,result){
+			{point:routeData},function(err,result){
 			if(err||!result)console.log("point not saved");
 			else console.log("point entered into RideHistory");
 		});
@@ -70,6 +70,20 @@ module.exports = function() {
 			if(err||!result)console.log("ride not saved");
 			else console.log("ride loged in FullRidesRecord");
 		});
+	};
+
+	insertUser = function(user){
+		// needs to find the user in the collection UsersSaved 
+			mongodb.collection.find('UsersSaved', function(err, user) {
+			if(err) console.log("User not saved");
+			else if(!user) {mongodb.collection('UsersSaved').save(
+				{users:user},function(err,result){
+				if(err||!result)console.log("user not saved");
+				else console.log("user loged in User");
+					else{
+						//user exists and do stuff.
+					}
+			});
 	};
 
 	deleteAll = function(colName,callback){
