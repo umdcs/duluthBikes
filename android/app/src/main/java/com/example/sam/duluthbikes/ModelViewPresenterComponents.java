@@ -18,6 +18,8 @@ public interface ModelViewPresenterComponents {
     interface View {
 
         public void locationChanged(Location location);
+
+        public void userResults(String results);
     }
 
     interface PresenterContract {
@@ -33,6 +35,10 @@ public interface ModelViewPresenterComponents {
         public void connectApi();
 
         public void notifyRoute(JSONArray fullRide,JSONArray l);
+
+        public void loginUser(String userName,String passWord);
+
+        public void returnLogin(String result);
     }
 
     interface Model {
@@ -59,6 +65,8 @@ public interface ModelViewPresenterComponents {
         void connectApiOnResume();
 
         void notifyFinishRoute(JSONArray r,JSONArray l);
+
+        void loginAttempt(String user,String pass);
     }
 }
 

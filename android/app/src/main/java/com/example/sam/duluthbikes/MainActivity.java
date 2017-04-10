@@ -138,6 +138,10 @@ public class MainActivity extends FragmentActivity
         Polyline p = mMap.addPolyline(polylineOptions);
     }
 
+    @Override
+    public void userResults(String results) {
+
+    }
 
 
 }

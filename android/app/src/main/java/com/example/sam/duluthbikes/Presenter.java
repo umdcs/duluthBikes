@@ -25,7 +25,6 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
         mView = view;
         mContext = context;
         mActivity = activity;
-
     }
 
     @Override
@@ -49,4 +48,13 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
 
     @Override
     public void notifyRoute(JSONArray route,JSONArray l){mModel.notifyFinishRoute(route,l);}
+
+    @Override
+    public void loginUser(String userName, String passWord) {
+        mModel= new Model(mContext,mActivity,this);
+        mModel.loginAttempt(userName,passWord);
+    }
+
+    @Override
+    public void returnLogin(String result){mView.userResults(result);}
 }
