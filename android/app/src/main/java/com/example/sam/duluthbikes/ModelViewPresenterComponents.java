@@ -2,12 +2,9 @@ package com.example.sam.duluthbikes;
 
 import android.location.Location;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.json.JSONArray;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by Sam on 3/26/2017.
@@ -17,28 +14,28 @@ public interface ModelViewPresenterComponents {
 
     interface View {
 
-        public void locationChanged(Location location);
+        void locationChanged(Location location);
 
-        public void userResults(String results);
+        void userResults(String results);
     }
 
     interface PresenterContract {
 
-        public void updateMapLocation();
+        void updateMapLocation();
 
-        public void clickStart();
-        
-        public void pauseRideButton();
+        void clickStart();
 
-        public void finishRideButton();
+        void pauseRideButton();
 
-        public void connectApi();
+        void finishRideButton();
 
-        public void notifyRoute(JSONArray fullRide,JSONArray l);
+        void connectApi();
 
-        public void loginUser(String userName,String passWord);
+        void notifyRoute(JSONArray fullRide,JSONArray l);
 
-        public void returnLogin(String result);
+        void loginUser(String userName,String passWord);
+
+        void returnLogin(String result);
     }
 
     interface Model {
