@@ -109,15 +109,9 @@ public class LoginActivity extends AppCompatActivity
                 String p = mPasswordView.getText().toString();
                 if (!Objects.equals(u, "") && !Objects.equals(p, ""))
                     mPresenter.loginUser(u, p);
-                while (duplicateCode == 400) {
-                    ///showProgress(true);
-                   // Log.d("here", "onClick: here");
-                }
-                if (duplicateCode == 300) onDestroy();
-                else if (duplicateCode == 200) {
+                //
                     startMenu(mUserView.getText().toString(), mPasswordView.getText().toString());
-                }
-                else onDestroy();
+                //
             }
         });
 
