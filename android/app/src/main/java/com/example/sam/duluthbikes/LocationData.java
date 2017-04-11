@@ -30,7 +30,7 @@ public class LocationData {
 
     private Location lastLocation;
     private double distance;
-    private String startTime;
+    private Long startTime;
 
     private LocationData(Context context) {
 
@@ -80,15 +80,14 @@ public class LocationData {
         return distance;
     }
 
-    public String getStartTime(){
+    public Long getStartTime(){
         if (startTime == null){
             Date date = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String formattedDate = df.format(date.getTime());
-            startTime = formattedDate;
+            startTime = date.getTime();
         }
         return startTime;
     }
+
 
     public JSONArray getTrip(){
         if(trip==null)trip = new JSONArray();
