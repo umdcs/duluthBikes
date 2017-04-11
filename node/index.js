@@ -48,6 +48,17 @@ app.get('/fullRide',function(req,res){
 	console.log('full ride request');
 }); 
 
+app.get('/fulllatlng',function(req,res){
+        var rides = printRides('FullLatLngsRecorded',function(result){
+                res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
+                +'<H1>Full Rides.</H1>');
+                result.reverse();
+                res.write(JSON.stringify(result));
+                res.send();
+        });
+        console.log('full ride request');
+});
+
 // this next section is for our GET, POST, PUT, DELETE routes
 // the first one is the default dashboard route
 //
@@ -76,6 +87,9 @@ app.get('/rides',function(request,response){
 
 app.get('/maps',function(req,res){
 	res.sendFile(__dirname + '/maps.html');
+	printRides('FullLatLngsRecorded',function(doc){
+	io.emit('FullRidesRecorded',doc);
+	});
 });
 
 app.get('/',function(req,res){
@@ -107,7 +121,11 @@ app.post('/postfinish',function(req,res){
 	var arr = [];
 	arr = req.body.ride;
 	insertFullRide(arr);
-
+	if(req.body.LatLng){
+	var latlng = [];
+	latlng = req.body.LatLng;
+	insertLatLng(latlng);
+	}
 	console.log('Post Full Ride');
 
 	res.sendStatus(200);
@@ -116,7 +134,7 @@ app.post('/postfinish',function(req,res){
 app.get('/deletealltherides',function(res,req){
 	console.log('deleted all rides atempt');
 	
-	deleteAll('FullRidesRecorded',function(result){
+	deleteAll('FullLatLngsRecorded',function(result){
 		if(result==true)console.log("deleted all");
 		else console.log("didnt work");
 		});

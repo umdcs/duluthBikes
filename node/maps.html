@@ -20,36 +20,47 @@
   </head>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io();
+var x=0;
+var map;
+var prepath;
+var path = null;
+var socket = io();
+function initialize() {
+  var myLatLng = new google.maps.LatLng(46.7867,-92.1005);
+  var mapOptions = {
+    zoom: 11,
+    center: myLatLng,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+}
+
+socket.on('FullRidesRecorded',function(result){
+	//var listRides = JSON.parse(result);
+	var arrayRide = [];
+	for(var i=0;i<result.length;i++)
+{
+	arrayRide = result[i]['lat/lng'];
+	var poly = new google.maps.visualization.HeatmapLayer({
+			opacity:1.0,
+			data:arrayRide,
+			map:map
+		});
+}
+});
+ 
+
+
 </script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&libraries=visualization&callback=initialize">
+    </script>
+
+
   <body>
-    <div id="map"></div>
-    <script>
-
-      // This example creates an interactive map which constructs a polyline based on
-      // user clicks. Note that the polyline only appears once its path property
-      // contains two LatLng coordinates.
-
-      var poly;
-      var map;
-
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: {lat: 46.7867, lng: -92.1005}  // Center the map on Duluth, MN USA.
-        });
-
-        poly = new google.maps.Polyline({
-          strokeColor: '#000000',
-          strokeOpacity: 1.0,
-          strokeWeight: 3
-        });
-        poly.setMap(map);
-
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initMap">
-    </script>
+     <div id='map-canvas'></div>
+	<div id='test'></div>
   </body>
 </html>

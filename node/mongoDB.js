@@ -72,6 +72,14 @@ module.exports = function() {
 		});
 	};
 
+	insertLatLng = function(LatLng){
+		mongodb.collection('FullLatLngsRecorded').save(
+			{latlng:LatLng},function(err,result){
+			if(err||!result)console.log("latlng not saved");
+			else console.log("latlng loged in DB");
+		});
+	};
+
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});
 		callback(true);
