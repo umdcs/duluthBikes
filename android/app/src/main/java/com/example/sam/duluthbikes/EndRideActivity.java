@@ -22,29 +22,42 @@ public class EndRideActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_ride);
 
-        TextView tv = (TextView)findViewById(R.id.distance);
+        TextView rideDate = (TextView)findViewById(R.id.dateLabel);
+        TextView dist = (TextView)findViewById(R.id.distance);
+        TextView timeLapsed = (TextView) findViewById(R.id.timeLapsed);
+        TextView avSpeed = (TextView)findViewById(R.id.averageSpeed);
         TextView startTime = (TextView)findViewById(R.id.startTime);
         TextView endTime = (TextView)findViewById(R.id.endTime);
-        TextView timeLapsed = (TextView) findViewById(R.id.timeLapsed);
 
         data = getIntent().getExtras();
 
-        tv.setText(Double.toString(data.getDouble("dis")));
-
         //retrieve current time and format start and current time
         Date fDate = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedEnd = df.format(fDate.getTime());
-        String formattedStart = df.format(data.getString("startTime"));
+        SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat datef = new SimpleDateFormat("yyyy-MM-dd");
 
-        endTime.setText(formattedEnd);
-        startTime.setText(formattedStart);
+        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //String formattedEnd = df.format(fDate.getTime());
+        //String formattedStart = df.format(data.getString("startTime"));
 
         Long sTime =  data.getLong("startTime");
         Long fTime = fDate.getTime();
         Long timelapse = fTime - sTime;
 
-        timeLapsed.setText(Long.toString(timelapse));
+        int sec = (int) (timelapse / 1000) % 60 ;
+        int min = (int) ((timelapse / (1000*60)) % 60);
+        int hours   = (int) ((timelapse / (1000*60*60)) % 24);
+
+        String dateOfRide = datef.format(fDate);
+        String timeFinish = timef.format(fDate);
+        String timeStart = timef.format(sTime);
+
+        rideDate.setText(dateOfRide);
+        dist.setText(Double.toString(data.getDouble("dis")));
+        timeLapsed.setText(Integer.toString(hours)+":"+Integer.toString(min)+":"+Integer.toString(sec));
+        startTime.setText(timeStart);
+        endTime.setText(timeFinish);
+
 
     }
 
