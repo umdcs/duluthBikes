@@ -138,7 +138,7 @@ public class Model
             e.printStackTrace();
         }
         mode = true;
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/SOMETHING","POST",profile.toString());
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postusername","POST",profile.toString());
     }
 
     /**

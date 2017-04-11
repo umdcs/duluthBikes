@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity
     // UI references.
     private EditText mUserView;
     private EditText mPasswordView;
+    private EditText mEmailView;
     private View mProgressView;
     private View mLoginFormView;
     private Presenter mPresenter;
@@ -81,11 +82,11 @@ public class LoginActivity extends AppCompatActivity
         setContentView(R.layout.activity_login);
         duplicateCode = 400;
 
-        mPresenter = new Presenter(this.getBaseContext(),this,this);
+        mPresenter = new Presenter(this.getBaseContext(), this, this);
 
         final File file = new File("sdcard/Profile.txt");
-        if(file.exists()){
-            Intent menu = new Intent(this.getApplicationContext(),MenuActivity.class);
+        if (file.exists()) {
+            Intent menu = new Intent(this.getApplicationContext(), MenuActivity.class);
             startActivity(menu);
         }
         try {
@@ -94,8 +95,11 @@ public class LoginActivity extends AppCompatActivity
             e.printStackTrace();
         }
         // Set up the login form.
-        mUserView = (EditText) findViewById(R.id.email);
+        mUserView = (EditText) findViewById(R.id.username);
         mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailView = (EditText) findViewById(R.id.email);
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -103,27 +107,26 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View view) {
                 String u = mUserView.getText().toString();
                 String p = mPasswordView.getText().toString();
-                if(!Objects.equals(u, "") && !Objects.equals(p, ""))
-                    mPresenter.loginUser(u,p);
-                while(duplicateCode == 400){
-                    Log.d("here", "onClick: here");
+                if (!Objects.equals(u, "") && !Objects.equals(p, ""))
+                    mPresenter.loginUser(u, p);
+                while (duplicateCode == 400) {
+                    ///showProgress(true);
+                   // Log.d("here", "onClick: here");
                 }
-                if(duplicateCode==300)onDestroy();
-                else if(duplicateCode == 200){
-                    startMenu(mUserView.getText().toString(),mPasswordView.getText().toString());
+                if (duplicateCode == 300) onDestroy();
+                else if (duplicateCode == 200) {
+                    startMenu(mUserView.getText().toString(), mPasswordView.getText().toString());
                 }
                 else onDestroy();
             }
         });
 
-        //mLoginFormView = findViewById(R.id.login_form);
-        //mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void startMenu(String user,String pass){
+    private void startMenu(String user, String pass) {
 
         try {
-            out = openFileOutput("profile",Context.MODE_PRIVATE);
+            out = openFileOutput("profile", Context.MODE_PRIVATE);
             out.write(user.getBytes());
             out.write(pass.getBytes());
             out.close();
@@ -133,7 +136,7 @@ public class LoginActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        Intent start = new Intent(this.getApplicationContext(),MenuActivity.class);
+        Intent start = new Intent(this.getApplicationContext(), MenuActivity.class);
         startActivity(start);
     }
 
@@ -256,10 +259,10 @@ public class LoginActivity extends AppCompatActivity
 
     @Override
     public void userResults(String results) {
-        if(results=="good"){
-            duplicateCode=200;
-        }else if(results=="bad"){
-            duplicateCode=300;
+        if (results == "good") {
+            duplicateCode = 200;
+        } else if (results == "bad") {
+            duplicateCode = 300;
         }
     }
 
@@ -274,93 +277,4 @@ public class LoginActivity extends AppCompatActivity
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Private class that extends AsyncTask which then allows the use of the asynchronous methods which
-     * are needed in collaboration with the restGET, restPUT, restPOST, and restDELETE methods.
-     */
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            //Initialize the server connection and input stream to null.
-            HttpURLConnection serverConnection = null;
-            InputStream is = null;
-
-            try {
-                URL url = new URL(params[0]);
-                serverConnection = (HttpURLConnection) url.openConnection();
-                serverConnection.setRequestMethod(params[1]);
-                //If the request is either POST PUT or DELETE, set the server connection to allow output.
-                if (params[1].equals("POST") ||
-                        params[1].equals("PUT") ||
-                        params[1].equals("DELETE")) {
-                    serverConnection.setDoOutput(true);
-                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-                    //params[2] contains the JSON String to send, make sure we send the
-                    //content length to be the json string length.
-                    serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
-
-                    //Send POST data that was provided.
-                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2].toString());
-                    out.flush();
-                    out.close();
-                }
-                //Retrieves the response code from the server.
-                duplicateCode = serverConnection.getResponseCode();
-                Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
-                Log.d("Debug: ", "Response Code : " + duplicateCode);
-
-                //Sets the input stream to the input stream of the Server.
-                if (duplicateCode != 500)
-                    is = serverConnection.getInputStream();
-
-                //If the request is restGET, create a JSON Array which is used to collect all
-                //of the JSON Objects which were went from the Node Server.
-                if (params[1] == "GET") {
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line);
-                    }
-
-                    try {
-                        JSONObject jsonData = new JSONObject(sb.toString());
-                        return jsonData.toString();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //Else the request with anything other than restGET so we return test to notify
-                //the onPostExecute method to not try to access the elements in the JSON Array.
-                else if (params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE"){
-                    return "test";
-                }
-
-                //Catches any exception that is thrown and handles it accordingly.
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                serverConnection.disconnect();
-            }
-
-            return "Should not get to this if the data has been sent/received correctly!";
-        }
-
-        /**
-         * Method called when a RESTful method is used like restGET and restPOST.
-         * @param result The result from the query
-         */
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-        }
-    }
 }
-
