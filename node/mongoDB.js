@@ -72,6 +72,14 @@ module.exports = function() {
 		});
 	};
 
+
+	insertLatLng = function(LatLng){
+		mongodb.collection('FullLatLngsRecorded').save(
+			{latlng:LatLng},function(err,result){
+			if(err||!result)console.log("latlng not saved");
+			else console.log("latlng loged in DB");
+		});
+
 	insertUser = function(user){
 		// needs to find the user in the collection UsersSaved 
 			mongodb.collection.find('UsersSaved', function(err, user) {
@@ -84,8 +92,10 @@ module.exports = function() {
 						//user exists and do stuff.
 					}
 			});
-	};
+		}
 
+	});
+};
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});
 		callback(true);
