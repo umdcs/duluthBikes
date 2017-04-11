@@ -12,10 +12,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
- * Created by clark on 3/28/2017.
+ * Singleton for saving ride information when the screen is rotated
  */
 
 public class LocationData {
@@ -28,6 +30,7 @@ public class LocationData {
 
     private Location lastLocation;
     private double distance;
+    private String startTime;
 
     private LocationData(Context context) {
 
@@ -38,6 +41,7 @@ public class LocationData {
         distance = getDistance();
         trip = getTrip();
         latlng = getLatlng();
+        startTime = getStartTime();
     }
 
 
@@ -74,6 +78,16 @@ public class LocationData {
     public double getDistance(){
         if(distance==-1)distance=0;
         return distance;
+    }
+
+    public String getStartTime(){
+        if (startTime == null){
+            Date date = new Date();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = df.format(date.getTime());
+            startTime = formattedDate;
+        }
+        return startTime;
     }
 
     public JSONArray getTrip(){
