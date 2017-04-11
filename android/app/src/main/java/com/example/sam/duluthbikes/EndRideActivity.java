@@ -25,18 +25,26 @@ public class EndRideActivity extends AppCompatActivity{
         TextView tv = (TextView)findViewById(R.id.distance);
         TextView startTime = (TextView)findViewById(R.id.startTime);
         TextView endTime = (TextView)findViewById(R.id.endTime);
+        TextView timeLapsed = (TextView) findViewById(R.id.timeLapsed);
 
         data = getIntent().getExtras();
 
         tv.setText(Double.toString(data.getDouble("dis")));
-        startTime.setText(data.getString("startTime"));
 
-        //retrieve current time
-        Date date = new Date();
+        //retrieve current time and format start and current time
+        Date fDate = new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = df.format(date.getTime());
+        String formattedEnd = df.format(fDate.getTime());
+        String formattedStart = df.format(data.getString("startTime"));
 
-        endTime.setText(formattedDate);
+        endTime.setText(formattedEnd);
+        startTime.setText(formattedStart);
+
+        Long sTime =  data.getLong("startTime");
+        Long fTime = fDate.getTime();
+        Long timelapse = fTime - sTime;
+
+        timeLapsed.setText(Long.toString(timelapse));
 
     }
 
