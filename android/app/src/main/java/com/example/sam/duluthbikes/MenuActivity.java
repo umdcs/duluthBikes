@@ -109,10 +109,6 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new ToursFragment())
                     .commit();
-        } else if (id == R.id.nav_membership) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new MembershipFragment())
-                    .commit();
         } else if (id == R.id.nav_about) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new AboutFragment())
