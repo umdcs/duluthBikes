@@ -3,22 +3,23 @@ package com.example.sam.duluthbikes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,16 +29,33 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity
+        implements LoaderCallbacks<Cursor>,ModelViewPresenterComponents.View {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -45,53 +63,78 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    public int duplicateCode;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private EditText mUserView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Presenter mPresenter;
+    private FileOutputStream out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        duplicateCode = 400;
 
+        mPresenter = new Presenter(this.getBaseContext(),this,this);
+
+        final File file = new File("sdcard/Profile.txt");
+        if(file.exists()){
+            Intent menu = new Intent(this.getApplicationContext(),MenuActivity.class);
+            startActivity(menu);
+        }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Set up the login form.
+        mUserView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                String u = mUserView.getText().toString();
+                String p = mPasswordView.getText().toString();
+                if(!Objects.equals(u, "") && !Objects.equals(p, ""))
+                    mPresenter.loginUser(u,p);
+                while(duplicateCode == 400){
+                    Log.d("here", "onClick: here");
+                }
+                if(duplicateCode==300)onDestroy();
+                else if(duplicateCode == 200){
+                    startMenu(mUserView.getText().toString(),mPasswordView.getText().toString());
+                }
+                else onDestroy();
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        //mLoginFormView = findViewById(R.id.login_form);
+        //mProgressView = findViewById(R.id.login_progress);
+    }
+
+    private void startMenu(String user,String pass){
+
+        try {
+            out = openFileOutput("profile",Context.MODE_PRIVATE);
+            out.write(user.getBytes());
+            out.write(pass.getBytes());
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Intent start = new Intent(this.getApplicationContext(),MenuActivity.class);
+        startActivity(start);
     }
 
     private void populateAutoComplete() {
@@ -110,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mUserView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -135,69 +178,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 populateAutoComplete();
             }
         }
-    }
-
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 
     /**
@@ -262,7 +242,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cursor.moveToNext();
         }
 
-        addEmailsToAutoComplete(emails);
     }
 
     @Override
@@ -270,13 +249,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
+    @Override
+    public void locationChanged(Location location) {
 
-        mEmailView.setAdapter(adapter);
+    }
+
+    @Override
+    public void userResults(String results) {
+        if(results=="good"){
+            duplicateCode=200;
+        }else if(results=="bad"){
+            duplicateCode=300;
+        }
     }
 
 
@@ -291,59 +275,91 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
+     * Private class that extends AsyncTask which then allows the use of the asynchronous methods which
+     * are needed in collaboration with the restGET, restPUT, restPOST, and restDELETE methods.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
+    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+        protected String doInBackground(String... params) {
+
+            //Initialize the server connection and input stream to null.
+            HttpURLConnection serverConnection = null;
+            InputStream is = null;
 
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+                URL url = new URL(params[0]);
+                serverConnection = (HttpURLConnection) url.openConnection();
+                serverConnection.setRequestMethod(params[1]);
+                //If the request is either POST PUT or DELETE, set the server connection to allow output.
+                if (params[1].equals("POST") ||
+                        params[1].equals("PUT") ||
+                        params[1].equals("DELETE")) {
+                    serverConnection.setDoOutput(true);
+                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    //params[2] contains the JSON String to send, make sure we send the
+                    //content length to be the json string length.
+                    serverConnection.setRequestProperty("Content-Length", "" +
+                            Integer.toString(params[2].toString().getBytes().length));
+
+                    //Send POST data that was provided.
+                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
+                    out.writeBytes(params[2].toString());
+                    out.flush();
+                    out.close();
                 }
+                //Retrieves the response code from the server.
+                duplicateCode = serverConnection.getResponseCode();
+                Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
+                Log.d("Debug: ", "Response Code : " + duplicateCode);
+
+                //Sets the input stream to the input stream of the Server.
+                if (duplicateCode != 500)
+                    is = serverConnection.getInputStream();
+
+                //If the request is restGET, create a JSON Array which is used to collect all
+                //of the JSON Objects which were went from the Node Server.
+                if (params[1] == "GET") {
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+
+                    try {
+                        JSONObject jsonData = new JSONObject(sb.toString());
+                        return jsonData.toString();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //Else the request with anything other than restGET so we return test to notify
+                //the onPostExecute method to not try to access the elements in the JSON Array.
+                else if (params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE"){
+                    return "test";
+                }
+
+                //Catches any exception that is thrown and handles it accordingly.
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                serverConnection.disconnect();
             }
 
-            // TODO: register the new account here.
-            return true;
+            return "Should not get to this if the data has been sent/received correctly!";
         }
 
+        /**
+         * Method called when a RESTful method is used like restGET and restPOST.
+         * @param result The result from the query
+         */
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
         }
     }
 }

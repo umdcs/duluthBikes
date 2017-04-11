@@ -76,10 +76,13 @@ public class MainActivity extends FragmentActivity
     public void endRide(View view) {
         mPresenter.finishRideButton();
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
-        endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
-        startActivity(endIntent);
-        mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip());
 
+        endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
+        endIntent.putExtra("startTime", LocationData.getOurInstance(this.getBaseContext()).getStartTime());
+
+        startActivity(endIntent);
+        mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
+                locationData.getOurInstance(this.getBaseContext()).getLatlng());
         LocationData.getOurInstance(this.getBaseContext()).resetData();
     }
 
@@ -138,6 +141,10 @@ public class MainActivity extends FragmentActivity
         Polyline p = mMap.addPolyline(polylineOptions);
     }
 
+    @Override
+    public void userResults(String results) {
+
+    }
 
 
 }

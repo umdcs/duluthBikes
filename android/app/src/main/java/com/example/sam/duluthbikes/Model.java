@@ -58,11 +58,13 @@ public class Model
     private Context mContext;
     private Activity mActivity;
     private int mRequestCode;
+    private boolean mode;
 
     public Model(Context context, Activity activity,Presenter presenter){
         mContext = context;
         mActivity = activity;
         mPresenter = presenter;
+        mode = false;
 
         ////////////////////////////////////////////////////////////
         // Create an instance of GoogleAPIClient
@@ -113,15 +115,30 @@ public class Model
     }
 
     @Override
-    public void notifyFinishRoute(JSONArray finishRoute){
+    public void notifyFinishRoute(JSONArray finishRoute,JSONArray list){
         JSONObject fullRide = null;
         try{
             fullRide = new JSONObject();
             fullRide.put("ride",finishRoute);
+            fullRide.put("LatLng",list);
         }catch (JSONException e){
             e.printStackTrace();
         }
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
+    }
+
+    @Override
+    public void loginAttempt(String user, String pass) {
+        JSONObject profile = null;
+        try{
+            profile = new JSONObject();
+            profile.put("userName",user);
+            profile.put("passWord",pass);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        mode = true;
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/SOMETHING","POST",profile.toString());
     }
 
     /**
@@ -170,6 +187,7 @@ public class Model
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(3000);
         mLocationRequest.setFastestInterval(100);
+        mLocationRequest.setSmallestDisplacement(1.0f);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -254,7 +272,8 @@ public class Model
                 if (params[1].equals("POST") ||
                         params[1].equals("PUT") ||
                         params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
+                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0]
+                            + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
 
                     /* Various server parameters need to set on HTTP connections that indicate the type
                      * of data that will be sent. In our case, we are sending JSON as output so need to
@@ -323,8 +342,13 @@ public class Model
             }
             return "shouldnt ever get here ";
         }
-        protected void onPostExecute(String latLong){
-
+        protected void onPostExecute(String user){
+            if(mode){
+                if(user=="good")mPresenter.returnLogin("good");
+                else if(user=="bad")mPresenter.returnLogin("bad");
+                else mPresenter.returnLogin("error");
+                mode =false;
+            }
         }
     }
 

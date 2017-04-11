@@ -131,6 +131,15 @@ app.post('/postfinish',function(req,res){
 	res.sendStatus(200);
 });
 
+app.post('/postusername', function(req,res){
+	if(!req.body)return res.sendStatus(400);
+	var userObj = req.body.user;
+	insertUsername(userObj);
+	console.log('Post Username');
+	res.sendStatus(200);
+
+});
+
 app.get('/deletealltherides',function(res,req){
 	console.log('deleted all rides atempt');
 	
