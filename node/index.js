@@ -125,6 +125,7 @@ app.post('/postfinish',function(req,res){
 	var latlng = [];
 	latlng = req.body.LatLng;
 	insertLatLng(latlng);
+	io.emit('FullRidesRecorded',doc);
 	}
 	console.log('Post Full Ride');
 
@@ -136,7 +137,7 @@ app.post('/postusername', function(req,res){
 	var userObj = req.body.user;
 	insertUsername(userObj);
 	console.log('Post Username');
-	res.sendStatus(200);
+	res.send('good');
 
 });
 

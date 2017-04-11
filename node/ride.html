@@ -40,17 +40,47 @@ function initialize() {
 socket.on('FullRidesRecorded',function(result){
 	//var listRides = JSON.parse(result);
 	var arrayRide = [];
-	for(var i=0;i<result.length;i++)
+	for(var i=result.length-1;i>=0;i--)
 {
 	arrayRide = result[i]['ride'];
-	arr = arrayRide;	
+	arr = arrayRide;
+	if(i%4==0){
 	var poly = new google.maps.Polyline({
-			strokeColor:'#ff0000',
+			strokeColor: '#db3236',
 			strokeOpacity:1.0,
 			strokeWeight:3,
 			path:arrayRide,
-			map:map
-		});
+			map:map	
+	});
+	}
+	else if(i%4==1){
+	var poly = new google.maps.Polyline({
+                        strokeColor: '#4885ed',
+                        strokeOpacity:1.0,
+                        strokeWeight:3,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(i%4==2){
+	var poly = new google.maps.Polyline({
+                        strokeColor: '#3cba54',
+                        strokeOpacity:1.0,
+                        strokeWeight:3,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else
+	{
+	var poly = new google.maps.Polyline({
+                        strokeColor: '#f4c20d',
+                        strokeOpacity:1.0,
+                        strokeWeight:3,
+                        path:arrayRide,
+                        map:map
+        });
+        }
 }
 });
  
