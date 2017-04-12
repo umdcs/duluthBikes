@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by Ruta on 11.04.2017.
+ * A link to a Feedback form
+ * For testing purposes only while the app is in a development stage
  */
 
 public class ReportAppFragment extends Fragment {
