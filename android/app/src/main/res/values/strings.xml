@@ -43,9 +43,9 @@
         completions."</string>
 
     <!-- Strings for stats-->
-    <string name="distanceLabel">Distance (miles): </string>
+    <string name="distanceLabel">Distance (km): </string>
     <string name="timelapseLabel">Time Lapsed: </string>
-    <string name="avSpeedLabel">Average Speed (miles/h): </string>
+    <string name="avSpeedLabel">Average Speed (km/hour): </string>
     <string name="sTimeLabel">Start Time: </string>
     <string name="fTimeLabel">Finish Time: </string>
 

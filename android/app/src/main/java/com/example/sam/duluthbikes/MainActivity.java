@@ -120,7 +120,7 @@ public class MainActivity extends FragmentActivity
         points.add(latLng);
 
         if(mMap.isMyLocationEnabled()==false){
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED){
                 mMap.setMyLocationEnabled(true);
                 mMap.setMaxZoomPreference(18);

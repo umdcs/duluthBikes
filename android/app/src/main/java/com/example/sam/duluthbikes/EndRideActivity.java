@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,7 +35,7 @@ public class EndRideActivity extends AppCompatActivity{
         //retrieve current time and format start and current time
         Date fDate = new Date();
         SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat datef = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat datef = new SimpleDateFormat("MM-dd-yyyy");
 
         //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //String formattedEnd = df.format(fDate.getTime());
@@ -52,9 +53,19 @@ public class EndRideActivity extends AppCompatActivity{
         String timeFinish = timef.format(fDate);
         String timeStart = timef.format(sTime);
 
+        Double distance = data.getDouble("dis");
+        distance = distance/1000;
+        Double average = (distance/(timelapse/1000))*3600;
+
+        DecimalFormat df = new DecimalFormat("#.###");
+        distance = Double.valueOf(df.format(distance));
+        average = Double.valueOf(df.format(average));
+
         rideDate.setText(dateOfRide);
-        dist.setText(Double.toString(data.getDouble("dis")));
-        timeLapsed.setText(Integer.toString(hours)+":"+Integer.toString(min)+":"+Integer.toString(sec));
+        dist.setText(Double.toString(distance));
+        //timeLapsed.setText(timef.format(timelapse));
+        timeLapsed.setText(Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+ "sec ");
+        avSpeed.setText(Double.toString(average));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
 
