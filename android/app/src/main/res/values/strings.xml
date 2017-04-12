@@ -55,4 +55,9 @@
         Thank you!</string>
     <string name="feedbackLink"><a href="https://goo.gl/forms/NlAyjQBkhZ9iLqUm1">Feedback Form</a></string>
 
+    <string name="About1">This is a campaign developed for Duluth Bikes club to replace head count campaigns.
+The main goal is to collect information about rides and use that data for cycling advocacy in Duluth.</string>
+    <string name="About2">SECURITY</string>
+    <string name="About3">This app does not encrypt data when sending to the server.</string>
+
 </resources>
