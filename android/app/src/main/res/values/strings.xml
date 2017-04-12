@@ -59,5 +59,19 @@
 The main goal is to collect information about rides and use that data for cycling advocacy in Duluth.</string>
     <string name="About2">SECURITY</string>
     <string name="About3">This app does not encrypt data when sending to the server.</string>
+    <string name="About4">Instructions for recording a ride:</string>
+    <string name="About5">When you click START, you need to click FINISH for the ride to be send up to the database.
+        The app will ask you to give permission to use location.</string>
+    <string name="About6">Report Roads</string>
+    <string name="About7">There is an option to report road issues and send a photo and description of the problem to Duluth Bikes.</string>
+    <string name="About8">REPORT APP</string>
+    <string name="About9">For testing purposes, report issues with the app using Google form.
+        Address is posted under App Reports section.</string>
+    <string name="About10">EVENTS</string>
+    <string name="About11">Learn about news and upcoming cycling events.
+        Data is pulled from Duluth Bikes webpage.</string>
+    <string name="About12">DISCOUNTS</string>
+    <string name="About13">Look for businesses which provide discounts for cyclists.</string>
+
 
 </resources>
