@@ -34,12 +34,12 @@ public class EndRideActivity extends AppCompatActivity{
 
         //retrieve current time and format start and current time
         Date fDate = new Date();
-        SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss");
-        SimpleDateFormat datef = new SimpleDateFormat("MM-dd-yyyy");
 
-        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //String formattedEnd = df.format(fDate.getTime());
-        //String formattedStart = df.format(data.getString("startTime"));
+        //data format definitions
+        //SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss"); //military time
+        SimpleDateFormat timef = new SimpleDateFormat("hh:mm:ss a");
+        SimpleDateFormat datef = new SimpleDateFormat("MM-dd-yyyy");
+        DecimalFormat df = new DecimalFormat("#.###");
 
         Long sTime =  data.getLong("startTime");
         Long fTime = fDate.getTime();
@@ -47,28 +47,25 @@ public class EndRideActivity extends AppCompatActivity{
 
         int sec = (int) (timelapse / 1000) % 60 ;
         int min = (int) ((timelapse / (1000*60)) % 60);
-        int hours   = (int) ((timelapse / (1000*60*60)) % 24);
-
-        String dateOfRide = datef.format(fDate);
-        String timeFinish = timef.format(fDate);
-        String timeStart = timef.format(sTime);
+        int hours = (int) ((timelapse / (1000*60*60)) % 24);
 
         Double distance = data.getDouble("dis");
         distance = distance/1000;
         Double average = (distance/(timelapse/1000))*3600;
 
-        DecimalFormat df = new DecimalFormat("#.###");
-        distance = Double.valueOf(df.format(distance));
-        average = Double.valueOf(df.format(average));
+        //format data entries
+        Double distKM = Double.valueOf(df.format(distance));
+        Double averKmH = Double.valueOf(df.format(average));
+        String dateOfRide = datef.format(fDate);
+        String timeFinish = timef.format(fDate);
+        String timeStart = timef.format(sTime);
 
         rideDate.setText(dateOfRide);
-        dist.setText(Double.toString(distance));
-        //timeLapsed.setText(timef.format(timelapse));
+        dist.setText(Double.toString(distKM));
         timeLapsed.setText(Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+ "sec ");
-        avSpeed.setText(Double.toString(average));
+        avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
-
 
     }
 

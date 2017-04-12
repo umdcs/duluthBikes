@@ -113,6 +113,10 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new AboutFragment())
                     .commit();
+        } else if (id == R.id.nav_reportApp) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new ReportAppFragment())
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

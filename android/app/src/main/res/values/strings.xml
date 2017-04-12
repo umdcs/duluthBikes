@@ -24,10 +24,10 @@
 
     <string name="home">Home</string>
     <string name="events">Events</string>
-    <string name="report">Report</string>
+    <string name="report">Report Road</string>
     <string name="tours">Tours</string>
     <string name="discount">Get Discount</string>
-    <string name="membership">Membership</string>
+    <string name="reportApp">Report App</string>
     <string name="about">About Us</string>
 
     <!-- Strings related to login -->
@@ -48,5 +48,11 @@
     <string name="avSpeedLabel">Average Speed (km/hour): </string>
     <string name="sTimeLabel">Start Time: </string>
     <string name="fTimeLabel">Finish Time: </string>
+
+    <string name="DisclaimerReportApp">This app is in a development stage.
+        However, we would like to hear what you think about it.
+        Please provide your feedback via Google Form by following the link below.
+        Thank you!</string>
+    <string name="feedbackLink"><a href="https://goo.gl/forms/NlAyjQBkhZ9iLqUm1">Feedback Form</a></string>
 
 </resources>
