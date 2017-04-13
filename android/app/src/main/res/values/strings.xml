@@ -24,10 +24,10 @@
 
     <string name="home">Home</string>
     <string name="events">Events</string>
-    <string name="report">Report</string>
+    <string name="report">Report Road</string>
     <string name="tours">Tours</string>
     <string name="discount">Get Discount</string>
-    <string name="membership">Membership</string>
+    <string name="reportApp">Report App</string>
     <string name="about">About Us</string>
 
     <!-- Strings related to login -->
@@ -40,8 +40,38 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+        completions."</string>
+
+    <!-- Strings for stats-->
+    <string name="distanceLabel">Distance (km): </string>
+    <string name="timelapseLabel">Time Lapsed: </string>
+    <string name="avSpeedLabel">Average Speed (km/hour): </string>
+    <string name="sTimeLabel">Start Time: </string>
+    <string name="fTimeLabel">Finish Time: </string>
+
+    <string name="DisclaimerReportApp">This app is in a development stage.
+        However, we would like to hear what you think about it.
+        Please provide your feedback via Google Form by following the link below.
+        Thank you!</string>
+    <string name="feedbackLink"><a href="https://goo.gl/forms/NlAyjQBkhZ9iLqUm1">Feedback Form</a></string>
+
+    <string name="About1">This is a campaign developed for Duluth Bikes club to replace head count campaigns.
+The main goal is to collect information about rides and use that data for cycling advocacy in Duluth.</string>
+    <string name="About2">SECURITY</string>
+    <string name="About3">This app does not encrypt data when sending to the server.</string>
+    <string name="About4">Instructions for recording a ride:</string>
+    <string name="About5">When you click START, you need to click FINISH for the ride to be send up to the database.
+        The app will ask you to give permission to use location.</string>
+    <string name="About6">Report Roads</string>
+    <string name="About7">There is an option to report road issues and send a photo and description of the problem to Duluth Bikes.</string>
+    <string name="About8">REPORT APP</string>
+    <string name="About9">For testing purposes, report issues with the app using Google form.
+        Address is posted under App Reports section.</string>
+    <string name="About10">EVENTS</string>
+    <string name="About11">Learn about news and upcoming cycling events.
+        Data is pulled from Duluth Bikes webpage.</string>
+    <string name="About12">DISCOUNTS</string>
+    <string name="About13">Look for businesses which provide discounts for cyclists.</string>
 
 
 </resources>

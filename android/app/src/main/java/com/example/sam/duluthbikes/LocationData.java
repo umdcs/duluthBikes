@@ -30,7 +30,7 @@ public class LocationData {
 
     private Location lastLocation;
     private double distance;
-    private String startTime;
+    private Long startTime;
 
     private LocationData(Context context) {
 
@@ -80,15 +80,14 @@ public class LocationData {
         return distance;
     }
 
-    public String getStartTime(){
+    public Long getStartTime(){
         if (startTime == null){
             Date date = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String formattedDate = df.format(date.getTime());
-            startTime = formattedDate;
+            startTime = date.getTime();
         }
         return startTime;
     }
+
 
     public JSONArray getTrip(){
         if(trip==null)trip = new JSONArray();
@@ -101,20 +100,20 @@ public class LocationData {
     }
 
     public void addPoint(LatLng p,Location location){
-        if(distance>0){
+        if(location.getAccuracy()<15) {
             mPolylineOptions.add(p);
             JSONObject arr = new JSONObject();
             try {
-                arr.put("lat",location.getLatitude());
-                arr.put("lng",location.getLongitude());
+                arr.put("lat", location.getLatitude());
+                arr.put("lng", location.getLongitude());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             trip.put(arr);
             latlng.put(p);
+            if (getLastLocation() != null) distance += getLastLocation().distanceTo(location);
         }
         builder.include(p);
-        if(getLastLocation()!=null)distance += getLastLocation().distanceTo(location);
         lastLocation = location;
     }
 }

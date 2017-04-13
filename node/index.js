@@ -96,6 +96,9 @@ app.get('/',function(req,res){
 	res.sendFile(__dirname + '/duluthbikes.html');
 });
 
+app.get('/heatmaps', function(req, res){
+	res.sendFile(__dirname + '/heatmaps.html');
+});
 
 app.post('/postroute', function(request, response) {
 
