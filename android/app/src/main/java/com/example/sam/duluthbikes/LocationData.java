@@ -100,20 +100,20 @@ public class LocationData {
     }
 
     public void addPoint(LatLng p,Location location){
-        if(distance>0){
+        if(location.getAccuracy()<15) {
             mPolylineOptions.add(p);
             JSONObject arr = new JSONObject();
             try {
-                arr.put("lat",location.getLatitude());
-                arr.put("lng",location.getLongitude());
+                arr.put("lat", location.getLatitude());
+                arr.put("lng", location.getLongitude());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             trip.put(arr);
             latlng.put(p);
+            if (getLastLocation() != null) distance += getLastLocation().distanceTo(location);
         }
         builder.include(p);
-        if(getLastLocation()!=null)distance += getLastLocation().distanceTo(location);
         lastLocation = location;
     }
 }
