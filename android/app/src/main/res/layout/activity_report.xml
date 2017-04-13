@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:contentDescription="image" />
 
     <!-- Capture picture button -->
     <Button
