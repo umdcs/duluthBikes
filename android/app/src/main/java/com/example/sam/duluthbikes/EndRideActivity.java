@@ -3,6 +3,7 @@ package com.example.sam.duluthbikes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -67,6 +68,11 @@ public class EndRideActivity extends AppCompatActivity{
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
 
+    }
+
+    public void doneWithRide(View view){
+        Intent menu = new Intent(this.getApplicationContext(),MenuActivity.class);
+        startActivity(menu);
     }
 
     @Override
