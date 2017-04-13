@@ -86,8 +86,8 @@ app.get('/rides',function(request,response){
 });
 
 app.get('/maps',function(req,res){
-	res.sendFile(__dirname + '/maps.html');
-	printRides('FullLatLngsRecorded',function(doc){
+	res.sendFile(__dirname + '/blankMap.html');
+	printRides('FullRidesRecorded',function(doc){
 	io.emit('FullRidesRecorded',doc);
 	});
 });
@@ -96,6 +96,9 @@ app.get('/',function(req,res){
 	res.sendFile(__dirname + '/duluthbikes.html');
 });
 
+app.get('/heatmaps', function(req, res){
+	res.sendFile(__dirname + '/heatmaps.html');
+});
 
 app.post('/postroute', function(request, response) {
 
@@ -125,6 +128,8 @@ app.post('/postfinish',function(req,res){
 	var latlng = [];
 	latlng = req.body.LatLng;
 	insertLatLng(latlng);
+	
+	io.emit('FullRidesRecorded',doc);
 	}
 	console.log('Post Full Ride');
 
@@ -136,7 +141,7 @@ app.post('/postusername', function(req,res){
 	var userObj = req.body.user;
 	insertUsername(userObj);
 	console.log('Post Username');
-	res.sendStatus(200);
+	res.send('good');
 
 });
 

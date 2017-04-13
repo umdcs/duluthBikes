@@ -14,7 +14,7 @@ module.exports = function() {
 	})
 
 	mongodb.on('connect', function () {
-	console.log('database connected')
+	console.log('database connected DulBik')
 	})
 	
 	/** ********************************************************************
@@ -25,7 +25,8 @@ module.exports = function() {
 	printDatabase = function(collectionName, callback) {
 	
 		// 
-		// Collection look ups with find return a MongoDB 'cursor'. More info can be found here
+		// Collection look ups with find return a 
+		// MongoDB 'cursor'. More info can be found here
 		// https://docs.mongodb.com/v3.2/reference/glossary/#term-cursor
 		// 
 		
@@ -79,23 +80,17 @@ module.exports = function() {
 			if(err||!result)console.log("latlng not saved");
 			else console.log("latlng loged in DB");
 		});
+	};
 
-	insertUser = function(user){
-		// needs to find the user in the collection UsersSaved 
-			mongodb.collection.find('UsersSaved', function(err, user) {
-			if(err) console.log("User not saved");
-			else if(!user) {mongodb.collection('UsersSaved').save(
-				{users:user},function(err,result){
-				if(err||!result)console.log("user not saved");
-				else console.log("user loged in User");
-					else{
-						//user exists and do stuff.
-					}
-			});
-		}
+	insertUsername = function(user){
+		mongodb.collection('UsersSaved').save(
+			{users:user},function(err,result){
+			if(err||!result)console.log("user not saved");
+			else console.log("user loged in User");
+		});
+	};
 
-	});
-};
+	
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});
 		callback(true);
