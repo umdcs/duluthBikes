@@ -52,8 +52,6 @@ public interface ModelViewPresenterComponents {
         //Gets User name
         String getUserName (String filePath) throws IOException;
 
-        //Initializes user
-        void initializeUser();
 
         void stopLocationUpdates();
 
