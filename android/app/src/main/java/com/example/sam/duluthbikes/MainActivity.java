@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,6 +45,12 @@ public class MainActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CharSequence text ="Must click finish to end location tracking!";
+        Toast toast = Toast.makeText(
+                getApplicationContext(), text,Toast.LENGTH_LONG
+        );
+        toast.show();
 
         points = new ArrayList<>();
 
