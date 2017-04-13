@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -34,21 +35,30 @@ public class ReportFragment extends Fragment {
     Button button;
     ImageView imageView;
     public String imageFileName;
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA =1;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     public static final int RequestPermissionCode = 1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View myView = inflater.inflate(R.layout.activity_report,container,false);
+        final View myView = inflater.inflate(R.layout.activity_report, container, false);
         button = (Button) myView.findViewById(R.id.camera);
         imageView = (ImageView) myView.findViewById(R.id.image);
+
         requestCameraPermission();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startCamera();
+                if (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    startCamera();
+                } else {
+                    CharSequence text = "You need to grant camera permissions";
+                    Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_SHORT);
+                    toast.show();
+                    requestCameraPermission();
+                }
             }
         });
         return myView;
@@ -65,14 +75,14 @@ public class ReportFragment extends Fragment {
     //Pulls the picture taken and places it into the image preview.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String path = "sdcard/Duluth Bikes Pictures/"+imageFileName;
+        String path = "sdcard/Duluth Bikes Pictures/" + imageFileName;
         imageView.setImageDrawable(Drawable.createFromPath(path));
     }
 
     //Method to get a file. Stores Pictures in Device storage/Duluth Bikes Pictures
     private File getFile() {
         File file = new File("sdcard/Duluth Bikes Pictures");
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.mkdir();
         }
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -85,13 +95,15 @@ public class ReportFragment extends Fragment {
     //Method that requests Camera Permission
     private void requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(this.getContext(),
-                Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this.getActivity(),
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA);
 
         }
-        ActivityCompat.requestPermissions(this.getActivity(),
-                new String[]{Manifest.permission.CAMERA},
-                MY_PERMISSIONS_REQUEST_CAMERA);
-
     }
- }
+}
+
+
+
 
