@@ -162,26 +162,7 @@ public class Model
         return username;
     }
 
-    /**
-     * Checks if a user account exists, otherwise starts the CreateAccount activity.
-     */
-    @Override
-    public void initializeUser() {
-        File file = mContext.getFileStreamPath("account.txt");
-        if(file == null || !file.exists()) {
-            Intent createAccount = new Intent(mContext, CreateAccountActivity.class);
-            mContext.startActivity(createAccount);
-        }
-        else {
-            try {
-                userName = getUserName(file.toString());
-                Log.d("username on main", userName);
-            } catch (java.lang.Exception e) {
-                e.printStackTrace();
-            }
-        }
 
-    }
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
