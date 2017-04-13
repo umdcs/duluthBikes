@@ -19,6 +19,7 @@
     </style>
   </head>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&libraries=visualization"></script>
 <script>
 var x=0;
 var map;
@@ -40,11 +41,15 @@ function initialize() {
 socket.on('FullRidesRecorded',function(result){
 	//var listRides = JSON.parse(result);
 	var arrayRide = [];
-	for(var i=result.length-1;i>=0;i--)
+	var n=0;
+	for(var i=0;i<result.length;i++)
 {
+	
 	arrayRide = result[i]['ride'];
 	arr = arrayRide;
-	if(i%4==0){
+	if(arr!=null){
+	if(arr.length>10){
+	if(n%6==0){
 	var poly = new google.maps.Polyline({
 			strokeColor: '#db3236',
 			strokeOpacity:1.0,
@@ -53,7 +58,7 @@ socket.on('FullRidesRecorded',function(result){
 			map:map	
 	});
 	}
-	else if(i%4==1){
+	else if(n%6==1){
 	var poly = new google.maps.Polyline({
                         strokeColor: '#4885ed',
                         strokeOpacity:1.0,
@@ -62,9 +67,27 @@ socket.on('FullRidesRecorded',function(result){
                         map:map
         });
         }
-	else if(i%4==2){
+	else if(n%6==2){
 	var poly = new google.maps.Polyline({
                         strokeColor: '#3cba54',
+                        strokeOpacity:1.0,
+                        strokeWeight:3,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%6==3){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#800080',
+                        strokeOpacity:1.0,
+                        strokeWeight:3,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%6==4){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#ffa500',
                         strokeOpacity:1.0,
                         strokeWeight:3,
                         path:arrayRide,
@@ -81,14 +104,21 @@ socket.on('FullRidesRecorded',function(result){
                         map:map
         });
         }
+	n++;
+	}}
+
 }
+map.data.toGeoJson(function(doc){
+	var heat = new google.maps.visualization.HeatmapLayer({
+		data: doc,
+		map:map
 });
- 
+});
 
-
+});
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initialize">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initialize&libraries=visualization">
     </script>
 
 

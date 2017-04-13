@@ -18,10 +18,14 @@
       }
     </style>
   </head>
+  <body>
+     <div id='map-canvas'></div>
+        <div id='test'></div>
+  </body>
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
 var x=0;
-var map;
 var prepath;
 var path = null;
 var socket = io();
@@ -33,14 +37,16 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.TERRAIN
   };
   
-  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+  var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+};
 
-}
 
-socket.on('FullRidesRecorded',function(result){
+//socket.on('FullRidesRecorded',function(result){
 	//var listRides = JSON.parse(result);
-	var arrayRide = [];
-	for(var i=0;i<result.length;i++)
+//	var arrayRide = [];
+//	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+/*
+	for(var i=0;i>result.length;i++)
 {
 	arrayRide = result[i]['lat/lng'];
 	var poly = new google.maps.visualization.HeatmapLayer({
@@ -49,18 +55,15 @@ socket.on('FullRidesRecorded',function(result){
 			map:map
 		});
 }
-});
- 
+*/
+//});
+
+
 
 
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&libraries=visualization&callback=initialize">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initialize">
     </script>
 
-
-  <body>
-     <div id='map-canvas'></div>
-	<div id='test'></div>
-  </body>
 </html>
