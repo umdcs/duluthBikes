@@ -78,6 +78,7 @@ public class Model
     public void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
+        disconnectApiOnFinish();
     }
 
     public void disconnectApiOnFinish() {

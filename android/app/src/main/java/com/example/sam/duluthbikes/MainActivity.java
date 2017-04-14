@@ -93,18 +93,15 @@ public class MainActivity extends FragmentActivity
     public void endRide(View view) {
         mPresenter.finishRideButton();
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
-
         Date thisDate = new Date();
         Long endTime = thisDate.getTime();
-
         endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         endIntent.putExtra("startTime", LocationData.getOurInstance(this.getBaseContext()).getStartTime());
         endIntent.putExtra("endTime", endTime);
-
-        startActivity(endIntent);
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
         LocationData.getOurInstance(this.getBaseContext()).resetData();
+        startActivity(endIntent);
     }
 
     public void changeUI(View view){
