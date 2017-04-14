@@ -18,7 +18,9 @@ public class UnitTestRideStatistics {
         long timelaspe = 3600000; //1hour in milisec
 
         assertEquals(10.0, endRide.getKmPerHour(distance, timelaspe), 0.001);
-
+        assertEquals(6.21371, endRide.getMilesPerHour(distance, timelaspe), 0.001);
+        assertEquals(10.0, endRide.getDistInKm(distance), 0.001);
+        assertEquals(6.21371, endRide.getDistInMiles(distance), 0.001);
 
     }
 }
