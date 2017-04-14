@@ -66,7 +66,6 @@ public class Model
         mPresenter = presenter;
         mode = false;
 
-        ////////////////////////////////////////////////////////////
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(mContext)
@@ -75,12 +74,9 @@ public class Model
                     .addApi(LocationServices.API)
                     .build();
         }
-
         mGoogleApiClient.connect();
-
         createLocationRequest();
     }
-
 
     /**
      * Method to stop location services called by Presenters pauseRideButton method
@@ -116,15 +112,17 @@ public class Model
 
     @Override
     public void notifyFinishRoute(JSONArray finishRoute,JSONArray list){
-        JSONObject fullRide = null;
-        try{
-            fullRide = new JSONObject();
-            fullRide.put("ride",finishRoute);
-            fullRide.put("LatLng",list);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
+        if(finishRoute.length()>10) {
+            JSONObject fullRide = null;
+            try {
+                fullRide = new JSONObject();
+                fullRide.put("ride", finishRoute);
+                fullRide.put("heat", list);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish", "POST", fullRide.toString());
+        };
     }
 
     @Override
@@ -141,29 +139,6 @@ public class Model
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postusername","POST",profile.toString());
     }
 
-    /**
-     * Gets the account username from file.
-     * @param filePath The filepath of the file the username is stored on
-     * @return username The username of the account
-     * @throws IOException Just in case there's an issue with the buffered reader
-     */
-    @Override
-    public String getUserName(String filePath) throws IOException {
-        File file = new File(filePath);
-        FileInputStream fin = new FileInputStream(file);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-        StringBuilder sb = new StringBuilder();
-        String line = reader.readLine();
-        sb.append(line);
-        String username = sb.toString();
-        reader.close();
-        fin.close();
-
-        return username;
-    }
-
-
-
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(3000);
@@ -172,13 +147,11 @@ public class Model
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-
     /**
      * Getter and Setter methods for Location
      */
     public Location getLocation() { return mLastLocation; }
     public void setLocation(Location curr) { mLastLocation = curr; }
-
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -193,27 +166,18 @@ public class Model
                     mRequestCode);
             return;
         }
-
         // get the last location
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
         notifyRouteUpdate();
-
-
         PendingResult<Status> pendingResult = LocationServices.FusedLocationApi
                 .requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
-
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
+    public void onConnectionSuspended(int i) {}
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     @Override
     public void onLocationChanged(Location location){

@@ -49,10 +49,6 @@ public interface ModelViewPresenterComponents {
         //Notify Route Update
         void notifyRouteUpdate();
 
-        //Gets User name
-        String getUserName (String filePath) throws IOException;
-
-
         void stopLocationUpdates();
 
         void disconnectApiOnFinish();
