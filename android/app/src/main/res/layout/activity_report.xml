@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
         android:visibility="visible"
-        android:contentDescription="image" />
+        android:contentDescription="@string/image" />
 
     <!-- Capture picture button -->
     <Button
