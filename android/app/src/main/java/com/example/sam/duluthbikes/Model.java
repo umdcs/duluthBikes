@@ -3,7 +3,6 @@ package com.example.sam.duluthbikes;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -20,7 +19,6 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,10 +34,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.sam.duluthbikes.MainActivity.userName;
 
 /**
  * Created by Sam on 3/26/2017.
@@ -321,7 +315,7 @@ public class Model
             }finally {
                 serverConnection.disconnect();
             }
-            return "shouldnt ever get here ";
+            return "Shouldn't ever get here ";
         }
         protected void onPostExecute(String user){
             if(mode){
