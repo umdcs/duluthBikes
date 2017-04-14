@@ -45,7 +45,7 @@ public class MainActivity extends FragmentActivity
     private LocationData locationData;
     private boolean animate;
 
-    private LinearLayout tv;
+    private RelativeLayout tv;
     private SupportMapFragment mapFragment;
     private TextView tvSpeed;
     private TextView tvDistance;
@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        tv = (LinearLayout) findViewById(R.id.tvStats);
+        tv = (RelativeLayout) findViewById(R.id.tvStats);
         tv.setVisibility(View.GONE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
@@ -111,10 +111,6 @@ public class MainActivity extends FragmentActivity
         if(tv.getVisibility()==View.GONE){
             tv.setVisibility(View.VISIBLE);
             mapFragment.getView().setVisibility(View.GONE);
-            String sd = Float.toString(getLastLocation().getSpeed());
-            tvSpeed.setText(sd);
-            sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
-            tvDistance.setText(sd);
         }else{
             tv.setVisibility(View.GONE);
             mapFragment.getView().setVisibility(View.VISIBLE);
