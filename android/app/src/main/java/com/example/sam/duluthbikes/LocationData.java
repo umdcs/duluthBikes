@@ -12,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -87,7 +86,6 @@ public class LocationData {
         }
         return startTime;
     }
-
 
     public JSONArray getTrip(){
         if(trip==null)trip = new JSONArray();

@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Main Activity Class
@@ -84,8 +85,12 @@ public class MainActivity extends FragmentActivity
         mPresenter.finishRideButton();
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
 
+        Date thisDate = new Date();
+        Long endTime = thisDate.getTime();
+
         endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         endIntent.putExtra("startTime", LocationData.getOurInstance(this.getBaseContext()).getStartTime());
+        endIntent.putExtra("endTime", endTime);
 
         startActivity(endIntent);
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),

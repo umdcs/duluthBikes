@@ -12,7 +12,8 @@ import java.util.Date;
 
 
 /**
- * Created by Sam on 3/29/2017.
+ * End of the Ride activity
+ * Displays statistics of the ride and allows to return to the home screen
  */
 
 public class EndRideActivity extends AppCompatActivity{
@@ -32,9 +33,11 @@ public class EndRideActivity extends AppCompatActivity{
         TextView endTime = (TextView)findViewById(R.id.endTime);
 
         data = getIntent().getExtras();
+        Long sTime =  data.getLong("startTime");
+        Long fTime = data.getLong("endTime");
 
         //retrieve current time and format start and current time
-        Date fDate = new Date();
+        //Date fDate = new Date();
 
         //data format definitions
         //SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss"); //military time
@@ -42,8 +45,6 @@ public class EndRideActivity extends AppCompatActivity{
         SimpleDateFormat datef = new SimpleDateFormat("MM-dd-yyyy");
         DecimalFormat df = new DecimalFormat("#.###");
 
-        Long sTime =  data.getLong("startTime");
-        Long fTime = fDate.getTime();
         Long timelapse = fTime - sTime;
 
         int sec = (int) (timelapse / 1000) % 60 ;
@@ -57,8 +58,8 @@ public class EndRideActivity extends AppCompatActivity{
         //format data entries
         Double distKM = Double.valueOf(df.format(distance));
         Double averKmH = Double.valueOf(df.format(average));
-        String dateOfRide = datef.format(fDate);
-        String timeFinish = timef.format(fDate);
+        String dateOfRide = datef.format(fTime);
+        String timeFinish = timef.format(fTime);
         String timeStart = timef.format(sTime);
 
         rideDate.setText(dateOfRide);

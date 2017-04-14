@@ -118,7 +118,7 @@
                 android:id="@+id/button2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Done"
+                android:text="@string/DONE"
                 android:layout_alignParentBottom="true"
                 android:onClick="doneWithRide"/>
         </RelativeLayout>
