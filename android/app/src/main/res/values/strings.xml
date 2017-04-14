@@ -48,6 +48,7 @@
     <string name="avSpeedLabel">Average Speed (km/hour): </string>
     <string name="sTimeLabel">Start Time: </string>
     <string name="fTimeLabel">Finish Time: </string>
+    <string name="DONE">DONE</string>
 
     <string name="DisclaimerReportApp">This app is in a development stage.
         However, we would like to hear what you think about it.
