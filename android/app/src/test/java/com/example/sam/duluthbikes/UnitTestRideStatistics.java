@@ -5,13 +5,20 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Ruta on 13.04.2017.
+ * Unit Test for Ride Statistics
  */
 
 public class UnitTestRideStatistics {
 
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void testStatsCalculations() throws Exception {
+
+        EndRideActivity endRide = new EndRideActivity();
+        double distance = 10000; //10 km
+        long timelaspe = 3600000; //1hour in milisec
+
+        assertEquals(10.0, endRide.getKmPerHour(distance, timelaspe), 0.001);
+
+
     }
 }

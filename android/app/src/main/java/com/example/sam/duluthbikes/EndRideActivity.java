@@ -19,6 +19,9 @@ import java.util.Date;
 public class EndRideActivity extends AppCompatActivity{
 
     Bundle data;
+    int sec;
+    int min;
+    int hours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,7 @@ public class EndRideActivity extends AppCompatActivity{
         data = getIntent().getExtras();
         Long sTime =  data.getLong("startTime");
         Long fTime = data.getLong("endTime");
-
-        //retrieve current time and format start and current time
-        //Date fDate = new Date();
+        Double distance = data.getDouble("dis");
 
         //data format definitions
         //SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss"); //military time
@@ -46,18 +47,11 @@ public class EndRideActivity extends AppCompatActivity{
         DecimalFormat df = new DecimalFormat("#.###");
 
         Long timelapse = fTime - sTime;
-
-        int sec = (int) (timelapse / 1000) % 60 ;
-        int min = (int) ((timelapse / (1000*60)) % 60);
-        int hours = (int) ((timelapse / (1000*60*60)) % 24);
-
-        Double distance = data.getDouble("dis");
-        distance = distance/1000;
-        Double average = (distance/(timelapse/1000))*3600;
+        setSecMinHours(timelapse);
 
         //format data entries
-        Double distKM = Double.valueOf(df.format(distance));
-        Double averKmH = Double.valueOf(df.format(average));
+        Double distKM = Double.valueOf(df.format(getDistInKm(distance)));
+        Double averKmH = Double.valueOf(df.format(getKmPerHour(distance, timelapse)));
         String dateOfRide = datef.format(fTime);
         String timeFinish = timef.format(fTime);
         String timeStart = timef.format(sTime);
@@ -69,6 +63,30 @@ public class EndRideActivity extends AppCompatActivity{
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
 
+    }
+
+    public void setSecMinHours(Long timelapse){
+        sec = (int) (timelapse / 1000) % 60 ;
+        min = (int) ((timelapse / (1000*60)) % 60);
+        hours = (int) ((timelapse / (1000*60*60)) % 24);
+    }
+
+    public double getDistInKm(Double distance){
+        return distance/1000;
+    }
+
+    public double getDistInMiles(Double distance){
+        return distance*0.000621371;
+    }
+
+    public double getKmPerHour(Double distance, Long timelapse){
+
+        return (getDistInKm(distance)/(timelapse/1000))*3600;
+    }
+
+    public double getMilesPerHour(Double distance, Long timelapse){
+
+        return (getDistInMiles(distance)/(timelapse/1000))*3600;
     }
 
     public void doneWithRide(View view){
