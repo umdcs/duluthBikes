@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -41,6 +44,11 @@ public class MainActivity extends FragmentActivity
     private LocationData locationData;
     private boolean animate;
 
+    private LinearLayout tv;
+    private SupportMapFragment mapFragment;
+    private TextView tvSpeed;
+    private TextView tvDistance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,23 +59,24 @@ public class MainActivity extends FragmentActivity
                 getApplicationContext(), text,Toast.LENGTH_LONG
         );
         toast.show();
-
         points = new ArrayList<>();
-
         polylineOptions = new PolylineOptions()
                 .width(15)
                 .color(Color.BLUE);
 
         mPresenter = new Presenter(this.getApplicationContext(),this,this);
         mPresenter.clickStart();
-
         animate = true;
 
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
         mapFragment.getMapAsync(this);
+
+        tv = (LinearLayout) findViewById(R.id.tvStats);
+        tv.setVisibility(View.GONE);
+        tvDistance = (TextView) findViewById(R.id.distanceMain);
+        tvSpeed = (TextView) findViewById(R.id.speed);
     }
 
     /**
@@ -93,6 +102,20 @@ public class MainActivity extends FragmentActivity
         LocationData.getOurInstance(this.getBaseContext()).resetData();
     }
 
+    public void changeUI(View view){
+        if(tv.getVisibility()==View.GONE){
+            tv.setVisibility(View.VISIBLE);
+            mapFragment.getView().setVisibility(View.GONE);
+            String sd = Float.toString(getLastLocation().getSpeed());
+            tvSpeed.setText(sd);
+            sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
+            tvDistance.setText(sd);
+        }else{
+            tv.setVisibility(View.GONE);
+            mapFragment.getView().setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -110,11 +133,6 @@ public class MainActivity extends FragmentActivity
         mMap = googleMap;
     }
 
-    //called by get coordinates button
-    public void displayLocation(View view) {
-        setLastLocation(mLastLocation);
-    }
-
     //get location and set location methods
     public Location getLastLocation(){ return mLastLocation; }
     public void setLastLocation(Location curr) { mLastLocation = curr; }
@@ -125,7 +143,6 @@ public class MainActivity extends FragmentActivity
         LatLng latLng =
                 new LatLng(getLastLocation().getLatitude(),getLastLocation().getLongitude());
         points.add(latLng);
-
         if(mMap.isMyLocationEnabled()==false){
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED){
@@ -133,12 +150,10 @@ public class MainActivity extends FragmentActivity
                 mMap.setMaxZoomPreference(18);
             }
         }
-
         locationData.getOurInstance(this.getBaseContext()).addPoint(latLng,location);
         polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
         LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
         CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),100);
-
         if(animate)
         {
             animate = false;
@@ -146,12 +161,14 @@ public class MainActivity extends FragmentActivity
         }
         else mMap.moveCamera(cu);
         Polyline p = mMap.addPolyline(polylineOptions);
+        String sd = Float.toString(location.getSpeed());
+        tvSpeed.setText(sd);
+        sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
+        tvDistance.setText(sd);
     }
 
     @Override
     public void userResults(String results) {
 
     }
-
-
 }
