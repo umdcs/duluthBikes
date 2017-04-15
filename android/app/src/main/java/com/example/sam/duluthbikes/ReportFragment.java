@@ -3,6 +3,8 @@ package com.example.sam.duluthbikes;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,14 +13,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,9 +40,13 @@ public class ReportFragment extends Fragment {
     int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
     Button button;
     ImageView imageView;
+    TextView imageBytes;
     public String imageFileName;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     public static final int RequestPermissionCode = 1;
+    public String encodedImage;
+    public Drawable imageB;
+    public String path;
 
     @Nullable
     @Override
@@ -45,6 +55,8 @@ public class ReportFragment extends Fragment {
         final View myView = inflater.inflate(R.layout.activity_report, container, false);
         button = (Button) myView.findViewById(R.id.camera);
         imageView = (ImageView) myView.findViewById(R.id.image);
+
+        imageBytes = (TextView)myView.findViewById(R.id.imageBytes);
 
         requestCameraPermission();
         button.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +87,21 @@ public class ReportFragment extends Fragment {
     //Pulls the picture taken and places it into the image preview.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String path = "sdcard/Duluth Bikes Pictures/" + imageFileName;
+        super.onActivityResult(requestCode, resultCode, data);
+        path = "sdcard/Duluth Bikes Pictures/" + imageFileName;
         imageView.setImageDrawable(Drawable.createFromPath(path));
+
+        try {
+            compressImage();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        imageBytes.setText(encodedImage);
+
+        //final Uri imageUri = data.getData();
+        //final InputStream inputStream = getContentResolver().openInputStream(imageUri);
+
     }
 
     //Method to get a file. Stores Pictures in Device storage/Duluth Bikes Pictures
@@ -91,17 +116,46 @@ public class ReportFragment extends Fragment {
         return image_file;
     }
 
-
     //Method that requests Camera Permission
     private void requestCameraPermission() {
         if (ContextCompat.checkSelfPermission(this.getContext(),
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this.getActivity(),
-                        new String[]{Manifest.permission.CAMERA},
-                        MY_PERMISSIONS_REQUEST_CAMERA);
+            ActivityCompat.requestPermissions(this.getActivity(),
+                    new String[]{Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
 
         }
     }
+
+    public void compressImage() throws FileNotFoundException {
+        //"/sdcard/Duluth Bikes Pictures/JPEG_20170413_162100.jpg"
+        //Bitmap bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath());
+        Bitmap bm = BitmapFactory.decodeFile(path);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos); //bm is the bitmap object
+        byte[] b = baos.toByteArray();
+        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+    }
+
+    public void sendPictureToServer(byte[] byteImage) {
+
+    }
+
+/**
+     @Override
+     public void notifyFinishRoute(JSONArray finishRoute, JSONArray list){
+     JSONObject fullRide = null;
+     try{
+     fullRide = new JSONObject();
+     fullRide.put("ride",finishRoute);
+     fullRide.put("LatLng",list);
+     }catch (JSONException e){
+     e.printStackTrace();
+     }
+     new Model.HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
+     }
+     */
 }
 
 
