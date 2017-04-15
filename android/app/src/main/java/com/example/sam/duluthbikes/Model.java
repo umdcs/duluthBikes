@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -48,16 +49,17 @@ public class Model
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private int mRequestCode;
     private boolean mode;
 
-    public Model(Context context, Activity activity,Presenter presenter){
+    public Model(Context context, FragmentActivity activity,Presenter presenter){
         mContext = context;
         mActivity = activity;
         mPresenter = presenter;
         mode = false;
 
+        mGoogleApiClient = mPresenter.getOurClient();
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(mContext)
@@ -65,8 +67,18 @@ public class Model
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
+            mPresenter.setOurClient(mGoogleApiClient);
+            mGoogleApiClient.connect();
+        }else{
+            mGoogleApiClient.disconnect();
+            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mPresenter.setOurClient(mGoogleApiClient);
+            mGoogleApiClient.connect();
         }
-        mGoogleApiClient.connect();
         createLocationRequest();
     }
 
@@ -76,6 +88,7 @@ public class Model
     public void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
+        disconnectApiOnFinish();
     }
 
     public void disconnectApiOnFinish() {

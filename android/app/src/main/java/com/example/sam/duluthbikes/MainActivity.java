@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -93,18 +94,15 @@ public class MainActivity extends FragmentActivity
     public void endRide(View view) {
         mPresenter.finishRideButton();
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
-
         Date thisDate = new Date();
         Long endTime = thisDate.getTime();
-
         endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
         endIntent.putExtra("startTime", LocationData.getOurInstance(this.getBaseContext()).getStartTime());
         endIntent.putExtra("endTime", endTime);
-
-        startActivity(endIntent);
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
         LocationData.getOurInstance(this.getBaseContext()).resetData();
+        startActivity(endIntent);
     }
 
     public void changeUI(View view){
@@ -119,9 +117,11 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public void onResume() {
-        super.onResume();
         mPresenter.connectApi();
+        super.onResume();
+
     }
+
 
      /**
      * Required by OnMapReadyCallback interface
@@ -171,5 +171,15 @@ public class MainActivity extends FragmentActivity
     @Override
     public void userResults(String results) {
 
+    }
+
+    @Override
+    public void setClient(GoogleApiClient googleApiClient) {
+        LocationData.getOurInstance(this).setGoogleClient(googleApiClient);
+    }
+
+    @Override
+    public GoogleApiClient getClient() {
+        return LocationData.getOurInstance(this).getGoogleClient();
     }
 }
