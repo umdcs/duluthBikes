@@ -93,11 +93,10 @@ public class ReportFragment extends Fragment {
 
         try {
             compressImage();
+            imageBytes.setText(encodedImage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        imageBytes.setText(encodedImage);
 
         //final Uri imageUri = data.getData();
         //final InputStream inputStream = getContentResolver().openInputStream(imageUri);
@@ -141,21 +140,7 @@ public class ReportFragment extends Fragment {
     public void sendPictureToServer(byte[] byteImage) {
 
     }
-
-/**
-     @Override
-     public void notifyFinishRoute(JSONArray finishRoute, JSONArray list){
-     JSONObject fullRide = null;
-     try{
-     fullRide = new JSONObject();
-     fullRide.put("ride",finishRoute);
-     fullRide.put("LatLng",list);
-     }catch (JSONException e){
-     e.printStackTrace();
-     }
-     new Model.HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
-     }
-     */
+    
 }
 
 
