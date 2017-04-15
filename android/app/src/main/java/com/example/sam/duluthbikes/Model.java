@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -50,11 +51,11 @@ public class Model
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private int mRequestCode;
     private boolean mode;
 
-    public Model(Context context, Activity activity,Presenter presenter){
+    public Model(Context context, FragmentActivity activity,Presenter presenter){
         mContext = context;
         mActivity = activity;
         mPresenter = presenter;
@@ -63,6 +64,7 @@ public class Model
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                    .enableAutoManage(mActivity,0,this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)

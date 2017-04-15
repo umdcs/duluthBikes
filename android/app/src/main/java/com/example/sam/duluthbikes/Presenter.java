@@ -2,6 +2,7 @@ package com.example.sam.duluthbikes;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 
 import org.json.JSONArray;
 
@@ -15,9 +16,9 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     private ModelViewPresenterComponents.Model mModel;
     private ModelViewPresenterComponents.View mView;
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
-    public Presenter(Context context, Activity activity,ModelViewPresenterComponents.View view){
+    public Presenter(Context context, FragmentActivity activity,ModelViewPresenterComponents.View view){
         mView = view;
         mContext = context;
         mActivity = activity;
