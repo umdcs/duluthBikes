@@ -9,7 +9,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="START"
+        android:text="@string/START"
         android:id="@+id/start"
         android:onClick="startMainActivity"
         tools:layout_editor_absoluteY="0dp"

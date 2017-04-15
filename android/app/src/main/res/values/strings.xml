@@ -21,7 +21,7 @@
 
     <string name="title_activity_login">Sign in</string>
 
-
+    <!-- Strings related to Drawer -->
     <string name="home">Home</string>
     <string name="events">Events</string>
     <string name="report">Report Road</string>
@@ -29,6 +29,16 @@
     <string name="discount">Get Discount</string>
     <string name="reportApp">Report App</string>
     <string name="about">About Us</string>
+
+    <!-- Other Strings -->
+    <string name="START">START</string>
+    <string name="Pause">Pause</string>
+    <string name="Stats">Stats</string>
+    <string name="Finish">Finish</string>
+    <string name="Speed">Speed</string>
+    <string name="Distance">Distance</string>
+    <string name="image">image</string>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -41,6 +51,9 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+
 
     <!-- Strings for stats-->
     <string name="distanceLabel">Distance (km): </string>
