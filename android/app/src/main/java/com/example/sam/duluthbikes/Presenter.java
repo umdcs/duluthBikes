@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import org.json.JSONArray;
 
 /**
@@ -54,4 +56,14 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
 
     @Override
     public void returnLogin(String result){mView.userResults(result);}
+
+    @Override
+    public void setOurClient(GoogleApiClient googleApiClient) {
+        mView.setClient(googleApiClient);
+    }
+
+    @Override
+    public GoogleApiClient getOurClient() {
+        return mView.getClient();
+    }
 }

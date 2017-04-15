@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -116,9 +117,11 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public void onResume() {
-        super.onResume();
         mPresenter.connectApi();
+        super.onResume();
+
     }
+
 
      /**
      * Required by OnMapReadyCallback interface
@@ -168,5 +171,15 @@ public class MainActivity extends FragmentActivity
     @Override
     public void userResults(String results) {
 
+    }
+
+    @Override
+    public void setClient(GoogleApiClient googleApiClient) {
+        LocationData.getOurInstance(this).setGoogleClient(googleApiClient);
+    }
+
+    @Override
+    public GoogleApiClient getClient() {
+        return LocationData.getOurInstance(this).getGoogleClient();
     }
 }

@@ -61,16 +61,26 @@ public class Model
         mPresenter = presenter;
         mode = false;
 
+        mGoogleApiClient = mPresenter.getOurClient();
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-                    .enableAutoManage(mActivity,0,this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
+            mPresenter.setOurClient(mGoogleApiClient);
+            mGoogleApiClient.connect();
+        }else{
+            mGoogleApiClient.disconnect();
+            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mPresenter.setOurClient(mGoogleApiClient);
+            mGoogleApiClient.connect();
         }
-        mGoogleApiClient.connect();
         createLocationRequest();
     }
 

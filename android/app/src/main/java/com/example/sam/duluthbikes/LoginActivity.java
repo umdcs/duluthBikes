@@ -31,6 +31,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -258,6 +260,16 @@ public class LoginActivity extends AppCompatActivity
         } else if (results == "bad") {
             duplicateCode = 300;
         }
+    }
+
+    @Override
+    public void setClient(GoogleApiClient googleApiClient) {
+
+    }
+
+    @Override
+    public GoogleApiClient getClient() {
+        return null;
     }
 
 

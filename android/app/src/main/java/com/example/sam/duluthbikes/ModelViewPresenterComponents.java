@@ -2,6 +2,8 @@ package com.example.sam.duluthbikes;
 
 import android.location.Location;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import org.json.JSONArray;
 
 import java.io.IOException;
@@ -17,6 +19,10 @@ public interface ModelViewPresenterComponents {
         void locationChanged(Location location);
 
         void userResults(String results);
+
+        void setClient(GoogleApiClient googleApiClient);
+
+        GoogleApiClient getClient();
     }
 
     interface PresenterContract {
@@ -36,6 +42,10 @@ public interface ModelViewPresenterComponents {
         void loginUser(String userName,String passWord);
 
         void returnLogin(String result);
+
+        void setOurClient(GoogleApiClient googleApiClient);
+
+        GoogleApiClient getOurClient();
     }
 
     interface Model {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -30,6 +31,7 @@ public class LocationData {
     private Location lastLocation;
     private double distance;
     private Long startTime;
+    private GoogleApiClient googleApiClient;
 
     private LocationData(Context context) {
 
@@ -41,6 +43,7 @@ public class LocationData {
         trip = getTrip();
         latlng = getLatlng();
         startTime = getStartTime();
+        googleApiClient = getGoogleClient();
     }
 
 
@@ -95,6 +98,14 @@ public class LocationData {
     public JSONArray getLatlng(){
         if(latlng==null)latlng = new JSONArray();
         return latlng;
+    }
+
+    public GoogleApiClient getGoogleClient(){
+        return googleApiClient;
+    }
+
+    public void setGoogleClient(GoogleApiClient g){
+        googleApiClient = g;
     }
 
     public void addPoint(LatLng p,Location location){
