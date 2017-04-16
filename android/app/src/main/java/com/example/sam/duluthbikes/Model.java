@@ -1,7 +1,6 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -142,6 +141,19 @@ public class Model
         }
         mode = true;
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postusername","POST",profile.toString());
+    }
+
+    @Override
+    public void sendPicture(String pic) {
+        JSONObject picture = null;
+        try{
+            picture = new JSONObject();
+            picture.put("picture",pic);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        mode = true;
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",picture.toString());
     }
 
     protected void createLocationRequest() {

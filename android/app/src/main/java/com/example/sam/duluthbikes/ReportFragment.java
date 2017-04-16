@@ -101,6 +101,7 @@ public class ReportFragment extends Fragment {
         //    imageBytes.setText(encodedImage);
             Log.d("Encoded Image:", encodedImage);
             imageView.setImageBitmap(decodedByte);
+            sendPictureToServer(encodedImage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -153,7 +154,9 @@ public class ReportFragment extends Fragment {
 
     }
 
-    public void sendPictureToServer(byte[] byteImage) {
+    public void sendPictureToServer(String picture) {
+
+        mPresenter.sendPictureToServer(picture);
 
     }
     

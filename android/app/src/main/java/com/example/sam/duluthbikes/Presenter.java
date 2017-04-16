@@ -1,6 +1,5 @@
 package com.example.sam.duluthbikes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
@@ -52,6 +51,12 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     public void loginUser(String userName, String passWord) {
         mModel= new Model(mContext,mActivity,this);
         mModel.loginAttempt(userName,passWord);
+    }
+
+    @Override
+    public void sendPictureToServer(String encodedImage) {
+        //mModel = new Model(mContext,mActivity,this);
+        mModel.sendPicture(encodedImage);
     }
 
     @Override
