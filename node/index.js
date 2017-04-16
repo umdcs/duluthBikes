@@ -149,6 +149,17 @@ app.post('/postusername', function(req,res){
 
 });
 
+app.post('/postpicture', function(req,res){
+	if(!req.body)return res.sendStatus(400);
+
+	var picObj = req.body.pic;
+	insertPicture(picObj);
+	consol.log('Post Picture');
+	res.send('good');
+
+});
+
+
 app.get('/deletealltherides',function(res,req){
 	console.log('deleted all rides atempt');
 	
