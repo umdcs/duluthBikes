@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,8 @@ public class ReportFragment extends Fragment {
     public String encodedImage;
     public Drawable imageB;
     public String path;
+    Bitmap bm;
+    Bitmap decodedByte;
 
     @Nullable
     @Override
@@ -89,14 +92,19 @@ public class ReportFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         path = "sdcard/Duluth Bikes Pictures/" + imageFileName;
-        imageView.setImageDrawable(Drawable.createFromPath(path));
+        //imageView.setImageDrawable(Drawable.createFromPath(path));
+
 
         try {
             compressImage();
-            imageBytes.setText(encodedImage);
+            decomImage();
+        //    imageBytes.setText(encodedImage);
+            Log.d("Encoded Image:", encodedImage);
+            imageView.setImageBitmap(decodedByte);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
 
         //final Uri imageUri = data.getData();
         //final InputStream inputStream = getContentResolver().openInputStream(imageUri);
@@ -127,14 +135,22 @@ public class ReportFragment extends Fragment {
     }
 
     public void compressImage() throws FileNotFoundException {
-        //"/sdcard/Duluth Bikes Pictures/JPEG_20170413_162100.jpg"
         //Bitmap bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath());
-        Bitmap bm = BitmapFactory.decodeFile(path);
+        bm = BitmapFactory.decodeFile(path);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG,100,baos); //bm is the bitmap object
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+    }
+
+    public void decomImage() {
+
+        byte[] decodedString = Base64.decode(encodedImage,Base64.DEFAULT);
+        decodedByte = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);
+
+
+
     }
 
     public void sendPictureToServer(byte[] byteImage) {
