@@ -262,3 +262,234 @@ ReferenceError: doc is not defined
     at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
     at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
     at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)
+ReferenceError: doc is not defined
+    at /home/csugrads/oldin002/DuluthBikes/node/index.js:132:30
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/layer.js:95:5)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/csugrads/oldin002/DuluthBikes/node/node_modules/express/lib/router/index.js:275:10)
+    at /home/csugrads/oldin002/DuluthBikes/node/node_modules/body-parser/lib/read.js:129:5
+    at invokeCallback (/home/csugrads/oldin002/DuluthBikes/node/node_modules/raw-body/index.js:262:16)

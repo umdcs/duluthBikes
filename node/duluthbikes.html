@@ -6,40 +6,45 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <style>
 #wrapper {
-        width: auto;
-        height: auto;
+        width: 100%;
+        height: 100%;
+	position:absolute;
         background-color: rgba(193,193,193,1.00);
 }
 #main{
-        width: 90%;
-	height: 50em;
-        margin-left: 5%;
+        width: 96%;
+	height:100%;
+	margin-left: 2%;
+	position:absolute;
         background-color: #fff;
 }
 h1{
-        width: 90%;
-        margin-left: 5%;
-	margin-right 5%;
-        text-align-last: center;
-        padding-top: .7em;
-	padding-bottom: .7em;
+        width: 98%;
+	height: 19%;
+	margin-left: 1%;
+        text-align: center;
 	background-color: green;
 }
 iframe{
-        width: 70%;
-        height: 40em;
-        margin-left: 5%;
-        float: left;
+        width: 78%;
+	height: 80%;
+	position:absolute; 
+        margin-left: 1%;
 	background-color:rgba(193,193,193,1.00);
 }
 button{
-        float: left;
-        width: 18%;
-        margin-left: 2%;
+        width: 9%;
+	height: 50px;
+	float: left;
+	margin-left:80%;
         margin-bottom: 10px;
 }
-a{
-	margin-left: 2%;
+#RB{
+	width: 9%;
+	height: 50px;
+	float: left;
+	margin-left: 1%;
+	margin-bottom: 10px;
 }
 </style>
 </head>
@@ -48,20 +53,23 @@ a{
 <div id="wrapper">
 
 	<div id="main">
-		<div id="border">
-		<h1>Duluth Bikes<br/>App Dashboard</h1>
-		</div>
-	<div>
-		<iframe id="map" src='http://ukko.d.umn.edu:23405/rides'></iframe>
+	
+	<div id="border">
+	<h1><a href="http://duluthbikes.org">Duluth Bikes</a><br/>App Dashboard</h1>
 	</div>
+
+	<div>
+	<iframe id="map" src='http://ukko.d.umn.edu:23405/rides'></iframe>
+	</div>
+	
 	<div>
 	<button onClick="changeContent('http://ukko.d.umn.edu:23405/maps')">blank map</button>
-	<button onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">Polylines</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">Polylines</button>
 	<button onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">Raw Data</button>
-	<button onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">Raw Finished</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">Raw Finished</button>
 	<button onClick="changeContent('http://ukko.d.umn.edu:23405/heatmaps')">Heat Map</button>
 	</div>
-	<a href="http://duluthbikes.org">Duluth Bikes</a>
+
 	</div>
 </div>
 <script>

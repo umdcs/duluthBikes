@@ -38,32 +38,31 @@ function initialize() {
   };
   
   var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-};
 
 
-//socket.on('FullRidesRecorded',function(result){
+
+socket.on('FullRidesRecorded',function(result){
 	//var listRides = JSON.parse(result);
-//	var arrayRide = [];
+	var arrayRide = [];
 //	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-/*
-	for(var i=0;i>result.length;i++)
+
+	for(var i=0;i<result.length;i++)
 {
-	arrayRide = result[i]['lat/lng'];
+	arrayRide = result[i]['heat'];
 	var poly = new google.maps.visualization.HeatmapLayer({
 			opacity:1.0,
 			data:arrayRide,
 			map:map
 		});
 }
-*/
-//});
-
+});
+};
 
 
 
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initialize">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&libraries=visualization&callback=initialize">
     </script>
 
 </html>

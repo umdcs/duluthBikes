@@ -86,7 +86,7 @@ app.get('/rides',function(request,response){
 });
 
 app.get('/maps',function(req,res){
-	res.sendFile(__dirname + '/blankMap.html');
+	res.sendFile(__dirname + '/maps.html');
 	printRides('FullRidesRecorded',function(doc){
 	io.emit('FullRidesRecorded',doc);
 	});
@@ -124,9 +124,9 @@ app.post('/postfinish',function(req,res){
 	var arr = [];
 	arr = req.body.ride;
 	insertFullRide(arr);
-	if(req.body.LatLng){
+	if(req.body.heat){
 	var latlng = [];
-	latlng = req.body.LatLng;
+	latlng = req.body.heat;
 	insertLatLng(latlng);
 	
 	io.emit('FullRidesRecorded',doc);
