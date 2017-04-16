@@ -1,5 +1,6 @@
 package com.example.sam.duluthbikes;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -12,39 +13,26 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,6 +49,7 @@ public class LoginActivity extends AppCompatActivity
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -84,6 +73,9 @@ public class LoginActivity extends AppCompatActivity
 
         mPresenter = new Presenter(this.getBaseContext(), this, this);
 
+
+
+        requestStoragePermission();
         final File file = new File("sdcard/Profile.txt");
         if (file.exists()) {
             Intent menu = new Intent(this.getApplicationContext(), MenuActivity.class);
@@ -102,16 +94,31 @@ public class LoginActivity extends AppCompatActivity
         mProgressView = findViewById(R.id.login_progress);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button skipSignInButton = (Button) findViewById(R.id.skip_sign_in_button);
+
+        skipSignInButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                String u = mUserView.getText().toString();
-                String p = mPasswordView.getText().toString();
-                if (!Objects.equals(u, "") && !Objects.equals(p, ""))
-                    mPresenter.loginUser(u, p);
-                //
+                if (ContextCompat.checkSelfPermission(getBaseContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    String u = mUserView.getText().toString();
+                    String p = mPasswordView.getText().toString();
+                    if (!Objects.equals(u, "") && !Objects.equals(p, ""))
+                        mPresenter.loginUser(u, p);
+                    //
                     startMenu(mUserView.getText().toString(), mPasswordView.getText().toString());
-                //
+                    //
+                } else {
+                    requestStoragePermission();
+                }
             }
         });
 
@@ -260,6 +267,16 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void setClient(GoogleApiClient googleApiClient) {
+
+    }
+
+    @Override
+    public GoogleApiClient getClient() {
+        return null;
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -269,6 +286,22 @@ public class LoginActivity extends AppCompatActivity
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
+    }
+
+    //Method that requests Storage Permission
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this.getBaseContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            CharSequence text = "To create a user you must allow storage permissions to store user on phone.";
+            Toast toast = Toast.makeText(getBaseContext(), text, Toast.LENGTH_SHORT);
+            toast.show();
+
+                ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+
+        }
     }
 
 }

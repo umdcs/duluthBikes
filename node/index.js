@@ -64,8 +64,6 @@ app.get('/fulllatlng',function(req,res){
 //
 app.get('/raw', function(request, response) {
 
-	
-
 	//when using Mongo
 	var str = printDatabase('RideHistory', function(result) {
 		response.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>' 
@@ -99,6 +97,7 @@ app.get('/',function(req,res){
 app.get('/heatmaps', function(req, res){
 	res.sendFile(__dirname + '/heatmaps.html');
 });
+
 
 app.post('/postroute', function(request, response) {
 
@@ -136,6 +135,11 @@ app.post('/postfinish',function(req,res){
 	res.sendStatus(200);
 });
 
+
+app.get('/username', function(req,res){
+	
+});
+
 app.post('/postusername', function(req,res){
 	if(!req.body)return res.sendStatus(400);
 	var userObj = req.body.user;
@@ -144,6 +148,17 @@ app.post('/postusername', function(req,res){
 	res.send('good');
 
 });
+
+app.post('/postpicture', function(req,res){
+	if(!req.body)return res.sendStatus(400);
+
+	var picObj = req.body.pic;
+	insertPicture(picObj);
+	consol.log('Post Picture');
+	res.send('good');
+
+});
+
 
 app.get('/deletealltherides',function(res,req){
 	console.log('deleted all rides atempt');

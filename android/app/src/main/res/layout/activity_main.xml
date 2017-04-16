@@ -19,7 +19,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="pauseRide"
-            android:text="Pause" />
+            android:text="@string/Pause" />
 
         <Button
             android:id="@+id/displayStats"
@@ -28,7 +28,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Stats"/>
+            android:text="@string/Stats"
+            android:onClick="changeUI"/>
 
         <Button
             android:id="@+id/finish"
@@ -38,9 +39,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
             android:onClick="endRide"
-            android:text="Finish"/>
+            android:text="@string/Finish"/>
 
     </LinearLayout>
+
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -50,6 +52,29 @@
         android:layout_height="match_parent"
         tools:context="com.example.sam.duluthbikes.MainActivity" />
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tvStats">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/titleStats"
+            android:text="@string/Stats"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/speed"
+            android:text="@string/Speed"
+            android:layout_below="@+id/titleStats"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/distanceMain"
+            android:text="@string/Distance"
+            android:layout_below="@+id/speed"/>
+    </RelativeLayout>
     <!--<fragment class="com.google.android.gms.maps.MapFragment"
         android:id="@+id/FirstMap"
         android:layout_width="wrap_content"

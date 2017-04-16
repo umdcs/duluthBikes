@@ -2,9 +2,9 @@ package com.example.sam.duluthbikes;
 
 import android.location.Location;
 
-import org.json.JSONArray;
+import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.IOException;
+import org.json.JSONArray;
 
 /**
  * Created by Sam on 3/26/2017.
@@ -17,6 +17,10 @@ public interface ModelViewPresenterComponents {
         void locationChanged(Location location);
 
         void userResults(String results);
+
+        void setClient(GoogleApiClient googleApiClient);
+
+        GoogleApiClient getClient();
     }
 
     interface PresenterContract {
@@ -35,7 +39,13 @@ public interface ModelViewPresenterComponents {
 
         void loginUser(String userName,String passWord);
 
+        void sendPictureToServer(String encodedImage);
+
         void returnLogin(String result);
+
+        void setOurClient(GoogleApiClient googleApiClient);
+
+        GoogleApiClient getOurClient();
     }
 
     interface Model {
@@ -49,10 +59,6 @@ public interface ModelViewPresenterComponents {
         //Notify Route Update
         void notifyRouteUpdate();
 
-        //Gets User name
-        String getUserName (String filePath) throws IOException;
-
-
         void stopLocationUpdates();
 
         void disconnectApiOnFinish();
@@ -62,6 +68,8 @@ public interface ModelViewPresenterComponents {
         void notifyFinishRoute(JSONArray r,JSONArray l);
 
         void loginAttempt(String user,String pass);
+
+        void sendPicture(String encodedImage);
     }
 }
 

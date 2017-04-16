@@ -1,9 +1,7 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -11,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -20,7 +19,6 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,18 +26,12 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.sam.duluthbikes.MainActivity.userName;
 
 /**
  * Created by Sam on 3/26/2017.
@@ -56,17 +48,19 @@ public class Model
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private int mRequestCode;
     private boolean mode;
 
-    public Model(Context context, Activity activity,Presenter presenter){
+    public Model(){}
+
+    public Model(Context context, FragmentActivity activity,Presenter presenter){
         mContext = context;
         mActivity = activity;
         mPresenter = presenter;
         mode = false;
 
-        ////////////////////////////////////////////////////////////
+        mGoogleApiClient = mPresenter.getOurClient();
         // Create an instance of GoogleAPIClient
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(mContext)
@@ -74,13 +68,20 @@ public class Model
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
+            mPresenter.setOurClient(mGoogleApiClient);
+            mGoogleApiClient.connect();
+        }else{
+            mGoogleApiClient.disconnect();
+            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mPresenter.setOurClient(mGoogleApiClient);
+            mGoogleApiClient.connect();
         }
-
-        mGoogleApiClient.connect();
-
         createLocationRequest();
     }
-
 
     /**
      * Method to stop location services called by Presenters pauseRideButton method
@@ -88,6 +89,7 @@ public class Model
     public void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
+        disconnectApiOnFinish();
     }
 
     public void disconnectApiOnFinish() {
@@ -116,15 +118,17 @@ public class Model
 
     @Override
     public void notifyFinishRoute(JSONArray finishRoute,JSONArray list){
-        JSONObject fullRide = null;
-        try{
-            fullRide = new JSONObject();
-            fullRide.put("ride",finishRoute);
-            fullRide.put("LatLng",list);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish","POST",fullRide.toString());
+        if(finishRoute.length()>10) {
+            JSONObject fullRide = null;
+            try {
+                fullRide = new JSONObject();
+                fullRide.put("ride", finishRoute);
+                fullRide.put("heat", list);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish", "POST", fullRide.toString());
+        };
     }
 
     @Override
@@ -141,28 +145,18 @@ public class Model
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postusername","POST",profile.toString());
     }
 
-    /**
-     * Gets the account username from file.
-     * @param filePath The filepath of the file the username is stored on
-     * @return username The username of the account
-     * @throws IOException Just in case there's an issue with the buffered reader
-     */
     @Override
-    public String getUserName(String filePath) throws IOException {
-        File file = new File(filePath);
-        FileInputStream fin = new FileInputStream(file);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-        StringBuilder sb = new StringBuilder();
-        String line = reader.readLine();
-        sb.append(line);
-        String username = sb.toString();
-        reader.close();
-        fin.close();
-
-        return username;
+    public void sendPicture(String pic) {
+        JSONObject picture = null;
+        try{
+            picture = new JSONObject();
+            picture.put("picture",pic);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        //mode = true;
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",picture.toString());
     }
-
-
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -172,13 +166,11 @@ public class Model
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-
     /**
      * Getter and Setter methods for Location
      */
     public Location getLocation() { return mLastLocation; }
     public void setLocation(Location curr) { mLastLocation = curr; }
-
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -193,27 +185,18 @@ public class Model
                     mRequestCode);
             return;
         }
-
         // get the last location
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
         notifyRouteUpdate();
-
-
         PendingResult<Status> pendingResult = LocationServices.FusedLocationApi
                 .requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
-
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-
-    }
+    public void onConnectionSuspended(int i) {}
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
 
     @Override
     public void onLocationChanged(Location location){
@@ -321,16 +304,15 @@ public class Model
             }finally {
                 serverConnection.disconnect();
             }
-            return "shouldnt ever get here ";
+            return "Shouldn't ever get here ";
         }
         protected void onPostExecute(String user){
-            if(mode){
+           /* if(mode){
                 if(user=="good")mPresenter.returnLogin("good");
                 else if(user=="bad")mPresenter.returnLogin("bad");
                 else mPresenter.returnLogin("error");
                 mode =false;
-            }
+            }*/
         }
     }
-
 }
