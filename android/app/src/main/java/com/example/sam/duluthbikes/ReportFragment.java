@@ -98,10 +98,9 @@ public class ReportFragment extends Fragment {
         try {
             compressImage();
             decomImage();
-        //    imageBytes.setText(encodedImage);
             Log.d("Encoded Image:", encodedImage);
             imageView.setImageBitmap(decodedByte);
-            sendPictureToServer(encodedImage);
+            //sendPictureToServer(encodedImage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
