@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
     <ProgressBar
-        android:id="@+id/ventilator_progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_alignParentTop="true"
-        android:progress="50"/>
+        android:id="@+id/progress_bar"
+        android:indeterminate="true"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        /> -->
 
 
         <WebView
@@ -19,6 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/pb">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
 
 </RelativeLayout>
