@@ -61,6 +61,8 @@ public class ReportFragment extends Fragment {
 
         imageBytes = (TextView)myView.findViewById(R.id.imageBytes);
 
+        mPresenter = new Presenter();
+
         requestCameraPermission();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +102,7 @@ public class ReportFragment extends Fragment {
             decomImage();
             Log.d("Encoded Image:", encodedImage);
             imageView.setImageBitmap(decodedByte);
-            //sendPictureToServer(encodedImage);
+            sendPictureToServer(encodedImage);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

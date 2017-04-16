@@ -52,6 +52,8 @@ public class Model
     private int mRequestCode;
     private boolean mode;
 
+    public Model(){}
+
     public Model(Context context, FragmentActivity activity,Presenter presenter){
         mContext = context;
         mActivity = activity;
@@ -152,7 +154,7 @@ public class Model
         }catch (JSONException e){
             e.printStackTrace();
         }
-        mode = true;
+        //mode = true;
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",picture.toString());
     }
 
@@ -305,12 +307,12 @@ public class Model
             return "Shouldn't ever get here ";
         }
         protected void onPostExecute(String user){
-            if(mode){
+           /* if(mode){
                 if(user=="good")mPresenter.returnLogin("good");
                 else if(user=="bad")mPresenter.returnLogin("bad");
                 else mPresenter.returnLogin("error");
                 mode =false;
-            }
+            }*/
         }
     }
 }

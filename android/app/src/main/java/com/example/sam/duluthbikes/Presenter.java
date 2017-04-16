@@ -19,6 +19,8 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     private Context mContext;
     private FragmentActivity mActivity;
 
+    public Presenter(){mModel = new Model();}
+
     public Presenter(Context context, FragmentActivity activity,ModelViewPresenterComponents.View view){
         mView = view;
         mContext = context;
@@ -55,7 +57,6 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
 
     @Override
     public void sendPictureToServer(String encodedImage) {
-        //mModel = new Model(mContext,mActivity,this);
         mModel.sendPicture(encodedImage);
     }
 
