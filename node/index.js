@@ -100,10 +100,6 @@ app.get('/',function(req,res){
 	res.sendFile(__dirname + '/duluthbikes.html');
 });
 
-app.get('/heatmaps', function(req, res){
-	res.sendFile(__dirname + '/heatmaps.html');
-});
-
 app.post('/postroute', function(request, response) {
 
 	if (!request.body)return response.sendStatus(400);
@@ -165,9 +161,14 @@ app.post('/postpicture', function(req,res){
 });
 
 app.get('/pictures',function(req,res){
-	res.sendFile(__dirname + '/pictures.html');
-		printPictures('PicturesSaved',function(doc){
-		io.emit('FullRidesRecorded',doc);
+	var pics = printPictures('PicturesSaved',function(result){
+         res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
+            +'<H1>Pictures.</H1>');
+            result.reverse();
+            res.write(JSON.stringify(result));
+            res.send();
+        });
+    console.log('picture request');
 })
 
 
