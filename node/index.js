@@ -14,7 +14,6 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
 /*
  * varaible area for any required varaibles we might use
  */
@@ -36,6 +35,13 @@ app.use(bodyParser.json());
 // Connect to the mongo module
 var mongodb = require('./mongoDB.js')();
 
+app.get('/heatmapfiles',function(req,res){
+	res.sendFile(__dirname + '/node_modules/heatmap.js/build/heatmap.js');
+});
+
+app.get('/heatmapfilesgmaps',function(req,res){
+  res.sendFile(__dirname + '/node_modules/heatmap.js/plugins/gmaps-heatmap/gmaps-heatmap.js');
+});
 
 app.get('/fullRide',function(req,res){
 	var rides = printRides('FullRidesRecorded',function(result){

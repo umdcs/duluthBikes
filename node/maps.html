@@ -8,7 +8,7 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        height: 50%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -18,51 +18,78 @@
       }
     </style>
   </head>
-  <body>
-     <div id='map-canvas'></div>
-        <div id='test'></div>
-  </body>
+<body>
 
-<script src="/socket.io/socket.io.js"></script>
+<div id='map'></div>
+<div id='data'></div>
+</body>
 <script>
-var x=0;
-var prepath;
-var path = null;
+function init(callback){
 var socket = io();
-function initialize() {
-  var myLatLng = new google.maps.LatLng(46.7867,-92.1005);
+var myLatLng = new google.maps.LatLng(46.7867,-92.1005);
   var mapOptions = {
-    zoom: 11,
+    zoom: 12,
     center: myLatLng,
     mapTypeId: google.maps.MapTypeId.TERRAIN
   };
-  
-  var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
+var map = new google.maps.Map(document.getElementById("map"),mapOptions);
 
+var heatmap = new HeatmapOverlay(map,
+        {
+        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+        "radius": 1,
+        "maxOpacity": .6,
+	"minOpacity": .1,
+        // scales the radius based on map zoom
+        "scaleRadius": false,
+        // if set to false the heatmap uses the global maximum for colorization
+        // if activated: uses the data maximum within the current map boundaries
+        //   (there will always be a red spot with useLocalExtremas true)
+        "useLocalExtrema": true,
+	
+        // which field name in your data represents the latitude - default "lat"
+        latField: 'lat',
+        // which field name in your data represents the longitude - default "lng"
+        lngField: 'lng',
+	valueField:'count'
+        }
+        );
 
 socket.on('FullRidesRecorded',function(result){
-	//var listRides = JSON.parse(result);
-	var arrayRide = [];
-//	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+        var arrayRide = [];
+        var ra = [];
 
-	for(var i=0;i<result.length;i++)
-{
-	arrayRide = result[i]['heat'];
-	var poly = new google.maps.visualization.HeatmapLayer({
-			opacity:1.0,
-			data:arrayRide,
-			map:map
-		});
-}
+        for(var i=0;i<result.length;i++)
+        {
+        arrayRide = result[i]['ride'];
+	var a = arrayRide
+        if(a!=null){
+	ra = ra.concat(arrayRide);
+        }
+	}
+
+        var data = {
+	data:ra
+        }
+
+        heatmap.setData(data);
+	document.getElementById("data").innerHTML = heatmap.getData();
+	
 });
-};
 
-
+}
 
 </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&libraries=visualization&callback=initialize">
+<script src="/socket.io/socket.io.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ">
     </script>
-
+<script src="/heatmapfiles"></script>
+<script src="/heatmapfilesgmaps"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+    init();
+  });
+</script>
 </html>
