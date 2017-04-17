@@ -3,6 +3,7 @@ package com.example.sam.duluthbikes;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -23,22 +24,24 @@ public class EventsFragment extends Fragment {
 
     View myView;
     WebView myWebView;
-    private ProgressBar progressbar;
     String EventsPage = "http://www.duluthbikes.org/news-events/";
+    ProgressBar progressbar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_events, container, false);
 
-        progressbar = (ProgressBar)myView.findViewById(R.id.ventilator_progress);
-
         myWebView = (WebView) myView.findViewById(R.id.webViewEvents);
+        //progressbar = (ProgressBar)myView.findViewById(R.id.pb);
+
+
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new newWebClient(){
             @Override
             public void onPageFinished(WebView view,String url)
             {
+          //      progressbar.setVisibility(View.GONE);
                 myWebView.loadUrl("javascript:(function() { " +
                         "document.getElementsByTagName('footer')[0].style.display='none'; " +
                         "document.getElementsByTagName('header')[0].style.display='none'; " +
@@ -46,19 +49,7 @@ public class EventsFragment extends Fragment {
                         "})()");
             }
         });
-        //for progress bar
-        myWebView.setWebChromeClient(new WebChromeClient() {
-            public void onProgressChanged(WebView view, int progress) {
-                progressbar.setVisibility(View.VISIBLE);
-                progressbar.setProgress(progress);
-                if (progress == 100) {
-                    progressbar.setVisibility(View.GONE); // Make the bar disappear after URL is loaded
-                }
-            }
-        });
 
-
-        progressbar.setVisibility(View.VISIBLE);
 
         myWebView.loadUrl(EventsPage);
         //this allows to navigate back in website using Back key
@@ -90,21 +81,6 @@ public class EventsFragment extends Fragment {
 
 
     private class newWebClient extends WebViewClient {
-
-        /**
-        private ProgressBar progressBar;
-
-        public newWebClient(ProgressBar progressBar) {
-            this.progressBar=progressBar;
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-            progressBar.setVisibility(View.GONE);
-        }
-        */
 
     }
 
