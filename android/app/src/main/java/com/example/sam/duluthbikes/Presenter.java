@@ -1,6 +1,5 @@
 package com.example.sam.duluthbikes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
@@ -19,6 +18,8 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     private ModelViewPresenterComponents.View mView;
     private Context mContext;
     private FragmentActivity mActivity;
+
+    public Presenter(){mModel = new Model();}
 
     public Presenter(Context context, FragmentActivity activity,ModelViewPresenterComponents.View view){
         mView = view;
@@ -52,6 +53,11 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     public void loginUser(String userName, String passWord) {
         mModel= new Model(mContext,mActivity,this);
         mModel.loginAttempt(userName,passWord);
+    }
+
+    @Override
+    public void sendPictureToServer(String encodedImage) {
+        mModel.sendPicture(encodedImage);
     }
 
     @Override

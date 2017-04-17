@@ -6,8 +6,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 
-import java.io.IOException;
-
 /**
  * Created by Sam on 3/26/2017.
  */
@@ -41,6 +39,8 @@ public interface ModelViewPresenterComponents {
 
         void loginUser(String userName,String passWord);
 
+        void sendPictureToServer(String encodedImage);
+
         void returnLogin(String result);
 
         void setOurClient(GoogleApiClient googleApiClient);
@@ -68,6 +68,8 @@ public interface ModelViewPresenterComponents {
         void notifyFinishRoute(JSONArray r,JSONArray l);
 
         void loginAttempt(String user,String pass);
+
+        void sendPicture(String encodedImage);
     }
 }
 

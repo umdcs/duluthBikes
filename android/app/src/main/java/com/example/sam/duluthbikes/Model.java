@@ -1,7 +1,6 @@
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -27,8 +26,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,6 +51,8 @@ public class Model
     private FragmentActivity mActivity;
     private int mRequestCode;
     private boolean mode;
+
+    public Model(){}
 
     public Model(Context context, FragmentActivity activity,Presenter presenter){
         mContext = context;
@@ -144,6 +143,19 @@ public class Model
         }
         mode = true;
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postusername","POST",profile.toString());
+    }
+
+    @Override
+    public void sendPicture(String pic) {
+        JSONObject picture = null;
+        try{
+            picture = new JSONObject();
+            picture.put("picture",pic);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        //mode = true;
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",picture.toString());
     }
 
     protected void createLocationRequest() {
@@ -295,13 +307,12 @@ public class Model
             return "Shouldn't ever get here ";
         }
         protected void onPostExecute(String user){
-            if(mode){
+           /* if(mode){
                 if(user=="good")mPresenter.returnLogin("good");
                 else if(user=="bad")mPresenter.returnLogin("bad");
                 else mPresenter.returnLogin("error");
                 mode =false;
-            }
+            }*/
         }
     }
-
 }

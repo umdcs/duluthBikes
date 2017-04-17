@@ -86,10 +86,17 @@ module.exports = function() {
 		mongodb.collection('UsersSaved').save(
 			{users:user},function(err,result){
 			if(err||!result)console.log("user not saved");
-			else console.log("user loged in User");
+			else console.log("user loged in User DB");
 		});
 	};
 
+	insertPicture = function(pic){
+		mongodb.collection('PicturesSaved').save(
+			{pictures:pic},function(err,result){
+				if(err||!result)console.log("Picture not saved");
+				else console.log("picture saves in picture DB")
+			});
+	};
 	
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});

@@ -14,7 +14,6 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
 /*
  * varaible area for any required varaibles we might use
  */
@@ -36,6 +35,13 @@ app.use(bodyParser.json());
 // Connect to the mongo module
 var mongodb = require('./mongoDB.js')();
 
+app.get('/heatmapfiles',function(req,res){
+	res.sendFile(__dirname + '/node_modules/heatmap.js/build/heatmap.js');
+});
+
+app.get('/heatmapfilesgmaps',function(req,res){
+  res.sendFile(__dirname + '/node_modules/heatmap.js/plugins/gmaps-heatmap/gmaps-heatmap.js');
+});
 
 app.get('/fullRide',function(req,res){
 	var rides = printRides('FullRidesRecorded',function(result){
@@ -64,8 +70,6 @@ app.get('/fulllatlng',function(req,res){
 //
 app.get('/raw', function(request, response) {
 
-	
-
 	//when using Mongo
 	var str = printDatabase('RideHistory', function(result) {
 		response.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>' 
@@ -86,7 +90,7 @@ app.get('/rides',function(request,response){
 });
 
 app.get('/maps',function(req,res){
-	res.sendFile(__dirname + '/blankMap.html');
+	res.sendFile(__dirname + '/maps.html');
 	printRides('FullRidesRecorded',function(doc){
 	io.emit('FullRidesRecorded',doc);
 	});
@@ -99,6 +103,7 @@ app.get('/',function(req,res){
 app.get('/heatmaps', function(req, res){
 	res.sendFile(__dirname + '/heatmaps.html');
 });
+
 
 app.post('/postroute', function(request, response) {
 
@@ -124,9 +129,9 @@ app.post('/postfinish',function(req,res){
 	var arr = [];
 	arr = req.body.ride;
 	insertFullRide(arr);
-	if(req.body.LatLng){
+	if(req.body.heat){
 	var latlng = [];
-	latlng = req.body.LatLng;
+	latlng = req.body.heat;
 	insertLatLng(latlng);
 	
 	io.emit('FullRidesRecorded',doc);
@@ -134,6 +139,11 @@ app.post('/postfinish',function(req,res){
 	console.log('Post Full Ride');
 
 	res.sendStatus(200);
+});
+
+
+app.get('/username', function(req,res){
+	
 });
 
 app.post('/postusername', function(req,res){
@@ -144,6 +154,17 @@ app.post('/postusername', function(req,res){
 	res.send('good');
 
 });
+
+app.post('/postpicture', function(req,res){
+	if(!req.body)return res.sendStatus(400);
+
+	var picObj = req.body.pic;
+	insertPicture(picObj);
+	consol.log('Post Picture');
+	res.send('good');
+
+});
+
 
 app.get('/deletealltherides',function(res,req){
 	console.log('deleted all rides atempt');
