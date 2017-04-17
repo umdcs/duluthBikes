@@ -104,7 +104,6 @@ app.get('/heatmaps', function(req, res){
 	res.sendFile(__dirname + '/heatmaps.html');
 });
 
-
 app.post('/postroute', function(request, response) {
 
 	if (!request.body)return response.sendStatus(400);
@@ -143,7 +142,7 @@ app.post('/postfinish',function(req,res){
 
 
 app.get('/username', function(req,res){
-	
+	res.sendFile(__dirname + '/users.html');
 });
 
 app.post('/postusername', function(req,res){
@@ -164,6 +163,12 @@ app.post('/postpicture', function(req,res){
 	res.send('good');
 
 });
+
+app.get('/pictures',function(req,res){
+	res.sendFile(__dirname + '/pictures.html');
+		printPictures('PicturesSaved',function(doc){
+		io.emit('FullRidesRecorded',doc);
+})
 
 
 app.get('/deletealltherides',function(res,req){

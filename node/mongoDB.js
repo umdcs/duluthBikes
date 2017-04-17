@@ -97,6 +97,28 @@ module.exports = function() {
 				else console.log("picture saves in picture DB")
 			});
 	};
+
+	printPicture = function(collectionName, callback) {
+	
+		// 
+		// Collection look ups with find return a 
+		// MongoDB 'cursor'. More info can be found here
+		// https://docs.mongodb.com/v3.2/reference/glossary/#term-cursor
+		// 
+		
+        	var cursor = mongodb.collection(collectionName).find(function(err, docs){
+	    
+            	if(err || !docs) {
+			console.log("Cannot print database or database is empty\n");
+	    	}
+            	else {
+			//console.log(collectionName, docs);
+			
+			callback(docs);
+	    	}
+        	});
+	
+	};
 	
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});
