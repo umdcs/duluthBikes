@@ -154,7 +154,6 @@ public class Model
         }catch (JSONException e){
             e.printStackTrace();
         }
-        //mode = true;
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",picture.toString());
     }
 

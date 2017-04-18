@@ -58,6 +58,7 @@
         <fragment android:name=".ToursFragment" />
         <activity android:name=".EndRideActivity" />
         <activity android:name=".PauseActivity" />
+        <activity android:name=".MyRides"/>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_maps">

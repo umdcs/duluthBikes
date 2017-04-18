@@ -44,6 +44,7 @@ public class MainActivity extends FragmentActivity
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions;
     private LocationData locationData;
+    private MyRidesData ridesData;
     private boolean animate;
 
     private RelativeLayout tv;
@@ -101,6 +102,7 @@ public class MainActivity extends FragmentActivity
         endIntent.putExtra("endTime", endTime);
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
+        ridesData.getInstance(this.getApplicationContext()).addPolyline(locationData.getOurInstance(this).getPoints());
         LocationData.getOurInstance(this.getBaseContext()).resetData();
         startActivity(endIntent);
     }
