@@ -23,6 +23,9 @@ public class EndRideActivity extends AppCompatActivity{
     int sec;
     int min;
     int hours;
+    Float totDistance;
+    Long totTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,12 @@ public class EndRideActivity extends AppCompatActivity{
         TextView startTime = (TextView)findViewById(R.id.startTime);
         TextView endTime = (TextView)findViewById(R.id.endTime);
         TextView totalDist = (TextView)findViewById(R.id.totalDistance);
+        TextView totalTime = (TextView)findViewById(R.id.totalTime);
 
         data = getIntent().getExtras();
         Long sTime =  data.getLong("startTime");
         Long fTime = data.getLong("endTime");
         Double distance = data.getDouble("dis");
-        Float totalDistance = getTotalDistance(distance);
 
         //data format definitions
         //SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss"); //military time
@@ -51,6 +54,8 @@ public class EndRideActivity extends AppCompatActivity{
 
         Long timelapse = fTime - sTime;
         setSecMinHours(timelapse);
+
+        updateTotals(distance, timelapse);
 
         //format data entries
         Double distKM = Double.valueOf(df.format(getDistInKm(distance)));
@@ -65,23 +70,26 @@ public class EndRideActivity extends AppCompatActivity{
         avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
-        totalDist.setText(totalDistance.toString());
-
+        totalDist.setText(totDistance.toString());
+        totalTime.setText(totTime.toString());
 
     }
 
 
-    private float getTotalDistance(Double distance){
+    private void updateTotals(Double distance, Long timelapse){
 
-        SharedPreferences totalstats = getSharedPreferences(String.valueOf(R.string.lifetimeStats_file_key), 0);
-        float totdist = totalstats.getFloat(String.valueOf(R.string.lifetimeStats_totDist), 0) +
+        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
+        totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
                 distance.floatValue();
 
+        totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
+
         SharedPreferences.Editor editor = totalstats.edit();
-        editor.putFloat(String.valueOf(R.string.lifetimeStats_totDist), totdist);
+        editor.putFloat(getString(R.string.lifetimeStats_totDist), totDistance);
+        editor.putLong(getString(R.string.lifetimeStats_totTime), totTime);
+
         editor.commit();
 
-        return totdist;
     }
 
     public void setSecMinHours(Long timelapse){

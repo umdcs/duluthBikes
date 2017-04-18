@@ -63,6 +63,7 @@
     <string name="sTimeLabel">Start Time: </string>
     <string name="fTimeLabel">Finish Time: </string>
     <string name="totDistLabel">Total distance: </string>
+    <string name="totTimeLabel">Total time: </string>
     <string name="DONE">DONE</string>
 
     <string name="DisclaimerReportApp">This app is in a development stage.
@@ -91,6 +92,7 @@ The main goal is to collect information about rides and use that data for cyclin
 
     <string name="lifetimeStats_file_key">com.example.duluthbikes.LIFETIMESTATS_FILE_KEY</string>
     <string name="lifetimeStats_totDist">totalDistance</string>
+    <string name="lifetimeStats_totTime">totalTime</string>
 
 
 
