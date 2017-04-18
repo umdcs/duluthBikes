@@ -6,43 +6,47 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/nav_bar_drawable">
+        android:orientation="horizontal"
+        android:background="@drawable/nav_bar_drawable"
+        android:weightSum="3">
 
-        <Button
-            android:id="@+id/pause"
+        <ToggleButton
+            android:id="@+id/togglePause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="pauseRide"
-            android:text="@string/Pause" />
-
-        <Button
-            android:id="@+id/displayStats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/Stats"
-            android:onClick="changeUI"/>
+            android:layout_weight="1"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="3.5dp"/>
 
         <Button
             android:id="@+id/finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="3.5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="3.5dp"
             android:onClick="endRide"
             android:text="@string/Finish"/>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/displayStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="3.5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="7dp"
+            android:text="@string/Stats"
+            android:onClick="changeUI"/>
 
+    </LinearLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
