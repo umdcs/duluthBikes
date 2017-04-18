@@ -97,6 +97,20 @@ module.exports = function() {
 				else console.log("picture saves in picture DB")
 			});
 	};
+
+	printPictures = function(collectionName, callback) {
+
+       	var cursor = mongodb.collection(collectionName).find(function(err, docs){
+	    
+           	if(err || !docs) {
+				console.log("Cannot print database or database is empty\n");	
+    		} 
+    		else {
+				callback(docs);
+	    	}
+    	});
+	
+	};
 	
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});
