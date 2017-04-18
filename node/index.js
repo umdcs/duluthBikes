@@ -25,10 +25,13 @@ app.set("port",23405);
 
 // this section tells the body parser what type of data to expect
 // for now it is mainly json
+// Set limits in order to send images.
 app.use(bodyParser.urlencoded({
-	extended: true
+        limit: '50mb',
+        extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+
 
 
 //********MangoDB*******
@@ -155,7 +158,7 @@ app.post('/postpicture', function(req,res){
 
 	var picObj = req.body.pic;
 	insertPicture(picObj);
-	consol.log('Post Picture');
+	console.log('Post Picture');
 	res.send('good');
 
 });
@@ -164,7 +167,6 @@ app.get('/pictures',function(req,res){
 	var pics = printPictures('PicturesSaved',function(result){
          res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
             +'<H1>Pictures.</H1>');
-            result.reverse();
             res.write(JSON.stringify(result));
             res.send();
         });

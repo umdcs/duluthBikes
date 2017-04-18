@@ -98,7 +98,7 @@ module.exports = function() {
 			});
 	};
 
-	printPicture = function(collectionName, callback) {
+	printPictures = function(collectionName, callback) {
 
        	var cursor = mongodb.collection(collectionName).find(function(err, docs){
 	    
