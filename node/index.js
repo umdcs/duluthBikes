@@ -25,10 +25,13 @@ app.set("port",23405);
 
 // this section tells the body parser what type of data to expect
 // for now it is mainly json
+// Set limits in order to send images.
 app.use(bodyParser.urlencoded({
-	extended: true
+        limit: '50mb',
+        extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+
 
 
 //********MangoDB*******
@@ -100,11 +103,6 @@ app.get('/',function(req,res){
 	res.sendFile(__dirname + '/duluthbikes.html');
 });
 
-app.get('/heatmaps', function(req, res){
-	res.sendFile(__dirname + '/heatmaps.html');
-});
-
-
 app.post('/postroute', function(request, response) {
 
 	if (!request.body)return response.sendStatus(400);
@@ -143,7 +141,7 @@ app.post('/postfinish',function(req,res){
 
 
 app.get('/username', function(req,res){
-	
+	res.sendFile(__dirname + '/users.html');
 });
 
 app.post('/postusername', function(req,res){
@@ -158,12 +156,22 @@ app.post('/postusername', function(req,res){
 app.post('/postpicture', function(req,res){
 	if(!req.body)return res.sendStatus(400);
 
-	var picObj = req.body.pic;
+	var picObj = req.body.picture;
 	insertPicture(picObj);
-	consol.log('Post Picture');
-	res.send('good');
+	console.log('Post Picture');
+	res.send();
 
 });
+
+app.get('/pictures',function(req,res){
+	var pics = printPictures('PicturesSaved',function(result){
+         res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
+            +'<H1>Pictures.</H1>');
+            res.write(JSON.stringify(result));
+            res.send();
+        });
+    console.log('picture request');
+})
 
 
 app.get('/deletealltherides',function(res,req){
