@@ -109,7 +109,7 @@ public class LocationData {
     }
 
     public void addPoint(LatLng p,Location location){
-        if(location.getAccuracy()<15) {
+        if(location.getAccuracy()<25) {
             mPolylineOptions.add(p);
             JSONObject arr = new JSONObject();
             try {
@@ -121,8 +121,8 @@ public class LocationData {
             trip.put(arr);
             latlng.put(p);
             if (getLastLocation() != null) distance += getLastLocation().distanceTo(location);
+            builder.include(p);
         }
-        builder.include(p);
         lastLocation = location;
     }
 }
