@@ -19,8 +19,6 @@ import java.util.Date;
 
 public class EndRideActivity extends AppCompatActivity{
 
-    public static final String TOTAL_DIST = "TotalDistance";
-
     Bundle data;
     int sec;
     int min;
@@ -37,11 +35,13 @@ public class EndRideActivity extends AppCompatActivity{
         TextView avSpeed = (TextView)findViewById(R.id.averageSpeed);
         TextView startTime = (TextView)findViewById(R.id.startTime);
         TextView endTime = (TextView)findViewById(R.id.endTime);
+        TextView totalDist = (TextView)findViewById(R.id.totalDistance);
 
         data = getIntent().getExtras();
         Long sTime =  data.getLong("startTime");
         Long fTime = data.getLong("endTime");
         Double distance = data.getDouble("dis");
+        Float totalDistance = getTotalDistance(distance);
 
         //data format definitions
         //SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss"); //military time
@@ -65,17 +65,23 @@ public class EndRideActivity extends AppCompatActivity{
         avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
+        totalDist.setText(totalDistance.toString());
 
 
-        // WORKING ON SHARED PREFERENCES - RUTA
-        SharedPreferences totalstats = getSharedPreferences(TOTAL_DIST, 0);
-        float totdist = totalstats.getFloat("totalDistance", 0);
-        
-        // = new FloatingDecimal(totdist.floatValue()).doubleValue());
-        //totdist += (Float)distance;
+    }
 
 
+    private float getTotalDistance(Double distance){
 
+        SharedPreferences totalstats = getSharedPreferences(String.valueOf(R.string.lifetimeStats_file_key), 0);
+        float totdist = totalstats.getFloat(String.valueOf(R.string.lifetimeStats_totDist), 0) +
+                distance.floatValue();
+
+        SharedPreferences.Editor editor = totalstats.edit();
+        editor.putFloat(String.valueOf(R.string.lifetimeStats_totDist), totdist);
+        editor.commit();
+
+        return totdist;
     }
 
     public void setSecMinHours(Long timelapse){
