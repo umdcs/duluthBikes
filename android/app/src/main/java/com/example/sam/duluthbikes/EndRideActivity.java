@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +18,8 @@ import java.util.Date;
  */
 
 public class EndRideActivity extends AppCompatActivity{
+
+    public static final String TOTAL_DIST = "TotalDistance";
 
     Bundle data;
     int sec;
@@ -62,6 +65,16 @@ public class EndRideActivity extends AppCompatActivity{
         avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
+
+
+        // WORKING ON SHARED PREFERENCES - RUTA
+        SharedPreferences totalstats = getSharedPreferences(TOTAL_DIST, 0);
+        float totdist = totalstats.getFloat("totalDistance", 0);
+        
+        // = new FloatingDecimal(totdist.floatValue()).doubleValue());
+        //totdist += (Float)distance;
+
+
 
     }
 
