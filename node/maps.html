@@ -26,9 +26,9 @@
 <script>
 function init(callback){
 var socket = io();
-var myLatLng = new google.maps.LatLng(46.818926,-92.084454);
+var myLatLng = new google.maps.LatLng(46.814923,-92.080371);
   var mapOptions = {
-    zoom: 16,
+    zoom: 15,
     center: myLatLng,
     mapTypeId: google.maps.MapTypeId.TERRAIN
   };
@@ -38,16 +38,16 @@ var map = new google.maps.Map(document.getElementById("map"),mapOptions);
 var heatmap = new HeatmapOverlay(map,
         {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": .00003,
-        "maxOpacity": .75,
+        "radius": .000035,
+        "maxOpacity": .9,
 	"minOpacity": .1,
         // scales the radius based on map zoom
-        "scaleRadius": true,
+        "scaleRadius":true,
         // if set to false the heatmap uses the global maximum for colorization
         // if activated: uses the data maximum within the current map boundaries
         //   (there will always be a red spot with useLocalExtremas true)
         "useLocalExtrema": false,
-	gradient:{'.8':'blue','.99':'green','.9999':'red'},
+	gradient:{'.95':'blue','.995':'green','.999':'red'},
 	blur:1,
         // which field name in your data represents the latitude - default "lat"
         latField: 'lat',
