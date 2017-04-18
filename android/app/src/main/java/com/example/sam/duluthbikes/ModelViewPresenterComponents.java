@@ -25,6 +25,8 @@ public interface ModelViewPresenterComponents {
 
     interface PresenterContract {
 
+        Location getLocationForCamera();
+
         void updateMapLocation();
 
         void clickStart();

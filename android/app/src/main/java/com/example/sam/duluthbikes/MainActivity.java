@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdate;
@@ -44,12 +45,15 @@ public class MainActivity extends FragmentActivity
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions;
     private LocationData locationData;
+    private MyRidesData ridesData;
     private boolean animate;
+    private ToggleButton pauseToggle;
 
     private RelativeLayout tv;
     private SupportMapFragment mapFragment;
     private TextView tvSpeed;
     private TextView tvDistance;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,35 @@ public class MainActivity extends FragmentActivity
         mPresenter.clickStart();
         animate = true;
 
+        //toggle button initializer
+        addListenerOnToggle();
+
+        //add listener to toggle button
+        pauseToggle.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!pauseToggle.isChecked()){
+                            pauseToggle.setChecked(false);
+                            linearLayout.setVisibility(View.VISIBLE);
+                            try {
+                                mMap.setMyLocationEnabled(false);
+                            }catch (SecurityException e){
+                                e.printStackTrace();
+                            }
+                        } else if(pauseToggle.isChecked()){
+                            pauseToggle.setChecked(true);
+                            linearLayout.setVisibility(View.GONE);
+                            try{
+                                mMap.setMyLocationEnabled(true);
+                            }catch (SecurityException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+        );
+
         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -79,16 +112,27 @@ public class MainActivity extends FragmentActivity
         tv.setVisibility(View.GONE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
+        linearLayout = (LinearLayout) findViewById(R.id.cancelButton);
+        linearLayout.setVisibility(View.GONE);
     }
 
-    /**
-     * Method for pausing the current ride, will start a new activity.
-     * @param view
-     */
-    public void pauseRide(View view) {
+    private void addListenerOnToggle() {
+        pauseToggle = (ToggleButton)findViewById(R.id.togglePause);
+        pauseToggle.setTextOn("pause");
+        pauseToggle.setTextOff("restart");
+        pauseToggle.setChecked(true);
+    }
+
+
+    public void pauseRide() {
         mPresenter.pauseRideButton();
-        //Intent pauseIntent = new Intent(this, PauseActivity.class);
-        //startActivity(pauseIntent);
+    }
+
+    public void cancelTheRide(View view){
+        locationData.getOurInstance(this).resetData();
+        mPresenter.finishRideButton();
+        Intent i = new Intent(this,MenuActivity.class);
+        startActivity(i);
     }
 
     public void endRide(View view) {
@@ -101,6 +145,7 @@ public class MainActivity extends FragmentActivity
         endIntent.putExtra("endTime", endTime);
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
+        ridesData.getInstance(this.getApplicationContext()).addPolyline(locationData.getOurInstance(this).getPoints());
         LocationData.getOurInstance(this.getBaseContext()).resetData();
         startActivity(endIntent);
     }
@@ -144,7 +189,7 @@ public class MainActivity extends FragmentActivity
         LatLng latLng =
                 new LatLng(getLastLocation().getLatitude(),getLastLocation().getLongitude());
         points.add(latLng);
-        if(mMap.isMyLocationEnabled()==false){
+        if(mMap.isMyLocationEnabled()==false&&pauseToggle.isChecked()){
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED){
                 mMap.setMyLocationEnabled(true);
