@@ -27,7 +27,8 @@
         android:textSize="15sp"
         android:layout_above="@+id/camera"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp" />
+        android:layout_marginBottom="11dp"
+        android:imeOptions="actionGo"/>
 
 
     <Button

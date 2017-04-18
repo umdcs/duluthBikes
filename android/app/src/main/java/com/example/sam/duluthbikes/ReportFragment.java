@@ -15,11 +15,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -38,6 +43,7 @@ public class ReportFragment extends Fragment {
     int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
     Presenter mPresenter;
     int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
+    EditText imageDescription;
     Button takePictureButton;
     Button submitPictureButton;
     ImageView imageView;
@@ -55,12 +61,30 @@ public class ReportFragment extends Fragment {
 
         final View myView = inflater.inflate(R.layout.activity_report, container, false);
         mPresenter = new Presenter();
+        imageView = (ImageView) myView.findViewById(R.id.image);
+        imageDescription = (EditText) myView.findViewById(R.id.imageDescription);
+        imageDescription.setImeOptions(EditorInfo.IME_ACTION_GO);
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
-        imageView = (ImageView) myView.findViewById(R.id.image);
 
         requestCameraPermission();
+
+        imageDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (event.getAction() == KeyEvent.KEYCODE_ENTER){
+                    InputMethodManager in = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+
+                    in.hideSoftInputFromWindow(v.getApplicationWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+                }
+                else {
+                return false;
+                }
+            }
+        });
 
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +142,7 @@ public class ReportFragment extends Fragment {
                 decompressImage();
                 Log.d("Encoded Image:", encodedImage);
                 imageView.setImageBitmap(decodedByte);
+                imageView.setRotation(90);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
