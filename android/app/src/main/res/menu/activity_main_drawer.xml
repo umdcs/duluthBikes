@@ -20,8 +20,8 @@
             android:id="@+id/nav_discount"
             android:title="@string/discount" />
         <item
-            android:id="@+id/nav_membership"
-            android:title="@string/membership"/>
+            android:id="@+id/nav_reportApp"
+            android:title="@string/reportApp"/>
         <item
             android:id="@+id/nav_about"
             android:title="@string/about" />

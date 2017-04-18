@@ -2,10 +2,9 @@ package com.example.sam.duluthbikes;
 
 import android.location.Location;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.IOException;
-import java.util.List;
+import org.json.JSONArray;
 
 /**
  * Created by Sam on 3/26/2017.
@@ -15,22 +14,40 @@ public interface ModelViewPresenterComponents {
 
     interface View {
 
-        public void locationChanged(Location location);
+        void locationChanged(Location location);
+
+        void userResults(String results);
+
+        void setClient(GoogleApiClient googleApiClient);
+
+        GoogleApiClient getClient();
     }
 
     interface PresenterContract {
 
-        public void updateMapLocation();
+        Location getLocationForCamera();
 
-        public void clickStart();
-        
-        public void pauseRideButton();
+        void updateMapLocation();
 
-        public void finishRideButton();
+        void clickStart();
 
-        public void connectApi();
+        void pauseRideButton();
 
-        public void notifyRoute(List<LatLng> fullRide);
+        void finishRideButton();
+
+        void connectApi();
+
+        void notifyRoute(JSONArray fullRide,JSONArray l);
+
+        void loginUser(String userName,String passWord);
+
+        void sendPictureToServer(String encodedImage);
+
+        void returnLogin(String result);
+
+        void setOurClient(GoogleApiClient googleApiClient);
+
+        GoogleApiClient getOurClient();
     }
 
     interface Model {
@@ -44,19 +61,17 @@ public interface ModelViewPresenterComponents {
         //Notify Route Update
         void notifyRouteUpdate();
 
-        //Gets User name
-        String getUserName (String filePath) throws IOException;
-
-        //Initializes user
-        void initializeUser();
-
         void stopLocationUpdates();
 
         void disconnectApiOnFinish();
 
         void connectApiOnResume();
 
-        void notifyFinishRoute(List<LatLng> route);
+        void notifyFinishRoute(JSONArray r,JSONArray l);
+
+        void loginAttempt(String user,String pass);
+
+        void sendPicture(String encodedImage);
     }
 }
 

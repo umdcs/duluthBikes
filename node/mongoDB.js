@@ -1,7 +1,7 @@
 
-
-var url = 'mongodb://127.0.0.1:50432/db'; //URL needs to be changed
-var collections = ['rides']; //Array of known collections ???
+//database url
+var url = 'mongodb://127.0.0.1:50432/db'; 
+var collections = ['rides']; 
 
 var mongojs = require('mongojs');
 var assert = require('assert');
@@ -14,7 +14,7 @@ module.exports = function() {
 	})
 
 	mongodb.on('connect', function () {
-	console.log('database connected')
+	console.log('database connected DulBik')
 	})
 	
 	/** ********************************************************************
@@ -25,7 +25,8 @@ module.exports = function() {
 	printDatabase = function(collectionName, callback) {
 	
 		// 
-		// Collection look ups with find return a MongoDB 'cursor'. More info can be found here
+		// Collection look ups with find return a 
+		// MongoDB 'cursor'. More info can be found here
 		// https://docs.mongodb.com/v3.2/reference/glossary/#term-cursor
 		// 
 		
@@ -58,7 +59,7 @@ module.exports = function() {
 
 	insertRoute = function(routeData){
 		mongodb.collection('RideHistory').save(
-			{point: routeData},function(err,result){
+			{point:routeData},function(err,result){
 			if(err||!result)console.log("point not saved");
 			else console.log("point entered into RideHistory");
 		});
@@ -72,6 +73,45 @@ module.exports = function() {
 		});
 	};
 
+
+	insertLatLng = function(LatLng){
+		mongodb.collection('FullLatLngsRecorded').save(
+			{latlng:LatLng},function(err,result){
+			if(err||!result)console.log("latlng not saved");
+			else console.log("latlng loged in DB");
+		});
+	};
+
+	insertUsername = function(user){
+		mongodb.collection('UsersSaved').save(
+			{users:user},function(err,result){
+			if(err||!result)console.log("user not saved");
+			else console.log("user loged in User DB");
+		});
+	};
+
+	insertPicture = function(pic){
+		mongodb.collection('PicturesSaved').save(
+			{pictures:pic},function(err,result){
+				if(err||!result)console.log("Picture not saved");
+				else console.log("picture saves in picture DB")
+			});
+	};
+
+	printPictures = function(collectionName, callback) {
+
+       	var cursor = mongodb.collection(collectionName).find(function(err, docs){
+	    
+           	if(err || !docs) {
+				console.log("Cannot print database or database is empty\n");	
+    		} 
+    		else {
+				callback(docs);
+	    	}
+    	});
+	
+	};
+	
 	deleteAll = function(colName,callback){
 		mongodb.collection(colName).remove({});
 		callback(true);

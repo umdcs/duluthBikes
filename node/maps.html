@@ -18,38 +18,79 @@
       }
     </style>
   </head>
-<script src="/socket.io/socket.io.js"></script>
+<body>
+
+<div id='map'></div>
+<div id='data'></div>
+</body>
 <script>
-  var socket = io();
+function init(callback){
+var socket = io();
+var myLatLng = new google.maps.LatLng(46.818926,-92.084454);
+  var mapOptions = {
+    zoom: 16,
+    center: myLatLng,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
+var heatmap = new HeatmapOverlay(map,
+        {
+        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+        "radius": .00003,
+        "maxOpacity": .75,
+	"minOpacity": .1,
+        // scales the radius based on map zoom
+        "scaleRadius": true,
+        // if set to false the heatmap uses the global maximum for colorization
+        // if activated: uses the data maximum within the current map boundaries
+        //   (there will always be a red spot with useLocalExtremas true)
+        "useLocalExtrema": false,
+	gradient:{'.8':'blue','.99':'green','.9999':'red'},
+	blur:1,
+        // which field name in your data represents the latitude - default "lat"
+        latField: 'lat',
+        // which field name in your data represents the longitude - default "lng"
+        lngField: 'lng',
+	valueField:'count'
+        }
+        );
+
+socket.on('FullRidesRecorded',function(result){
+        var arrayRide = [];
+        var ra = [];
+
+        for(var i=0;i<result.length;i++)
+        {
+        arrayRide = result[i]['ride'];
+	var a = arrayRide
+        if(a!=null){
+	ra = ra.concat(arrayRide);
+        }
+	}
+
+        var data = {
+	data:ra
+        }
+
+        heatmap.setData(data);
+	document.getElementById("data").innerHTML = heatmap.getData();
+	
+});
+
+}
+
 </script>
-  <body>
-    <div id="map"></div>
-    <script>
-
-      // This example creates an interactive map which constructs a polyline based on
-      // user clicks. Note that the polyline only appears once its path property
-      // contains two LatLng coordinates.
-
-      var poly;
-      var map;
-
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: {lat: 46.7867, lng: -92.1005}  // Center the map on Duluth, MN USA.
-        });
-
-        poly = new google.maps.Polyline({
-          strokeColor: '#000000',
-          strokeOpacity: 1.0,
-          strokeWeight: 3
-        });
-        poly.setMap(map);
-
-      }
+<script src="/socket.io/socket.io.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ">
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initMap">
-    </script>
-  </body>
+<script src="/heatmapfiles"></script>
+<script src="/heatmapfilesgmaps"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+    init();
+  });
+</script>
 </html>

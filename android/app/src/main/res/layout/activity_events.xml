@@ -4,12 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:indeterminate="true"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        /> -->
 
-        <WebView
-            android:id="@+id/webViewEvents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+    <WebView
+        android:id="@+id/webViewEvents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/pb">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
 
 </RelativeLayout>
