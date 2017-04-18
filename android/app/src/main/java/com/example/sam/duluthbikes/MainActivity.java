@@ -53,6 +53,7 @@ public class MainActivity extends FragmentActivity
     private SupportMapFragment mapFragment;
     private TextView tvSpeed;
     private TextView tvDistance;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class MainActivity extends FragmentActivity
                     public void onClick(View v) {
                         if(!pauseToggle.isChecked()){
                             pauseToggle.setChecked(false);
+                            linearLayout.setVisibility(View.VISIBLE);
                             try {
                                 mMap.setMyLocationEnabled(false);
                             }catch (SecurityException e){
@@ -90,6 +92,7 @@ public class MainActivity extends FragmentActivity
                             }
                         } else if(pauseToggle.isChecked()){
                             pauseToggle.setChecked(true);
+                            linearLayout.setVisibility(View.GONE);
                             try{
                                 mMap.setMyLocationEnabled(true);
                             }catch (SecurityException e){
@@ -109,6 +112,8 @@ public class MainActivity extends FragmentActivity
         tv.setVisibility(View.GONE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
+        linearLayout = (LinearLayout) findViewById(R.id.cancelButton);
+        linearLayout.setVisibility(View.GONE);
     }
 
     private void addListenerOnToggle() {
@@ -118,14 +123,16 @@ public class MainActivity extends FragmentActivity
         pauseToggle.setChecked(true);
     }
 
-    /**
-     * Method for pausing the current ride, will start a new activity.
-     * @param view
-     */
-    public void pauseRide(View view) {
+
+    public void pauseRide() {
         mPresenter.pauseRideButton();
-        //Intent pauseIntent = new Intent(this, PauseActivity.class);
-        //startActivity(pauseIntent);
+    }
+
+    public void cancelTheRide(View view){
+        locationData.getOurInstance(this).resetData();
+        mPresenter.finishRideButton();
+        Intent i = new Intent(this,MenuActivity.class);
+        startActivity(i);
     }
 
     public void endRide(View view) {
