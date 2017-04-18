@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -144,8 +143,8 @@ public class ReportFragment extends Fragment {
                 Log.d("Encoded Image:", encodedImage);
                 imageView.setImageBitmap(decodedByte);
                 imageView.setRotation(90);
-                Location loc = mPresenter.getLocationForCamera();
-                Log.d("Location:", loc.toString());
+                //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
+                //Log.d("Location:", loc.toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
