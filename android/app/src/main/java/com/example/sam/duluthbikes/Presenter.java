@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 import android.content.Context;
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,6 +26,15 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
         mView = view;
         mContext = context;
         mActivity = activity;
+    }
+
+    @Override
+    public Location getLocationForCamera() {
+
+        ////// DOES NOT WORK BECAUSE MODEL HAS NOT STARTED. NO MAPS HACE STARTEd.
+        mModel= new Model(mContext,mActivity,this);
+        Location loc = mModel.getLocation();
+        return  loc;
     }
 
     @Override
