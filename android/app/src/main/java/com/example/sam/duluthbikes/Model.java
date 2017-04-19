@@ -146,15 +146,17 @@ public class Model
     }
 
     @Override
-    public void sendPicture(String pic) {
-        JSONObject picture = null;
+    public void sendPicture(String location, String description, String encodedImage) {
+        JSONObject pictureObj = null;
         try{
-            picture = new JSONObject();
-            picture.put("picture",pic);
+            pictureObj = new JSONObject();
+            pictureObj.put("loc",location);
+            pictureObj.put("description", description);
+            pictureObj.put("picture",encodedImage);
         }catch (JSONException e){
             e.printStackTrace();
         }
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",picture.toString());
+        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",pictureObj.toString());
     }
 
     protected void createLocationRequest() {

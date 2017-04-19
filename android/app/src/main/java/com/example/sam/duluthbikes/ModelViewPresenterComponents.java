@@ -41,7 +41,7 @@ public interface ModelViewPresenterComponents {
 
         void loginUser(String userName,String passWord);
 
-        void sendPictureToServer(String encodedImage);
+        void sendPictureToServer(String loc, String description, String encodedImage);
 
         void returnLogin(String result);
 
@@ -71,7 +71,7 @@ public interface ModelViewPresenterComponents {
 
         void loginAttempt(String user,String pass);
 
-        void sendPicture(String encodedImage);
+        void sendPicture(String loc, String description, String encodedImage);
     }
 }
 
