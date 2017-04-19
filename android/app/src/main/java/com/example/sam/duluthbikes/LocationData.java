@@ -121,8 +121,8 @@ public class LocationData {
             trip.put(arr);
             latlng.put(p);
             if (getLastLocation() != null) distance += getLastLocation().distanceTo(location);
-            builder.include(p);
         }
+        builder.include(p);
         lastLocation = location;
     }
 }
