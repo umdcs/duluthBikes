@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -49,7 +50,7 @@ public class MainActivity extends FragmentActivity
     private boolean animate;
     private ToggleButton pauseToggle;
 
-    private RelativeLayout tv;
+    private LinearLayout tv;
     private SupportMapFragment mapFragment;
     private TextView tvSpeed;
     private TextView tvDistance;
@@ -108,7 +109,7 @@ public class MainActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        tv = (RelativeLayout) findViewById(R.id.tvStats);
+        tv = (LinearLayout) findViewById(R.id.tvStats);
         tv.setVisibility(View.GONE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
@@ -153,10 +154,10 @@ public class MainActivity extends FragmentActivity
     public void changeUI(View view){
         if(tv.getVisibility()==View.GONE){
             tv.setVisibility(View.VISIBLE);
-            mapFragment.getView().setVisibility(View.GONE);
+
         }else{
             tv.setVisibility(View.GONE);
-            mapFragment.getView().setVisibility(View.VISIBLE);
+
         }
     }
 
@@ -205,11 +206,13 @@ public class MainActivity extends FragmentActivity
                 animate = false;
                 mMap.animateCamera(cu);
             } else mMap.moveCamera(cu);
+
+            DecimalFormat df = new DecimalFormat("0.00");
             Polyline p = mMap.addPolyline(polylineOptions);
-            String sd = Float.toString(location.getSpeed());
-            tvSpeed.setText(sd);
-            sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
-            tvDistance.setText(sd);
+            String sd = df.format(location.getSpeed());
+            tvSpeed.setText(sd+" KPM");
+            sd = df.format(locationData.getOurInstance(this.getBaseContext()).getDistance()/1000);
+            tvDistance.setText(sd+" Meters");
         }
     }
 

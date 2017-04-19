@@ -63,37 +63,88 @@
             android:layout_margin="5dp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
         tools:context="com.example.sam.duluthbikes.MainActivity" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/tvStats">
+        android:id="@+id/tvStats"
+        android:orientation="vertical"
+        android:layout_weight="2">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/titleStats"
             android:text="@string/Stats"
-            android:layout_centerHorizontal="true"/>
-        <TextView
+            android:textSize="30dp"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/speed"
-            android:text="@string/Speed"
-            android:layout_below="@+id/titleStats"/>
-        <TextView
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Speed: "
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/speed"
+                android:text="@string/Speed"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/distanceMain"
-            android:text="@string/Distance"
-            android:layout_below="@+id/speed"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distance: "
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/distanceMain"
+                android:text="@string/Distance"
+                android:layout_weight="1"
+                android:textSize="35dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </LinearLayout>
     <!--<fragment class="com.google.android.gms.maps.MapFragment"
         android:id="@+id/FirstMap"
         android:layout_width="wrap_content"
