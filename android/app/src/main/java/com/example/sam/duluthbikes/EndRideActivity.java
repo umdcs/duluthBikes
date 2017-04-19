@@ -20,9 +20,6 @@ import java.util.Date;
 public class EndRideActivity extends AppCompatActivity{
 
     Bundle data;
-    int sec;
-    int min;
-    int hours;
     Float totDistance;
     Long totTime;
 
@@ -53,9 +50,8 @@ public class EndRideActivity extends AppCompatActivity{
         DecimalFormat df = new DecimalFormat("#.###");
 
         Long timelapse = fTime - sTime;
-        setSecMinHours(timelapse);
 
-        updateTotals(distance, timelapse);
+        initializeTotals();
 
         //format data entries
         Double distKM = Double.valueOf(df.format(getDistInKm(distance)));
@@ -66,36 +62,31 @@ public class EndRideActivity extends AppCompatActivity{
 
         rideDate.setText(dateOfRide);
         dist.setText(Double.toString(distKM));
-        timeLapsed.setText(Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+ "sec ");
+        timeLapsed.setText(convertHoursMinSecToString(timelapse));
         avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
-        totalDist.setText(totDistance.toString());
-        totalTime.setText(totTime.toString());
+        totalDist.setText(df.format(getDistInKm(totDistance.doubleValue())).toString() + " km");
+        totalTime.setText(convertHoursMinSecToString(totTime));
 
     }
 
 
-    private void updateTotals(Double distance, Long timelapse){
+    private void initializeTotals(){
 
         SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
-        totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
-                distance.floatValue();
-
-        totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
-
-        SharedPreferences.Editor editor = totalstats.edit();
-        editor.putFloat(getString(R.string.lifetimeStats_totDist), totDistance);
-        editor.putLong(getString(R.string.lifetimeStats_totTime), totTime);
-
-        editor.commit();
+        totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0);
+        totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0);
 
     }
 
-    public void setSecMinHours(Long timelapse){
-        sec = (int) (timelapse / 1000) % 60 ;
-        min = (int) ((timelapse / (1000*60)) % 60);
-        hours = (int) ((timelapse / (1000*60*60)) % 24);
+    public String convertHoursMinSecToString(long time){
+        int sec = (int) (time / 1000) % 60 ;
+        int min = (int) ((time / (1000*60)) % 60);
+        int hours = (int) ((time / (1000*60*60)) % 24);
+
+        String converted = Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+"sec";
+        return converted;
     }
 
     public double getDistInKm(Double distance){
