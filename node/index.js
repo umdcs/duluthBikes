@@ -156,10 +156,10 @@ app.post('/postusername', function(req,res){
 app.post('/postpicture', function(req,res){
 	if(!req.body)return res.sendStatus(400);
 
-	var picObj = req.body.pic;
+	var picObj = req.body.picture;
 	insertPicture(picObj);
 	console.log('Post Picture');
-	res.send('good');
+	res.send();
 
 });
 

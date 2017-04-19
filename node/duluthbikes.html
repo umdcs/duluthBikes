@@ -6,28 +6,30 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <style>
 #wrapper {
-        width: 100%;
-        height: 100%;
+        width: 95%;
+        height: 96%;
 	position:absolute;
+	margin-left:2%;
         background-color: rgba(193,193,193,1.00);
 }
 #main{
-        width: 96%;
-	height:100%;
-	margin-left: 2%;
+        width: 93%;
+	height: 96%;
+	margin-left: 3%;
+	margin-top:1%;
 	position:absolute;
-        background-color: #fff;
+        background-color: #191919;
 }
 h1{
         width: 98%;
 	height: 19%;
 	margin-left: 1%;
         text-align: center;
-	background-color: green;
+	background-color:#707177;
 }
 iframe{
         width: 78%;
-	height: 80%;
+	height: 77%;
 	position:absolute; 
         margin-left: 1%;
 	background-color:rgba(193,193,193,1.00);
@@ -55,32 +57,51 @@ button{
 	<div id="main">
 	
 	<div id="border">
-	<h1><a href="http://duluthbikes.org">Duluth Bikes</a><br/>App Dashboard</h1>
+	<h1 class="haha"><a href="http://duluthbikes.org">Duluth Bikes</a><br/>App Dashboard</h1>
 	</div>
 
 	<div>
-	<iframe id="map" src='http://ukko.d.umn.edu:23405/rides'></iframe>
+	<iframe id="map" src='http://ukko.d.umn.edu:23405/maps'></iframe>
 	</div>
 	
 	<div>
 	<button onClick="changeContent('http://ukko.d.umn.edu:23405/maps')">
-	Blank Map</button>
-	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">
-	Polyline</button>
-	<button onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">
-	R Points</button>
-	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">
-	R Rides</button>
-	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/heatmaps')">
 	Heat Map</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">
+        R Rides</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">
+	Polyline</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">
+	R Points</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/heatmaps')">
+	Heat GMap</button>
 	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/fulllatlng')">
 	R LatLng</button>
-	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/pictures')">
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/pictures')">
 	Pictures </button>
 	</div>
 
 	</div>
 </div>
+<script src="/heatmapfiles"></script>
+<script>
+var heat = h337.create({
+	container:document.querySelector('.haha'),
+	radius: 10,
+	opacity:.5,
+	blur:1
+	
+});
+document.querySelector('.haha').onmousemove = function(e){
+
+	heat.addData({
+		x: e.layerX,
+		y: e.layerY,
+		value: 1
+});
+};
+
+</script>
 <script>
 	function changeContent(theSRC){
 		document.getElementById('map').src = theSRC;

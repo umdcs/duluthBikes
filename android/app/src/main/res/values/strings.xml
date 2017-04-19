@@ -62,6 +62,8 @@
     <string name="avSpeedLabel">Average Speed (km/hour): </string>
     <string name="sTimeLabel">Start Time: </string>
     <string name="fTimeLabel">Finish Time: </string>
+    <string name="totDistLabel">Total distance: </string>
+    <string name="totTimeLabel">Total time: </string>
     <string name="DONE">DONE</string>
 
     <string name="DisclaimerReportApp">This app is in a development stage.
@@ -87,6 +89,11 @@ The main goal is to collect information about rides and use that data for cyclin
         Data is pulled from Duluth Bikes webpage.</string>
     <string name="About12">DISCOUNTS</string>
     <string name="About13">Look for businesses which provide discounts for cyclists.</string>
+
+    <string name="lifetimeStats_file_key">com.example.duluthbikes.LIFETIMESTATS_FILE_KEY</string>
+    <string name="lifetimeStats_totDist">totalDistance</string>
+    <string name="lifetimeStats_totTime">totalTime</string>
+
 
 
 </resources>

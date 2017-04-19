@@ -2,6 +2,7 @@ package com.example.sam.duluthbikes;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -139,10 +140,17 @@ public class MainActivity extends FragmentActivity
         mPresenter.finishRideButton();
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
         Date thisDate = new Date();
+
         Long endTime = thisDate.getTime();
-        endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
-        endIntent.putExtra("startTime", LocationData.getOurInstance(this.getBaseContext()).getStartTime());
+        Long startTime = LocationData.getOurInstance(this.getBaseContext()).getStartTime();
+        Double distance = LocationData.getOurInstance(this.getBaseContext()).getDistance();
+
+        updateTotals(distance, endTime-startTime);
+
+        endIntent.putExtra("dis",distance);
+        endIntent.putExtra("startTime", startTime);
         endIntent.putExtra("endTime", endTime);
+
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
         ridesData.getInstance(this.getApplicationContext()).addPolyline(locationData.getOurInstance(this).getPoints());
@@ -167,6 +175,21 @@ public class MainActivity extends FragmentActivity
 
     }
 
+    private void updateTotals(Double distance, Long timelapse){
+
+        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
+        Float totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
+                distance.floatValue();
+
+        Long totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
+
+        SharedPreferences.Editor editor = totalstats.edit();
+        editor.putFloat(getString(R.string.lifetimeStats_totDist), totDistance);
+        editor.putLong(getString(R.string.lifetimeStats_totTime), totTime);
+
+        editor.commit();
+
+    }
 
      /**
      * Required by OnMapReadyCallback interface
@@ -185,32 +208,32 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public void locationChanged(Location location) {
-        setLastLocation(location);
-        LatLng latLng =
-                new LatLng(getLastLocation().getLatitude(),getLastLocation().getLongitude());
-        points.add(latLng);
-        if(mMap.isMyLocationEnabled()==false&&pauseToggle.isChecked()){
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED){
-                mMap.setMyLocationEnabled(true);
-                mMap.setMaxZoomPreference(18);
+        if(location!=null) {
+            setLastLocation(location);
+            LatLng latLng =
+                    new LatLng(getLastLocation().getLatitude(), getLastLocation().getLongitude());
+            points.add(latLng);
+            if (mMap.isMyLocationEnabled() == false && pauseToggle.isChecked()) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                    mMap.setMaxZoomPreference(18);
+                }
             }
+            locationData.getOurInstance(this.getBaseContext()).addPoint(latLng, location);
+            polylineOptions = locationData.getOurInstance(this.getBaseContext()).getPoints();
+            LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds.build(), 100);
+            if (animate) {
+                animate = false;
+                mMap.animateCamera(cu);
+            } else mMap.moveCamera(cu);
+            Polyline p = mMap.addPolyline(polylineOptions);
+            String sd = Float.toString(location.getSpeed());
+            tvSpeed.setText(sd);
+            sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
+            tvDistance.setText(sd);
         }
-        locationData.getOurInstance(this.getBaseContext()).addPoint(latLng,location);
-        polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
-        LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
-        CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),100);
-        if(animate)
-        {
-            animate = false;
-            mMap.animateCamera(cu);
-        }
-        else mMap.moveCamera(cu);
-        Polyline p = mMap.addPolyline(polylineOptions);
-        String sd = Float.toString(location.getSpeed());
-        tvSpeed.setText(sd);
-        sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
-        tvDistance.setText(sd);
     }
 
     @Override

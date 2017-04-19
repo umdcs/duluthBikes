@@ -58,8 +58,6 @@ public interface ModelViewPresenterComponents {
         //Get Location
         Location getLocation();
 
-        //Notify Route Update
-        void notifyRouteUpdate();
 
         void stopLocationUpdates();
 

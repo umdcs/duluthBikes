@@ -1,6 +1,7 @@
 package com.example.sam.duluthbikes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,9 +20,9 @@ import java.util.Date;
 public class EndRideActivity extends AppCompatActivity{
 
     Bundle data;
-    int sec;
-    int min;
-    int hours;
+    Float totDistance;
+    Long totTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class EndRideActivity extends AppCompatActivity{
         TextView avSpeed = (TextView)findViewById(R.id.averageSpeed);
         TextView startTime = (TextView)findViewById(R.id.startTime);
         TextView endTime = (TextView)findViewById(R.id.endTime);
+        TextView totalDist = (TextView)findViewById(R.id.totalDistance);
+        TextView totalTime = (TextView)findViewById(R.id.totalTime);
 
         data = getIntent().getExtras();
         Long sTime =  data.getLong("startTime");
@@ -47,7 +50,8 @@ public class EndRideActivity extends AppCompatActivity{
         DecimalFormat df = new DecimalFormat("#.###");
 
         Long timelapse = fTime - sTime;
-        setSecMinHours(timelapse);
+
+        initializeTotals();
 
         //format data entries
         Double distKM = Double.valueOf(df.format(getDistInKm(distance)));
@@ -58,17 +62,31 @@ public class EndRideActivity extends AppCompatActivity{
 
         rideDate.setText(dateOfRide);
         dist.setText(Double.toString(distKM));
-        timeLapsed.setText(Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+ "sec ");
+        timeLapsed.setText(convertHoursMinSecToString(timelapse));
         avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
+        totalDist.setText(df.format(getDistInKm(totDistance.doubleValue())).toString() + " km");
+        totalTime.setText(convertHoursMinSecToString(totTime));
 
     }
 
-    public void setSecMinHours(Long timelapse){
-        sec = (int) (timelapse / 1000) % 60 ;
-        min = (int) ((timelapse / (1000*60)) % 60);
-        hours = (int) ((timelapse / (1000*60*60)) % 24);
+
+    private void initializeTotals(){
+
+        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
+        totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0);
+        totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0);
+
+    }
+
+    public String convertHoursMinSecToString(long time){
+        int sec = (int) (time / 1000) % 60 ;
+        int min = (int) ((time / (1000*60)) % 60);
+        int hours = (int) ((time / (1000*60*60)) % 24);
+
+        String converted = Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+"sec";
+        return converted;
     }
 
     public double getDistInKm(Double distance){
