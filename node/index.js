@@ -155,8 +155,9 @@ app.post('/postusername', function(req,res){
 
 app.post('/postpicture', function(req,res){
 	if(!req.body)return res.sendStatus(400);
-
-	var picObj = req.body.picture;
+	var picObj = { 'location':req.body.loc,
+		       'description':req.body.description,
+		       'picture':req.body.picture };
 	insertPicture(picObj);
 	console.log('Post Picture');
 	res.send();
@@ -172,6 +173,15 @@ app.get('/pictures',function(req,res){
         });
     console.log('picture request');
 })
+
+app.get('/deleteallthepictures',function(res,req) {
+	console.log('deleted all pictures attempt');
+
+	deleteAll('PicturesSaved', function(result) {
+		if(result==true)console.log("deleted all pictures");
+		else console.log("Did not work");
+	});
+});
 
 
 app.get('/deletealltherides',function(res,req){
