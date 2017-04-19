@@ -2,6 +2,7 @@ package com.example.sam.duluthbikes;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -140,10 +141,17 @@ public class MainActivity extends FragmentActivity
         mPresenter.finishRideButton();
         Intent endIntent = new Intent(this.getApplicationContext(),EndRideActivity.class);
         Date thisDate = new Date();
+
         Long endTime = thisDate.getTime();
-        endIntent.putExtra("dis",LocationData.getOurInstance(this.getBaseContext()).getDistance());
-        endIntent.putExtra("startTime", LocationData.getOurInstance(this.getBaseContext()).getStartTime());
+        Long startTime = LocationData.getOurInstance(this.getBaseContext()).getStartTime();
+        Double distance = LocationData.getOurInstance(this.getBaseContext()).getDistance();
+
+        updateTotals(distance, endTime-startTime);
+
+        endIntent.putExtra("dis",distance);
+        endIntent.putExtra("startTime", startTime);
         endIntent.putExtra("endTime", endTime);
+
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
         ridesData.getInstance(this.getApplicationContext()).addPolyline(locationData.getOurInstance(this).getPoints());
@@ -168,6 +176,21 @@ public class MainActivity extends FragmentActivity
 
     }
 
+    private void updateTotals(Double distance, Long timelapse){
+
+        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
+        Float totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
+                distance.floatValue();
+
+        Long totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
+
+        SharedPreferences.Editor editor = totalstats.edit();
+        editor.putFloat(getString(R.string.lifetimeStats_totDist), totDistance);
+        editor.putLong(getString(R.string.lifetimeStats_totTime), totTime);
+
+        editor.commit();
+
+    }
 
      /**
      * Required by OnMapReadyCallback interface

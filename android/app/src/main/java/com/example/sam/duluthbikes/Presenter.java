@@ -66,8 +66,9 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     }
 
     @Override
-    public void sendPictureToServer(String encodedImage) {
-        mModel.sendPicture(encodedImage);
+    public void sendPictureToServer(String location, String description, String encodedImage) {
+        //mModel = new Model(mContext,mActivity,this);
+        mModel.sendPicture(location, description, encodedImage);
     }
 
     @Override

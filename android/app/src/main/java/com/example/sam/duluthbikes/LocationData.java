@@ -125,4 +125,5 @@ public class LocationData {
         builder.include(p);
         lastLocation = location;
     }
+
 }

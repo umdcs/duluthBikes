@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -43,7 +44,7 @@ public class ReportFragment extends Fragment {
     int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
     Presenter mPresenter;
     int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
-    EditText imageDescription;
+    EditText editDescription;
     Button takePictureButton;
     Button submitPictureButton;
     ImageView imageView;
@@ -54,6 +55,9 @@ public class ReportFragment extends Fragment {
     public String path;
     Bitmap bm;
     Bitmap decodedByte;
+    String imageLocation = "THIS IS HARDCODED TEST LOCATION";
+    String imageDescription = "";
+    Location pictureLocation;
 
     @Nullable
     @Override
@@ -62,15 +66,15 @@ public class ReportFragment extends Fragment {
         final View myView = inflater.inflate(R.layout.activity_report, container, false);
         mPresenter = new Presenter();
         imageView = (ImageView) myView.findViewById(R.id.image);
-        imageDescription = (EditText) myView.findViewById(R.id.imageDescription);
-        imageDescription.setImeOptions(EditorInfo.IME_ACTION_GO);
+        editDescription = (EditText) myView.findViewById(R.id.imageDescription);
+        editDescription.setImeOptions(EditorInfo.IME_ACTION_GO);
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
 
         requestCameraPermission();
 
-        imageDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        editDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (event.getAction() == KeyEvent.KEYCODE_ENTER){
@@ -105,9 +109,10 @@ public class ReportFragment extends Fragment {
         submitPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
-                sendPictureToServer(encodedImage);
+                sendPictureToServer(imageLocation, imageDescription, encodedImage);
                 submitPictureButton.setVisibility(View.INVISIBLE);
                 takePictureButton.setVisibility(View.VISIBLE);
+                editDescription.setText("");
                 CharSequence text = "Thank you!";
                 Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_LONG);
                 toast.show();
@@ -190,8 +195,14 @@ public class ReportFragment extends Fragment {
         decodedByte = BitmapFactory.decodeByteArray(decodedString,0,decodedString.length);
     }
 
-    public void sendPictureToServer(String picture) {
-        mPresenter.sendPictureToServer(picture);
+    public void sendPictureToServer(String location, String description, String picture) {
+
+        //pictureLocation = LocationData.getOurInstance(this.getContext()).getLastLocation();
+        //imageLocation = pictureLocation.toString();
+
+        imageDescription = editDescription.getText().toString();
+        mPresenter.sendPictureToServer(imageLocation,imageDescription,picture);
+
     }
 }
 
