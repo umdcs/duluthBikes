@@ -101,20 +101,6 @@ public class Model
         mGoogleApiClient.connect();
     }
 
-    @Override
-    public void notifyRouteUpdate() {
-        JSONObject route = null;
-        try{
-            route = new JSONObject();
-            route.put("lat",getLocation().getLatitude());
-            route.put("lang",getLocation().getLongitude());
-            route.put("time",getLocation().getTime());
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postroute","POST",route.toString());
-    }
 
     @Override
     public void notifyFinishRoute(JSONArray finishRoute,JSONArray list){
@@ -160,8 +146,8 @@ public class Model
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(3000);
-        mLocationRequest.setFastestInterval(100);
-        mLocationRequest.setSmallestDisplacement(1.0f);
+        mLocationRequest.setFastestInterval(500);
+        mLocationRequest.setSmallestDisplacement(2.0f);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -186,7 +172,6 @@ public class Model
         }
         // get the last location
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        notifyRouteUpdate();
         PendingResult<Status> pendingResult = LocationServices.FusedLocationApi
                 .requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
     }
@@ -200,7 +185,6 @@ public class Model
     @Override
     public void onLocationChanged(Location location){
         setLocation(location);
-        notifyRouteUpdate();
         mPresenter.updateMapLocation();
     }
 

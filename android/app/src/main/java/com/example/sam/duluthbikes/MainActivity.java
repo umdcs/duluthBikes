@@ -208,32 +208,32 @@ public class MainActivity extends FragmentActivity
 
     @Override
     public void locationChanged(Location location) {
-        setLastLocation(location);
-        LatLng latLng =
-                new LatLng(getLastLocation().getLatitude(),getLastLocation().getLongitude());
-        points.add(latLng);
-        if(mMap.isMyLocationEnabled()==false&&pauseToggle.isChecked()){
-            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED){
-                mMap.setMyLocationEnabled(true);
-                mMap.setMaxZoomPreference(18);
+        if(location!=null) {
+            setLastLocation(location);
+            LatLng latLng =
+                    new LatLng(getLastLocation().getLatitude(), getLastLocation().getLongitude());
+            points.add(latLng);
+            if (mMap.isMyLocationEnabled() == false && pauseToggle.isChecked()) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                    mMap.setMaxZoomPreference(18);
+                }
             }
+            locationData.getOurInstance(this.getBaseContext()).addPoint(latLng, location);
+            polylineOptions = locationData.getOurInstance(this.getBaseContext()).getPoints();
+            LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds.build(), 100);
+            if (animate) {
+                animate = false;
+                mMap.animateCamera(cu);
+            } else mMap.moveCamera(cu);
+            Polyline p = mMap.addPolyline(polylineOptions);
+            String sd = Float.toString(location.getSpeed());
+            tvSpeed.setText(sd);
+            sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
+            tvDistance.setText(sd);
         }
-        locationData.getOurInstance(this.getBaseContext()).addPoint(latLng,location);
-        polylineOptions=locationData.getOurInstance(this.getBaseContext()).getPoints();
-        LatLngBounds.Builder bounds = LocationData.getOurInstance(this.getBaseContext()).getBuilder();
-        CameraUpdate cu =  CameraUpdateFactory.newLatLngBounds(bounds.build(),100);
-        if(animate)
-        {
-            animate = false;
-            mMap.animateCamera(cu);
-        }
-        else mMap.moveCamera(cu);
-        Polyline p = mMap.addPolyline(polylineOptions);
-        String sd = Float.toString(location.getSpeed());
-        tvSpeed.setText(sd);
-        sd = Double.toString(locationData.getOurInstance(this.getBaseContext()).getDistance());
-        tvDistance.setText(sd);
     }
 
     @Override

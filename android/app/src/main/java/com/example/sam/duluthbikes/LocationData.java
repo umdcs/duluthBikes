@@ -109,7 +109,7 @@ public class LocationData {
     }
 
     public void addPoint(LatLng p,Location location){
-        if(location.getAccuracy()<15) {
+        if(location.getAccuracy()<25) {
             mPolylineOptions.add(p);
             JSONObject arr = new JSONObject();
             try {
