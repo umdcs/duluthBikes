@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 /**
@@ -47,7 +46,7 @@ public class EndRideActivity extends AppCompatActivity{
         //SimpleDateFormat timef = new SimpleDateFormat("HH:mm:ss"); //military time
         SimpleDateFormat timef = new SimpleDateFormat("hh:mm:ss a");
         SimpleDateFormat datef = new SimpleDateFormat("MM-dd-yyyy");
-        DecimalFormat df = new DecimalFormat("#.###");
+        DecimalFormat df = new DecimalFormat("#.##");
 
         Long timelapse = fTime - sTime;
 
