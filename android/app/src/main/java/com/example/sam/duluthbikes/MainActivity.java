@@ -188,7 +188,7 @@ public class MainActivity extends FragmentActivity
         editor.putFloat(getString(R.string.lifetimeStats_totDist), totDistance);
         editor.putLong(getString(R.string.lifetimeStats_totTime), totTime);
 
-        editor.commit();
+        editor.apply();
 
     }
 

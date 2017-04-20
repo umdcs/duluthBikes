@@ -114,7 +114,7 @@ public class Model
                 e.printStackTrace();
             }
             new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postfinish", "POST", fullRide.toString());
-        };
+        }
     }
 
     @Override
