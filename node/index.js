@@ -143,7 +143,7 @@ app.post('/postfinish',function(req,res){
 app.get('/usernames', function(req,res){
 	var users = printUsers('UsersSaved',function(result){
          res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
-            +'<H1>Userss.</H1>');
+            +'<H1>Users </H1>');
             res.write(JSON.stringify(result));
             res.send();
         });
