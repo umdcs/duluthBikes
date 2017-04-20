@@ -31,6 +31,7 @@ public class Presenter implements ModelViewPresenterComponents.PresenterContract
     @Override
     public Location getLocationForCamera() {
 
+        // NEED TO START GOOOGLE API CLIENT TO GET LOCATION
         ////// DOES NOT WORK BECAUSE MODEL HAS NOT STARTED. NO MAPS HACE STARTEd.
         mModel= new Model(mContext,mActivity,this);
         Location loc = mModel.getLocation();
