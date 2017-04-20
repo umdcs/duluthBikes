@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#777777</color>
     <color name="colorAccent">#FF4081</color>
     <color name="finishButtoncolor">#ff5000</color>
-    <color name="colorCancelButton">#ff0000</color>
+    <color name="colorCancelButton">#66FF0000</color>
+    <color name="greyOpacityScreen">#55000000</color>
 
 
     <!-- duluthBikesLightGreen = #7EC252
