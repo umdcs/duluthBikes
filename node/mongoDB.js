@@ -90,6 +90,20 @@ module.exports = function() {
 		});
 	};
 
+	printUsers = function(collectionName, callback) {
+
+       	var cursor = mongodb.collection(collectionName).find(function(err, docs){
+	    
+           	if(err || !docs) {
+				console.log("Cannot print database or database is empty\n");	
+    		} 
+    		else {
+				callback(docs);
+	    	}
+    	});
+	
+	};
+
 	insertPicture = function(pic){
 		mongodb.collection('PicturesSaved').save(
 			{pictures:pic},function(err,result){

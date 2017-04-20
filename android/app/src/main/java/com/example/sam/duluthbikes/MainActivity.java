@@ -11,7 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -232,7 +231,7 @@ public class MainActivity extends FragmentActivity
 
             DecimalFormat df = new DecimalFormat("0.00");
             Polyline p = mMap.addPolyline(polylineOptions);
-            String sd = df.format(location.getSpeed());
+            String sd = df.format(location.getSpeed()*3.6);
             tvSpeed.setText(sd+" KM/H");
             sd = df.format(locationData.getOurInstance(this.getBaseContext()).getDistance()/1000);
             tvDistance.setText(sd+" KM");

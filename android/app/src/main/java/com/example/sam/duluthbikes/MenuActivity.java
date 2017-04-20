@@ -151,8 +151,11 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new ReportAppFragment())
                     .commit();
+        } else if (id == R.id.nav_ride_history) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new RideHistoryFragment())
+                    .commit();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

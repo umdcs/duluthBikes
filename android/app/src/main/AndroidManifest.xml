@@ -56,6 +56,7 @@
         <fragment android:name=".EventsFragment" />
         <fragment android:name=".ReportFragment" />
         <fragment android:name=".ToursFragment" />
+        <fragment android:name=".RideHistoryFragment" />
         <activity android:name=".EndRideActivity" />
         <activity android:name=".PauseActivity" />
         <activity android:name=".MyRides"/>

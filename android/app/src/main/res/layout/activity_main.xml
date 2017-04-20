@@ -49,35 +49,9 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cancelButton">
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="cancel"
-            android:textSize="20dp"
-            android:onClick="cancelTheRide"
-            android:background="@color/colorCancelButton"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:weightSum="3">
-
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        tools:context="com.example.sam.duluthbikes.MainActivity" />
-
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -141,8 +115,52 @@
                 android:textSize="35dp"
                 android:textStyle="bold"/>
         </LinearLayout>
-
     </LinearLayout>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        tools:context="com.example.sam.duluthbikes.MainActivity" />
+
+
+            <LinearLayout
+                android:background="@color/greyOpacityScreen"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/cancelButton">
+                <Button
+
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel Ride"
+                    android:textSize="35sp"
+                    android:onClick="cancelTheRide"
+                    android:background="@color/colorCancelButton"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
     <!--<fragment class="com.google.android.gms.maps.MapFragment"
