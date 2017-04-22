@@ -28,6 +28,8 @@ public class EndRideActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_ride);
 
+        UnitConverter converter = new UnitConverter();
+
         TextView rideDate = (TextView)findViewById(R.id.dateLabel);
         TextView dist = (TextView)findViewById(R.id.distance);
         TextView timeLapsed = (TextView) findViewById(R.id.timeLapsed);
@@ -53,20 +55,20 @@ public class EndRideActivity extends AppCompatActivity{
         initializeTotals();
 
         //format data entries
-        Double distKM = Double.valueOf(df.format(getDistInKm(distance)));
-        Double averKmH = Double.valueOf(df.format(getKmPerHour(distance, timelapse)));
+        Double distKM = Double.valueOf(df.format(converter.getDistInKm(distance)));
+        Double averKmH = Double.valueOf(df.format(converter.getKmPerHour(distance, timelapse)));
         String dateOfRide = datef.format(fTime);
         String timeFinish = timef.format(fTime);
         String timeStart = timef.format(sTime);
 
         rideDate.setText(dateOfRide);
         dist.setText(Double.toString(distKM));
-        timeLapsed.setText(convertHoursMinSecToString(timelapse));
+        timeLapsed.setText(converter.convertHoursMinSecToString(timelapse));
         avSpeed.setText(Double.toString(averKmH));
         startTime.setText(timeStart);
         endTime.setText(timeFinish);
-        totalDist.setText(df.format(getDistInKm(totDistance.doubleValue())).toString() + " km");
-        totalTime.setText(convertHoursMinSecToString(totTime));
+        totalDist.setText(df.format(converter.getDistInKm(totDistance.doubleValue())).toString() + " km");
+        totalTime.setText(converter.convertHoursMinSecToString(totTime));
 
     }
 
@@ -79,38 +81,6 @@ public class EndRideActivity extends AppCompatActivity{
 
     }
 
-    private void updateRideData(){
-        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
-
-
-    }
-
-    public String convertHoursMinSecToString(long time){
-        int sec = (int) (time / 1000) % 60 ;
-        int min = (int) ((time / (1000*60)) % 60);
-        int hours = (int) ((time / (1000*60*60)) % 24);
-
-        String converted = Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+"sec";
-        return converted;
-    }
-
-    public double getDistInKm(Double distance){
-        return distance/1000;
-    }
-
-    public double getDistInMiles(Double distance){
-        return distance*0.000621371;
-    }
-
-    public double getKmPerHour(Double distance, Long timelapse){
-
-        return (getDistInKm(distance)/(timelapse/1000))*3600;
-    }
-
-    public double getMilesPerHour(Double distance, Long timelapse){
-
-        return (getDistInMiles(distance)/(timelapse/1000))*3600;
-    }
 
     public void doneWithRide(View view){
         Intent menu = new Intent(this.getApplicationContext(),MenuActivity.class);

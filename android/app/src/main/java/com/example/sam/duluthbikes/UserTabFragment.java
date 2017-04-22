@@ -26,12 +26,14 @@ public class UserTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_user_tab, container, false);
 
+        UnitConverter converter = new UnitConverter();
+
         totalDist = (TextView)myView.findViewById(R.id.homeTotalDistance);
         totalTime = (TextView)myView.findViewById(R.id.homeTotalTime);
         initializeTotals();
         DecimalFormat df = new DecimalFormat("#.##");
         totalDist.setText(df.format(totDistance.doubleValue()/1000).toString() + " km");
-        totalTime.setText(totTime.toString());
+        totalTime.setText(converter.convertHoursMinSecToString(totTime));
 
         return myView;
     }
