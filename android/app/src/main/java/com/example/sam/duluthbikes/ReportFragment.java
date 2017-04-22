@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -71,6 +73,22 @@ public class ReportFragment extends Fragment {
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
+
+        LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        lm.getBestProvider(criteria,true);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+
+        //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
+        Log.d("CAMlatitude:", String.valueOf(latitude));
+        Log.d("CAMlongitude:", String.valueOf(longitude));
+
+        TextView locTV = (TextView) myView.findViewById(R.id.locTV);
+        locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
 
         requestCameraPermission();
 
@@ -145,11 +163,9 @@ public class ReportFragment extends Fragment {
             try {
                 compressImage();
                 decompressImage();
-                Log.d("Encoded Image:", encodedImage);
+                //Log.d("Encoded Image:", encodedImage);
                 imageView.setImageBitmap(decodedByte);
                 imageView.setRotation(90);
-                //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
-                //Log.d("Location:", loc.toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -185,7 +201,7 @@ public class ReportFragment extends Fragment {
         bm = BitmapFactory.decodeFile(path);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG,50,baos);
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
     }

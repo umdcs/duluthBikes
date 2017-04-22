@@ -54,6 +54,22 @@ public class Model
 
     public Model(){}
 
+    public Model(Context context, Presenter presenter){
+        mContext = context;
+        if(mGoogleApiClient==null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
+        }
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(100);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+    }
+
     public Model(Context context, FragmentActivity activity,Presenter presenter){
         mContext = context;
         mActivity = activity;
@@ -136,13 +152,14 @@ public class Model
         JSONObject pictureObj = null;
         try{
             pictureObj = new JSONObject();
-            pictureObj.put("loc",location);
+            pictureObj.put("loc",location);   // pictureObj.put("loc",getLocation());
             pictureObj.put("description", description);
             pictureObj.put("picture",encodedImage);
         }catch (JSONException e){
             e.printStackTrace();
         }
         new HTTPAsyncTask().execute("http://ukko.d.umn.edu:23405/postpicture","POST",pictureObj.toString());
+        //mGoogleApiClient.disconnect();
     }
 
     protected void createLocationRequest() {

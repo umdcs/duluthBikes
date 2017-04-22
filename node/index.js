@@ -171,10 +171,11 @@ app.post('/postpicture', function(req,res){
 });
 
 app.get('/pictures',function(req,res){
+	res.sendFile(__dirname +'/pictures.html');
 	var pics = printPictures('PicturesSaved',function(result){
-         res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
-            +'<H1>Pictures.</H1>');
-            res.write(JSON.stringify(result));
+         //res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
+         //   +'<H1>Pictures.</H1>');
+         //   res.write(JSON.stringify(result));
             res.send();
         });
     console.log('picture request');
@@ -207,7 +208,9 @@ io.on('connection',function(socket){
 	});
 });
 
+function convertBase64ToImage(){
 
+}
 
 // this last section is to start the app and start listening on 
 // the given port for requests
