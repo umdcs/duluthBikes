@@ -20,20 +20,28 @@ public class UserTabFragment extends Fragment {
     View myView;
     TextView totalDist;
     TextView totalTime;
+    TextView rideData;
     Float totDistance;
     Long totTime;
+    int numberOfRides;
+    UnitConverter converter;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.activity_user_tab, container, false);
 
-        UnitConverter converter = new UnitConverter();
+        converter = new UnitConverter();
 
         totalDist = (TextView)myView.findViewById(R.id.homeTotalDistance);
         totalTime = (TextView)myView.findViewById(R.id.homeTotalTime);
+        rideData = (TextView)myView.findViewById(R.id.allRideDataGoesHere);
+
         initializeTotals();
+
         DecimalFormat df = new DecimalFormat("#.##");
         totalDist.setText(df.format(totDistance.doubleValue()/1000).toString() + " km");
         totalTime.setText(converter.convertHoursMinSecToString(totTime));
+
+        retrieveRideData();
 
         return myView;
     }
@@ -44,6 +52,24 @@ public class UserTabFragment extends Fragment {
         SharedPreferences totalstats = getActivity().getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
         totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0);
         totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0);
+        numberOfRides = totalstats.getInt(getString(R.string.lifetimeStats_rideNumber), 0);
+
+    }
+
+    private void retrieveRideData(){
+
+        SharedPreferences totalstats = getActivity().getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
+
+        for (int num = 1; num <= numberOfRides;  num++){
+            String rideTime = "ride" + num + "Time";
+            String rideDist = "ride" + num + "Distance";
+
+            Float rideD = totalstats.getFloat(rideDist, 0);
+            Long rideT = totalstats.getLong(rideTime, 0);
+
+            rideData.append(rideDist + " " + rideD.toString() + "\n" +
+                            rideTime + " " + converter.convertHoursMinSecToString(rideT) + "\n");
+        }
 
     }
 }

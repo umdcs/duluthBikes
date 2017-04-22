@@ -182,10 +182,18 @@ public class MainActivity extends FragmentActivity
                 distance.floatValue();
 
         Long totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
+        int rideNumber = totalstats.getInt(getString(R.string.lifetimeStats_rideNumber), 0) + 1;
+
+        String newRideID = "ride"+ rideNumber;
+        String newRideDistance = newRideID + "Distance";
+        String newRideTime = newRideID + "Time";
 
         SharedPreferences.Editor editor = totalstats.edit();
         editor.putFloat(getString(R.string.lifetimeStats_totDist), totDistance);
         editor.putLong(getString(R.string.lifetimeStats_totTime), totTime);
+        editor.putInt(getString(R.string.lifetimeStats_rideNumber), rideNumber);
+        editor.putFloat(newRideDistance, distance.floatValue());
+        editor.putLong(newRideTime, timelapse);
 
         editor.apply();
 
