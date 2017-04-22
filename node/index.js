@@ -152,7 +152,8 @@ app.get('/usernames', function(req,res){
 
 app.post('/postusername', function(req,res){
 	if(!req.body)return res.sendStatus(400);
-	var userObj = req.body.userName;
+	var userObj = { 'user':req.body.userName
+					'pass':req.body.passWord };
 	insertUsername(userObj);
 	console.log('Post Username');
 	res.send('good');
