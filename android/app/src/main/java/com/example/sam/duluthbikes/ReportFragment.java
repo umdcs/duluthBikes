@@ -17,12 +17,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +68,6 @@ public class ReportFragment extends Fragment {
         mPresenter = new Presenter();
         imageView = (ImageView) myView.findViewById(R.id.image);
         editDescription = (EditText) myView.findViewById(R.id.imageDescription);
-        editDescription.setImeOptions(EditorInfo.IME_ACTION_GO);
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
@@ -94,19 +91,17 @@ public class ReportFragment extends Fragment {
 
         requestCameraPermission();
 
-        editDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (event.getAction() == KeyEvent.KEYCODE_ENTER){
-                    InputMethodManager in = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-
-                    in.hideSoftInputFromWindow(v.getApplicationWindowToken(),
-                            InputMethodManager.HIDE_NOT_ALWAYS);
+        editDescription.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+                //If the keyevent is a key-down event on the "enter" button
+                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    if (myView != null) {
+                        InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     return true;
                 }
-                else {
                 return false;
-                }
             }
         });
 
