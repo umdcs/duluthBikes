@@ -20,7 +20,9 @@
             android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginRight="3.5dp"/>
+            android:layout_marginRight="3.5dp"
+            android:background="@drawable/buttons"
+            android:textColor="#ffffff"/>
 
         <Button
             android:id="@+id/finish"
@@ -32,8 +34,9 @@
             android:layout_marginBottom="5dp"
             android:layout_marginRight="3.5dp"
             android:onClick="endRide"
-            android:background="@color/finishButtoncolor"
-            android:text="@string/Finish"/>
+            android:background="@drawable/finish_button"
+            android:textColor="#ffffff"
+            android:text="@string/Finish" />
 
         <Button
             android:id="@+id/displayStats"
@@ -44,6 +47,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="7dp"
+            android:background="@drawable/buttons"
+            android:textColor="#ffffff"
             android:text="@string/Stats"
             android:onClick="changeUI"/>
 
@@ -154,7 +159,8 @@
                     android:text="Cancel Ride"
                     android:textSize="35sp"
                     android:onClick="cancelTheRide"
-                    android:background="@color/colorCancelButton"
+                    android:background="@drawable/cancel_button"
+                    android:textColor="#ffffff"
                     android:layout_marginTop="115dp"
                     android:layout_marginLeft="100dp"
                     android:layout_marginRight="100dp"/>

@@ -4,7 +4,6 @@ package com.example.sam.duluthbikes;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,9 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
-import java.text.DecimalFormat;
 
 /**
  * Home screen
@@ -29,8 +25,6 @@ public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private int mRequestCode;
-    Float totDistance;
-    Long totTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +55,6 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        TextView totalDist = (TextView)findViewById(R.id.homeTotalDistance);
-        TextView totalTime = (TextView)findViewById(R.id.homeTotalTime);
-        initializeTotals();
-        DecimalFormat df = new DecimalFormat("#.##");
-        //totalDist.setText(df.format(totDistance.doubleValue()/1000).toString() + " km");
-        //totalTime.setText(totTime.toString());
-        //totalDist.setText("dum");
-        //totalTime.setText(totTime.toString());
 
     }
 
@@ -127,33 +112,29 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new HomeFragment())
                     .commit();
+        } else if (id == R.id.nav_ride_history) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new RideHistoryFragment())
+                    .commit();
         } else if (id == R.id.nav_events) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new EventsFragment())
-                    .commit();
-        } else if (id == R.id.nav_report) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new ReportFragment())
                     .commit();
         } else if (id == R.id.nav_discount) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new DiscountFragment())
                     .commit();
-        } else if (id == R.id.nav_tours) {
+        } else if (id == R.id.nav_report) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new ToursFragment())
-                    .commit();
-        } else if (id == R.id.nav_about) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new AboutFragment())
+                    .replace(R.id.content_frame, new ReportFragment())
                     .commit();
         } else if (id == R.id.nav_reportApp) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new ReportAppFragment())
                     .commit();
-        } else if (id == R.id.nav_ride_history) {
+        } else if (id == R.id.nav_about) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new RideHistoryFragment())
+                    .replace(R.id.content_frame, new AboutFragment())
                     .commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -161,12 +142,4 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
-
-    private void initializeTotals(){
-
-        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
-        totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0);
-        totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0);
-
-    }
 }

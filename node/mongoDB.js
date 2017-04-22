@@ -83,17 +83,20 @@ module.exports = function() {
 	};
 
 	insertUsername = function(user){
-		mongodb.collection('UsersSaved').save(
-			{users:user},function(err,result){
-			if(err||!result)console.log("user not saved");
-			else console.log("user loged in User DB");
-		});
+		//if (mongodb.collection('UsersSaved').find(user)) console.log("USER IS FOUND IN DB"); Does not work yet. 
+		//else {
+ 
+			mongodb.collection('UsersSaved').save(
+				{users:user},function(err,result){
+				if(err||!result)console.log("user not saved");
+				else console.log("user loged in User DB");
+			});
+		//}
 	};
 
 	printUsers = function(collectionName, callback) {
 
        	var cursor = mongodb.collection(collectionName).find(function(err, docs){
-	    
            	if(err || !docs) {
 				console.log("Cannot print database or database is empty\n");	
     		} 

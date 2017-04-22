@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,12 +17,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Base64;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +56,8 @@ public class ReportFragment extends Fragment {
     Bitmap bm;
     Bitmap decodedByte;
     String imageLocation = "THIS IS HARDCODED TEST LOCATION";
-    String imageDescription = "";
+    String imageDescription = "No Description Given.";
+    String picLoc;
     Location pictureLocation;
 
     @Nullable
@@ -67,26 +68,40 @@ public class ReportFragment extends Fragment {
         mPresenter = new Presenter();
         imageView = (ImageView) myView.findViewById(R.id.image);
         editDescription = (EditText) myView.findViewById(R.id.imageDescription);
-        editDescription.setImeOptions(EditorInfo.IME_ACTION_GO);
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
 
+        LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        lm.getBestProvider(criteria,true);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+
+        picLoc = (String.valueOf(latitude) + "," + String.valueOf(longitude));
+
+        //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
+
+        // TO DEBUG. SHOWS LAT LONG IN TEXT VIEW
+        TextView locTV = (TextView) myView.findViewById(R.id.locTV);
+        locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
+
         requestCameraPermission();
 
-        editDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (event.getAction() == KeyEvent.KEYCODE_ENTER){
-                    InputMethodManager in = (InputMethodManager) getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
-
-                    in.hideSoftInputFromWindow(v.getApplicationWindowToken(),
-                            InputMethodManager.HIDE_NOT_ALWAYS);
+        editDescription.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
+                //If the keyevent is a key-down event on the "enter" button
+                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    if (myView != null) {
+                        InputMethodManager imm = (InputMethodManager)getContext().getSystemService(getContext().INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     return true;
                 }
-                else {
                 return false;
-                }
             }
         });
 
@@ -145,11 +160,9 @@ public class ReportFragment extends Fragment {
             try {
                 compressImage();
                 decompressImage();
-                Log.d("Encoded Image:", encodedImage);
+                //Log.d("Encoded Image:", encodedImage);
                 imageView.setImageBitmap(decodedByte);
                 imageView.setRotation(90);
-                //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
-                //Log.d("Location:", loc.toString());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -185,7 +198,7 @@ public class ReportFragment extends Fragment {
         bm = BitmapFactory.decodeFile(path);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG,50,baos);
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
     }
@@ -200,6 +213,7 @@ public class ReportFragment extends Fragment {
         //pictureLocation = LocationData.getOurInstance(this.getContext()).getLastLocation();
         //imageLocation = pictureLocation.toString();
 
+        imageLocation = picLoc;
         imageDescription = editDescription.getText().toString();
         mPresenter.sendPictureToServer(imageLocation,imageDescription,picture);
 

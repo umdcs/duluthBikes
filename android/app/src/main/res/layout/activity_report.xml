@@ -23,12 +23,16 @@
         android:id="@+id/imageDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="(Optional) Enter any details about this picture"
-        android:textSize="15sp"
         android:layout_above="@+id/camera"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"
-        android:imeOptions="actionGo"/>
+        android:hint="(Optional) Enter any details about this picture"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/locTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
     <Button
@@ -38,7 +42,8 @@
         android:text="Submit!"
         android:layout_marginBottom="31dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/grey_buttons"/>
 
     <!-- Capture picture button -->
     <Button
@@ -48,6 +53,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="31dp"
-        android:text="Take a Picture" />
+        android:text="Take a Picture"
+        android:background="@drawable/grey_buttons"/>
 
 </RelativeLayout>

@@ -152,7 +152,9 @@ app.get('/usernames', function(req,res){
 
 app.post('/postusername', function(req,res){
 	if(!req.body)return res.sendStatus(400);
-	var userObj = req.body.userName;
+
+	var userObj = { 'user':req.body.userName
+					'pass':req.body.passWord };
 	insertUsername(userObj);
 	console.log('Post Username');
 	res.send('good');
@@ -171,6 +173,7 @@ app.post('/postpicture', function(req,res){
 });
 
 app.get('/pictures',function(req,res){
+	//res.sendFile(__dirname +'/pictures.html'); // Will try and use if we can use Canvas element - HTML5
 	var pics = printPictures('PicturesSaved',function(result){
          res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
             +'<H1>Pictures.</H1>');
@@ -207,7 +210,9 @@ io.on('connection',function(socket){
 	});
 });
 
+function convertBase64ToImage(){
 
+}
 
 // this last section is to start the app and start listening on 
 // the given port for requests

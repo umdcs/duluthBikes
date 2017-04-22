@@ -1,16 +1,13 @@
 package com.example.sam.duluthbikes;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -25,7 +22,7 @@ public class EventsFragment extends Fragment {
     View myView;
     WebView myWebView;
     String EventsPage = "http://www.duluthbikes.org/news-events/";
-    ProgressBar progressbar;
+    ProgressBar pb;
 
     @Nullable
     @Override
@@ -33,7 +30,8 @@ public class EventsFragment extends Fragment {
         myView = inflater.inflate(R.layout.activity_events, container, false);
 
         myWebView = (WebView) myView.findViewById(R.id.webViewEvents);
-        //progressbar = (ProgressBar)myView.findViewById(R.id.pb);
+        pb = (ProgressBar)myView.findViewById(R.id.progressBar);
+        pb.setVisibility(View.VISIBLE);
 
 
         myWebView.getSettings().setJavaScriptEnabled(true);
@@ -41,7 +39,7 @@ public class EventsFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view,String url)
             {
-          //      progressbar.setVisibility(View.GONE);
+                pb.setVisibility(View.INVISIBLE);
                 myWebView.loadUrl("javascript:(function() { " +
                         "document.getElementsByTagName('footer')[0].style.display='none'; " +
                         "document.getElementsByTagName('header')[0].style.display='none'; " +
