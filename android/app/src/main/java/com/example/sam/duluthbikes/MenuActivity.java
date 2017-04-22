@@ -127,33 +127,29 @@ public class MenuActivity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new HomeFragment())
                     .commit();
+        } else if (id == R.id.nav_ride_history) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, new RideHistoryFragment())
+                    .commit();
         } else if (id == R.id.nav_events) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new EventsFragment())
-                    .commit();
-        } else if (id == R.id.nav_report) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new ReportFragment())
                     .commit();
         } else if (id == R.id.nav_discount) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new DiscountFragment())
                     .commit();
-        } else if (id == R.id.nav_tours) {
+        } else if (id == R.id.nav_report) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new ToursFragment())
-                    .commit();
-        } else if (id == R.id.nav_about) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new AboutFragment())
+                    .replace(R.id.content_frame, new ReportFragment())
                     .commit();
         } else if (id == R.id.nav_reportApp) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, new ReportAppFragment())
                     .commit();
-        } else if (id == R.id.nav_ride_history) {
+        } else if (id == R.id.nav_about) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, new RideHistoryFragment())
+                    .replace(R.id.content_frame, new AboutFragment())
                     .commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
