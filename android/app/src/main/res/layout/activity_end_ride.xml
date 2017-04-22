@@ -155,7 +155,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/DONE"
                 android:layout_alignParentBottom="true"
-                android:onClick="doneWithRide"/>
+                android:onClick="doneWithRide"
+                android:background="@drawable/grey_buttons"/>
         </RelativeLayout>
 
 

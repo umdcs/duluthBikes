@@ -39,13 +39,15 @@
                 android:text="my rides"
                 android:layout_weight=".5"
                 android:onClick="viewMyRides"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/grey_buttons"/>
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="User stats"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/grey_buttons"/>
 
 
             <LinearLayout
