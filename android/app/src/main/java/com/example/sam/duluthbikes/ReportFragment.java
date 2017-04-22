@@ -58,7 +58,8 @@ public class ReportFragment extends Fragment {
     Bitmap bm;
     Bitmap decodedByte;
     String imageLocation = "THIS IS HARDCODED TEST LOCATION";
-    String imageDescription = "";
+    String imageDescription = "No Description Given.";
+    String picLoc;
     Location pictureLocation;
 
     @Nullable
@@ -83,10 +84,11 @@ public class ReportFragment extends Fragment {
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
 
-        //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
-        Log.d("CAMlatitude:", String.valueOf(latitude));
-        Log.d("CAMlongitude:", String.valueOf(longitude));
+        picLoc = (String.valueOf(latitude) + "," + String.valueOf(longitude));
 
+        //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
+
+        // TO DEBUG. SHOWS LAT LONG IN TEXT VIEW
         TextView locTV = (TextView) myView.findViewById(R.id.locTV);
         locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
 
@@ -216,6 +218,7 @@ public class ReportFragment extends Fragment {
         //pictureLocation = LocationData.getOurInstance(this.getContext()).getLastLocation();
         //imageLocation = pictureLocation.toString();
 
+        imageLocation = picLoc;
         imageDescription = editDescription.getText().toString();
         mPresenter.sendPictureToServer(imageLocation,imageDescription,picture);
 
