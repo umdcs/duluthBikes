@@ -9,13 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:weightSum="3"
+        android:weightSum="2"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2.5">
+            android:layout_weight="1.5">
 
             <Button
                 android:layout_width="fill_parent"
@@ -30,72 +30,21 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:weightSum="2"
             android:orientation="vertical">
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="my rides"
-                android:layout_weight=".5"
                 android:onClick="viewMyRides"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/grey_buttons"/>
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
                 android:text="User stats"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/grey_buttons"/>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight=".5"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/labelTotDist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="@string/totDistLabel" />
-                <TextView
-                    android:id="@+id/homeTotalDistance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    tools:layout_editor_absoluteY="0dp"
-                    tools:layout_editor_absoluteX="8dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight=".5"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/labelTotTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:text="@string/totTimeLabel" />
-                <TextView
-                    android:id="@+id/homeTotalTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    tools:layout_editor_absoluteY="0dp"
-                    tools:layout_editor_absoluteX="8dp" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
     </LinearLayout>

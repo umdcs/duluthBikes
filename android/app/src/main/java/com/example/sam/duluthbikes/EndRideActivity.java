@@ -79,6 +79,12 @@ public class EndRideActivity extends AppCompatActivity{
 
     }
 
+    private void updateRideData(){
+        SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
+
+
+    }
+
     public String convertHoursMinSecToString(long time){
         int sec = (int) (time / 1000) % 60 ;
         int min = (int) ((time / (1000*60)) % 60);
