@@ -62,7 +62,8 @@
         android:layout_height="fill_parent"
         android:id="@+id/tvStats"
         android:orientation="vertical"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:background="#c1c1c1">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +85,8 @@
                 android:layout_weight="1"
                 android:textSize="30dp"
                 android:textAlignment="textEnd"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#568539"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,7 +95,8 @@
                 android:text="@string/Speed"
                 android:textSize="35dp"
                 android:textStyle="bold"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textColor="#074c56"/>
 
         </LinearLayout>
         <LinearLayout
@@ -109,7 +112,8 @@
                 android:layout_weight="1"
                 android:textSize="30dp"
                 android:textAlignment="textEnd"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#568539"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,60 +122,55 @@
                 android:text="@string/Distance"
                 android:layout_weight="1"
                 android:textSize="35dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#074c56"/>
         </LinearLayout>
     </LinearLayout>
 
     </FrameLayout>
 
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:weightSum="3">
-
-        <RelativeLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             xmlns:tools="http://schemas.android.com/tools">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        tools:context="com.example.sam.duluthbikes.MainActivity" />
-
-
-            <LinearLayout
-                android:background="@color/greyOpacityScreen"
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/cancelButton">
-                <Button
+                tools:context="com.example.sam.duluthbikes.MainActivity" />
 
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:layout_width="fill_parent"
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:id="@+id/cancelButton">
+
+
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cancel Ride"
-                    android:textSize="35sp"
+                    android:text="Cancel\nRide"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
                     android:onClick="cancelTheRide"
                     android:background="@drawable/cancel_button"
                     android:textColor="#ffffff"
-                    android:layout_marginTop="115dp"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginRight="100dp"/>
-            </LinearLayout>
+                    android:padding="50dp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="140sp"
+                    android:textColor="#55000000"/>
+
+            </FrameLayout>
 
         </RelativeLayout>
-
-    </LinearLayout>
-    <!--<fragment class="com.google.android.gms.maps.MapFragment"
-        android:id="@+id/FirstMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/> -->
 
 </LinearLayout>
