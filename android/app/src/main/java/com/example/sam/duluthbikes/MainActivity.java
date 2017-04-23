@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +55,7 @@ public class MainActivity extends FragmentActivity
     private SupportMapFragment mapFragment;
     private TextView tvSpeed;
     private TextView tvDistance;
-    private LinearLayout linearLayout;
+    private FrameLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class MainActivity extends FragmentActivity
         tv.setVisibility(View.GONE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
-        linearLayout = (LinearLayout) findViewById(R.id.cancelButton);
+        linearLayout = (FrameLayout) findViewById(R.id.cancelButton);
         linearLayout.setVisibility(View.GONE);
     }
 
