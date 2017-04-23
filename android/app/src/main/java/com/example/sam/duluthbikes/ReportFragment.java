@@ -59,6 +59,7 @@ public class ReportFragment extends Fragment {
     String imageDescription = "No Description Given.";
     String picLoc;
     Location pictureLocation;
+    TextView locTV;
 
     @Nullable
     @Override
@@ -71,26 +72,12 @@ public class ReportFragment extends Fragment {
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
-
-        LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        lm.getBestProvider(criteria,true);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-
-        picLoc = (String.valueOf(latitude) + "," + String.valueOf(longitude));
-
-        //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
-
-        // TO DEBUG. SHOWS LAT LONG IN TEXT VIEW
-        TextView locTV = (TextView) myView.findViewById(R.id.locTV);
-        locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
+        locTV = (TextView) myView.findViewById(R.id.locTV);
+        locTV.setText("");
 
         requestCameraPermission();
 
+        //Overrides return key to close IME (keyboard) rather than create a new line.
         editDescription.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
                 //If the keyevent is a key-down event on the "enter" button
@@ -105,12 +92,24 @@ public class ReportFragment extends Fragment {
             }
         });
 
+        //Take picture button - gets your location at this time.
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takePictureButton.setVisibility(View.INVISIBLE);
                 if (ContextCompat.checkSelfPermission(getContext(),
                         Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
+                    Criteria criteria = new Criteria();
+                    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                    lm.getBestProvider(criteria,true);
+                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+                    picLoc = (String.valueOf(latitude) + "," + String.valueOf(longitude));
+                    // TO DEBUG. SHOWS LAT LONG IN TEXT VIEW
+                    locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
+                    //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
                     startCamera();
                 } else {
                     CharSequence text = "You need to grant camera permissions";
