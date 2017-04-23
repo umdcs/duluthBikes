@@ -181,7 +181,7 @@ public class MainActivity extends FragmentActivity
         SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
         Float totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
                 distance.floatValue();
-
+        
         Long totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
         int rideNumber = totalstats.getInt(getString(R.string.lifetimeStats_rideNumber), 0) + 1;
 
