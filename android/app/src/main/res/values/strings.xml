@@ -59,9 +59,9 @@
 
 
     <!-- Strings for stats-->
-    <string name="distanceLabel">Distance (km):</string>
+    <string name="distanceLabel">Distance\n(km):</string>
     <string name="timelapseLabel">Time Lapsed:</string>
-    <string name="avSpeedLabel">Average Speed (km/hour):</string>
+    <string name="avSpeedLabel">Avg Speed\n(km/hour):</string>
     <string name="startFinish">Times:</string>
     <string name="sTimeLabel">Start:</string>
     <string name="fTimeLabel">Finish:</string>
