@@ -137,6 +137,12 @@
                 android:layout_height="fill_parent"
                 tools:context="com.example.sam.duluthbikes.MainActivity" />
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/greyOpacityScreen"
+            android:id="@+id/cancelGrey"
+            android:orientation="horizontal"></LinearLayout>
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -155,15 +161,20 @@
                     android:onClick="cancelTheRide"
                     android:background="@drawable/cancel_button"
                     android:textColor="#ffffff"
-                    android:padding="50dp" />
+                    android:paddingTop="40dp"
+                    android:paddingBottom="40dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"/>
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="X"
                     android:textAlignment="center"
-                    android:textSize="140sp"
-                    android:textColor="#55000000"/>
+                    android:textStyle="bold"
+                    android:textSize="165sp"
+                    android:textColor="#55000000"
+                    android:layout_marginTop="-39dp"/>
 
             </FrameLayout>
 

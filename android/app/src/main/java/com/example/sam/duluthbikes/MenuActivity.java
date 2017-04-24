@@ -63,11 +63,6 @@ public class MenuActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void viewMyRides(View view){
-        Intent intent = new Intent(this,MyRides.class);
-        startActivity(intent);
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

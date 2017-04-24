@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5">
+            android:layout_weight="1">
 
             <Button
                 android:layout_width="fill_parent"
@@ -26,26 +26,6 @@
                 android:onClick="startMainActivity" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="my rides"
-                android:onClick="viewMyRides"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/grey_buttons"/>
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="User stats"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/grey_buttons"/>
-        </LinearLayout>
 
     </LinearLayout>
 
