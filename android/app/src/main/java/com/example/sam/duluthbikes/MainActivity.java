@@ -121,8 +121,8 @@ public class MainActivity extends FragmentActivity
 
     private void addListenerOnToggle() {
         pauseToggle = (ToggleButton)findViewById(R.id.togglePause);
-        pauseToggle.setTextOn("pause");
-        pauseToggle.setTextOff("restart");
+        pauseToggle.setTextOn(getString(R.string.Pause));
+        pauseToggle.setTextOff(getString(R.string.Resume));
         pauseToggle.setChecked(true);
     }
 

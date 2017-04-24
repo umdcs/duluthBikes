@@ -13,7 +13,7 @@ public class UnitTestRideStatistics {
     @Test
     public void testStatsCalculations() throws Exception {
 
-        EndRideActivity endRide = new EndRideActivity();
+        UnitConverter endRide = new UnitConverter();
         double distance = 10000; //10 km
         long timelaspe = 3600000; //1hour in milisec
 
