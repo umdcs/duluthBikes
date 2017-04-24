@@ -48,7 +48,6 @@ public class MainActivity extends FragmentActivity
     private ArrayList<LatLng> points;
     private PolylineOptions polylineOptions;
     private LocationData locationData;
-    private MyRidesData ridesData;
     private boolean animate;
     private ToggleButton pauseToggle;
 
@@ -57,6 +56,7 @@ public class MainActivity extends FragmentActivity
     private TextView tvSpeed;
     private TextView tvDistance;
     private FrameLayout linearLayout;
+    private LinearLayout greyScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +88,23 @@ public class MainActivity extends FragmentActivity
                         if(!pauseToggle.isChecked()){
                             pauseToggle.setChecked(false);
                             linearLayout.setVisibility(View.VISIBLE);
+                            greyScreen.setVisibility(View.VISIBLE);
                             try {
                                 mMap.setMyLocationEnabled(false);
                             }catch (SecurityException e){
                                 e.printStackTrace();
                             }
+                            pauseRide();
                         } else if(pauseToggle.isChecked()){
                             pauseToggle.setChecked(true);
                             linearLayout.setVisibility(View.GONE);
+                            greyScreen.setVisibility(View.GONE);
                             try{
                                 mMap.setMyLocationEnabled(true);
                             }catch (SecurityException e){
                                 e.printStackTrace();
                             }
+                            mPresenter.connectApi();
                         }
                     }
                 }
@@ -112,17 +116,19 @@ public class MainActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
         tv = (LinearLayout) findViewById(R.id.tvStats);
-        tv.setVisibility(View.GONE);
+        tv.setVisibility(View.VISIBLE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
         linearLayout = (FrameLayout) findViewById(R.id.cancelButton);
         linearLayout.setVisibility(View.GONE);
+        greyScreen = (LinearLayout)findViewById(R.id.cancelGrey);
+        greyScreen.setVisibility(View.GONE);
     }
 
     private void addListenerOnToggle() {
         pauseToggle = (ToggleButton)findViewById(R.id.togglePause);
-        pauseToggle.setTextOn(getString(R.string.Pause));
-        pauseToggle.setTextOff(getString(R.string.Resume));
+        pauseToggle.setTextOn("pause");
+        pauseToggle.setTextOff("resume");
         pauseToggle.setChecked(true);
     }
 
@@ -160,7 +166,6 @@ public class MainActivity extends FragmentActivity
 
         mPresenter.notifyRoute(LocationData.getOurInstance(this.getBaseContext()).getTrip(),
                 locationData.getOurInstance(this.getBaseContext()).getLatlng());
-        ridesData.getInstance(this.getApplicationContext()).addPolyline(locationData.getOurInstance(this).getPoints());
         LocationData.getOurInstance(this.getBaseContext()).resetData();
         startActivity(endIntent);
     }
