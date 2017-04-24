@@ -173,15 +173,15 @@ app.post('/postpicture', function(req,res){
 });
 
 app.get('/pictures',function(req,res){
-	//res.sendFile(__dirname +'/pictures.html'); // Will try and use if we can use Canvas element - HTML5
-	var pics = printPictures('PicturesSaved',function(result){
-         res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
-            +'<H1>Pictures.</H1>');
-            res.write(JSON.stringify(result));
-            res.send();
-        });
+	res.sendFile(__dirname +'/pictures.html'); // Will try and use if we can use Canvas element - HTML5
+	//var pics = printPictures('PicturesSaved',function(result){
+    //    res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
+    //        +'<H1>Pictures.</H1>');
+    //        res.write(JSON.stringify(result));
+    //        res.send();
+    //    });
     console.log('picture request');
-})
+});
 
 app.get('/deleteallthepictures',function(res,req) {
 	console.log('deleted all pictures attempt');
