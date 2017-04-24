@@ -111,7 +111,7 @@ public class MainActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
         tv = (LinearLayout) findViewById(R.id.tvStats);
-        tv.setVisibility(View.GONE);
+        tv.setVisibility(View.VISIBLE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
         linearLayout = (FrameLayout) findViewById(R.id.cancelButton);
