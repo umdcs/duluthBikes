@@ -55,7 +55,7 @@ public class ReportFragment extends Fragment {
     public String path;
     Bitmap bm;
     Bitmap decodedByte;
-    String imageLocation = "THIS IS HARDCODED TEST LOCATION";
+    String imageLocation = "Unable to find location";
     String imageDescription = "No Description Given.";
     String picLoc;
     Location pictureLocation;
@@ -72,8 +72,8 @@ public class ReportFragment extends Fragment {
         takePictureButton = (Button) myView.findViewById(R.id.camera);
         submitPictureButton = (Button) myView.findViewById(R.id.camera2);
         submitPictureButton.setVisibility(View.INVISIBLE);
-        locTV = (TextView) myView.findViewById(R.id.locTV);
-        locTV.setText("");
+        //locTV = (TextView) myView.findViewById(R.id.locTV);
+        //locTV.setText("");
 
         requestCameraPermission();
 
@@ -108,7 +108,7 @@ public class ReportFragment extends Fragment {
                     double latitude = location.getLatitude();
                     picLoc = (String.valueOf(latitude) + "," + String.valueOf(longitude));
                     // TO DEBUG. SHOWS LAT LONG IN TEXT VIEW
-                    locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
+                    //locTV.setText(String.valueOf(latitude) + String.valueOf(longitude));
                     //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
                     startCamera();
                 } else {
@@ -213,8 +213,12 @@ public class ReportFragment extends Fragment {
         //imageLocation = pictureLocation.toString();
 
         imageLocation = picLoc;
-        imageDescription = editDescription.getText().toString();
-        mPresenter.sendPictureToServer(imageLocation,imageDescription,picture);
+        if(editDescription.getText().toString().equals("")){
+            mPresenter.sendPictureToServer(imageLocation,imageDescription,picture);
+        }else {
+            imageDescription = editDescription.getText().toString();
+            mPresenter.sendPictureToServer(imageLocation, imageDescription, picture);
+        }
 
     }
 }
