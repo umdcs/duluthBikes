@@ -26,6 +26,15 @@
                 android:onClick="startMainActivity" />
         </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:textColor="@color/navyBlue"
+                android:textSize="18dp"
+                android:text="@string/IntroMessage"/>
+
+
 
     </LinearLayout>
 
