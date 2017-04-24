@@ -111,7 +111,7 @@ public class MainActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
         tv = (LinearLayout) findViewById(R.id.tvStats);
-        tv.setVisibility(View.GONE);
+        tv.setVisibility(View.VISIBLE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
         linearLayout = (FrameLayout) findViewById(R.id.cancelButton);
@@ -181,7 +181,7 @@ public class MainActivity extends FragmentActivity
         SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
         Float totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
                 distance.floatValue();
-
+        
         Long totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
         int rideNumber = totalstats.getInt(getString(R.string.lifetimeStats_rideNumber), 0) + 1;
 
