@@ -59,13 +59,14 @@
 
 
     <!-- Strings for stats-->
-    <string name="distanceLabel">Distance (km): </string>
-    <string name="timelapseLabel">Time Lapsed: </string>
-    <string name="avSpeedLabel">Average Speed (km/hour): </string>
-    <string name="sTimeLabel">Start Time: </string>
-    <string name="fTimeLabel">Finish Time: </string>
-    <string name="totDistLabel">Total distance: </string>
-    <string name="totTimeLabel">Total time: </string>
+    <string name="distanceLabel">Distance (km):</string>
+    <string name="timelapseLabel">Time Lapsed:</string>
+    <string name="avSpeedLabel">Average Speed (km/hour):</string>
+    <string name="startFinish">Times:</string>
+    <string name="sTimeLabel">Start:</string>
+    <string name="fTimeLabel">Finish:</string>
+    <string name="totDistLabel">Total distance:</string>
+    <string name="totTimeLabel">Total time:</string>
     <string name="DONE">DONE</string>
 
     <string name="DisclaimerReportApp">This app is in a development stage.

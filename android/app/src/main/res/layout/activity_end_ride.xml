@@ -1,169 +1,199 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:weightSum="1"
+    >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout
-            android:layout_width="368dp"
+        <EditText
+            android:id="@+id/dateLabel"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
 
         <TextView
-            android:id="@+id/dateLabel"
+            android:id="@+id/distanceLabel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@+id/avSpeedLabel"
+            android:layout_alignBottom="@+id/avSpeedLabel"
+            android:layout_alignParentStart="true"
+            android:text="@string/distanceLabel"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_toStartOf="@+id/avSpeedLabel" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="192dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@+id/averageSpeed"
+            android:layout_alignBottom="@+id/averageSpeed"
+            android:layout_alignParentStart="true"
+            android:textAlignment="4"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/avSpeedLabel"
             android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/dateLabel"
+            android:layout_toRightOf="@id/distance"
+            android:background="@drawable/back"
+            android:text="@string/avSpeedLabel"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/averageSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/avSpeedLabel"
+            android:layout_toRightOf="@id/distance"
+            android:textAlignment="4"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+        <TextView
+            android:id="@+id/startFinishLabel"
+            android:layout_width="192dp"
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@+id/timeLapseLabel"
+            android:layout_alignBottom="@+id/timeLapseLabel"
+            android:layout_alignParentStart="true"
+            android:text="@string/startFinish"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/startTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="@string/sTimeLabel"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_alignBaseline="@+id/startTime"
+            android:layout_alignBottom="@+id/startTime"
+            android:layout_alignParentStart="true"
+            android:layout_alignEnd="@+id/endTime" />
+
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/startFinishLabel"
+            android:layout_toRightOf="@id/startTimeLabel" />
+
+        <TextView
+            android:id="@+id/finishTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/endTime"
+            android:layout_alignParentStart="true"
+            android:text="@string/fTimeLabel"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/startTime"
+            android:layout_toRightOf="@id/finishTimeLabel" />
+
+
+        <TextView
+            android:id="@+id/timeLapseLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/averageSpeed"
+            android:layout_toRightOf="@id/startFinishLabel"
+            android:text="@string/timelapseLabel"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/timeLapsed"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/timeLapseLabel"
+            android:layout_marginRight="50dp"
+            android:textAlignment="4"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_edtor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/totTimeLabel"
+            android:layout_width="192dp"
+            android:layout_height="30dp"
+            android:layout_alignBaseline="@+id/totDistanceLabel"
+            android:layout_alignBottom="@+id/totDistanceLabel"
+            android:layout_alignParentEnd="true"
+            android:text="@string/totTimeLabel"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalTime"
+            android:layout_width="192dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="92dp"
+            android:textAlignment="4"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="10dp" />
+
+        <TextView
+            android:id="@+id/totDistanceLabel"
+            android:layout_width="192dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
+            android:text="@string/totDistLabel"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalDistance"
+            android:layout_width="192dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="92dp"
+            android:textAlignment="4"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/distanceLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/distanceLabel" />
-            <TextView
-                android:id="@+id/distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-            </LinearLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:onClick="doneWithRide"
+            android:text="@string/DONE" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/timeLapseLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/timelapseLabel" />
-            <TextView
-                android:id="@+id/timeLapsed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-        </LinearLayout>
+    </RelativeLayout>
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/avSpeedLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/avSpeedLabel" />
-            <TextView
-                android:id="@+id/averageSpeed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/starttimeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/sTimeLabel" />
-            <TextView
-                android:id="@+id/startTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/endTimeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/fTimeLabel" />
-            <TextView
-                android:id="@+id/endTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/totDistanceLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/totDistLabel" />
-            <TextView
-                android:id="@+id/totalDistance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/totTimeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="10dp"
-                android:text="@string/totTimeLabel" />
-            <TextView
-                android:id="@+id/totalTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="0dp"
-                tools:layout_editor_absoluteX="8dp" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/DONE"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/white"
-                android:padding="15dp"
-                android:onClick="doneWithRide"
-                android:background="@drawable/buttons"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
