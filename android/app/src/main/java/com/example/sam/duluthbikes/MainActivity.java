@@ -1,3 +1,4 @@
+
 package com.example.sam.duluthbikes;
 
 import android.Manifest;
@@ -111,7 +112,7 @@ public class MainActivity extends FragmentActivity
         mapFragment.getMapAsync(this);
 
         tv = (LinearLayout) findViewById(R.id.tvStats);
-        tv.setVisibility(View.VISIBLE);
+        tv.setVisibility(View.GONE);
         tvDistance = (TextView) findViewById(R.id.distanceMain);
         tvSpeed = (TextView) findViewById(R.id.speed);
         linearLayout = (FrameLayout) findViewById(R.id.cancelButton);
@@ -125,6 +126,11 @@ public class MainActivity extends FragmentActivity
         pauseToggle.setChecked(true);
     }
 
+
+    public void pictureButton() {
+        Intent intent = new Intent(this.getApplicationContext(),ReportFragment.class);
+        startActivity(intent);
+    }
 
     public void pauseRide() {
         mPresenter.pauseRideButton();
@@ -181,7 +187,7 @@ public class MainActivity extends FragmentActivity
         SharedPreferences totalstats = getSharedPreferences(getString(R.string.lifetimeStats_file_key), 0);
         Float totDistance = totalstats.getFloat(getString(R.string.lifetimeStats_totDist), 0) +
                 distance.floatValue();
-        
+
         Long totTime = totalstats.getLong(getString(R.string.lifetimeStats_totTime), 0) + timelapse;
         int rideNumber = totalstats.getInt(getString(R.string.lifetimeStats_rideNumber), 0) + 1;
 
@@ -200,7 +206,7 @@ public class MainActivity extends FragmentActivity
 
     }
 
-     /**
+    /**
      * Required by OnMapReadyCallback interface
      * Called when the map is ready to be used.
      * https://developers.google.com/android/reference/com/google/android/gms/maps/OnMapReadyCallback

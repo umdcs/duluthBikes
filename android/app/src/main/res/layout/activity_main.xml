@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -16,41 +17,37 @@
             android:id="@+id/togglePause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginRight="3.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:textColor="#ffffff"/>
-
-        <Button
-            android:id="@+id/finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="3.5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="3.5dp"
-            android:onClick="endRide"
-            android:background="@drawable/finish_button"
-            android:textColor="#ffffff"
-            android:text="@string/Finish" />
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/displayStats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginLeft="3.5dp"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginRight="7dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/buttons"
             android:textColor="#ffffff"
             android:text="@string/Stats"
             android:onClick="changeUI"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_photo_camera_black_24dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"/>
+            <!--android:onClick="pictureButton" HI CLARK-->
 
     </LinearLayout>
 
@@ -170,6 +167,27 @@
                     android:textColor="#55000000"/>
 
             </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/map"
+            android:layout_centerHorizontal="true">
+
+            <Button
+                android:id="@+id/finish"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="3.5dp"
+                android:layout_marginRight="3.5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/finish_button"
+                android:onClick="endRide"
+                android:text="@string/Finish"
+                android:textColor="#ffffff" />
+        </FrameLayout>
 
         </RelativeLayout>
 
