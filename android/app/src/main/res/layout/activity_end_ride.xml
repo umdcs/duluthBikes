@@ -10,7 +10,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
         tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/dateLabel"
@@ -155,10 +157,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/DONE"
                 android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:padding="15dp"
                 android:onClick="doneWithRide"
-                android:background="@drawable/grey_buttons"/>
+                android:background="@drawable/buttons"/>
         </RelativeLayout>
-
 
     </LinearLayout>
 

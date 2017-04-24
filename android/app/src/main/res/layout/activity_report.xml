@@ -43,7 +43,9 @@
         android:layout_marginBottom="31dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/grey_buttons"/>
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:background="@drawable/buttons"/>
 
     <!-- Capture picture button -->
     <Button
@@ -52,8 +54,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="31dp"
+        android:textColor="@color/white"
+        android:padding="15dp"
         android:text="Take a Picture"
-        android:background="@drawable/grey_buttons"/>
+        android:background="@drawable/buttons"/>
 
 </RelativeLayout>

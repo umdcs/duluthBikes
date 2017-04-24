@@ -12,8 +12,8 @@
         android:thicknessRatio="7.0">
 
         <gradient
-            android:endColor="#00727F"
-            android:startColor="#7EC252"
+            android:endColor="@color/duluthBikesDarkBlue"
+            android:startColor="@color/duluthBikesLightGreen"
             android:angle="0"
             android:type="sweep"
             android:useLevel="false" />
