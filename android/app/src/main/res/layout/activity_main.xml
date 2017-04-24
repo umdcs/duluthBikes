@@ -23,7 +23,7 @@
             android:layout_marginTop="7dp"
             android:layout_weight="1"
             android:background="@drawable/buttons"
-            android:textColor="#ffffff" />
+            android:textColor="@color/white" />
 
         <Button
             android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="7dp"
             android:background="@drawable/buttons"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:text="@string/Stats"
             android:onClick="changeUI"/>
 
@@ -59,7 +59,7 @@
         android:id="@+id/tvStats"
         android:orientation="vertical"
         android:layout_weight="2"
-        android:background="#c1c1c1">
+        android:background="@color/lightgrey">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +67,7 @@
             android:text="@string/Stats"
             android:textSize="30dp"
             android:textAllCaps="true"
+            android:textColor="@color/navyBlue"
             android:textAlignment="center"
             android:textStyle="bold"/>
         <LinearLayout
@@ -82,7 +83,7 @@
                 android:textSize="30dp"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:textColor="#568539"/>
+                android:textColor="@color/duluthBikesDarkBlue"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,7 +93,7 @@
                 android:textSize="35dp"
                 android:textStyle="bold"
                 android:layout_weight="1"
-                android:textColor="#074c56"/>
+                android:textColor="@color/navyBlue"/>
 
         </LinearLayout>
         <LinearLayout
@@ -109,7 +110,7 @@
                 android:textSize="30dp"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:textColor="#568539"/>
+                android:textColor="@color/duluthBikesDarkBlue"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,7 +120,7 @@
                 android:layout_weight="1"
                 android:textSize="35dp"
                 android:textStyle="bold"
-                android:textColor="#074c56"/>
+                android:textColor="@color/navyBlue"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -160,7 +161,7 @@
                     android:textStyle="bold"
                     android:onClick="cancelTheRide"
                     android:background="@drawable/cancel_button"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/white"
                     android:paddingTop="40dp"
                     android:paddingBottom="40dp"
                     android:paddingLeft="20dp"
@@ -188,7 +189,7 @@
             android:background="@drawable/finish_button"
             android:onClick="endRide"
             android:text="@string/Finish"
-            android:textColor="#ffffff" />
+            android:textColor="@color/white" />
         </RelativeLayout>
 
 </LinearLayout>
