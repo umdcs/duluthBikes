@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:baselineAligned="false">
+    <!--tools:context=".CameraActivity">-->
+
+    <!-- To display picture taken -->
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:contentDescription="@string/image"
+        android:visibility="visible"
+        android:layout_below="@+id/locTV"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/imageDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_above="@+id/camera"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:hint="(Optional) Enter any details about this picture"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/locTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/camera2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit!"
+        android:layout_marginBottom="31dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:background="@drawable/buttons"/>
+
+    <!-- Capture picture button -->
+    <Button
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="31dp"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:text="Take a Picture"
+        android:background="@drawable/buttons"/>
+
+</RelativeLayout>

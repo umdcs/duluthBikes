@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> Pictures </title>
+    </head>
+
+    <body>
+        <h1>Picture Dashboard</h1>
+        <canvas id ="picCanvas" width="500" height="500"></canvas>
+    </body>
+
+<script src ="/socket.io/socket.io.js"></script>
+
+<script>
+var socket = io();
+socket.on('PicturesSaved',function(result){
+        var canvas = document.getElementById("picCanvas");
+        var context= canvas.getContext("2d");
+        var img = new Image();
+        var pictures = [];
+        for(var i=0;i<result.length;i++) {
+                pictures = result[i]['picture'];
+                var a = pictures
+                if(a!=null){
+                        img.onload = function() {
+                        context.drawImage(this,0,0,picCanvas.width, picCanvas.height);
+                    }
+                    img.src = "data:image/jpeg.base64," + a;
+                }
+        }
+});
+</script>
+
+</html>
+

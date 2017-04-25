@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> Pictures </title>
+    </head>
+
+    <body>
+        <h1>Picture Dashboard</h1>
+        <canvas id ="picCanvs" width="500" height="500"></canvas>
+    </body>
+
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        for(var i = 0; i <3; i++) {
+                var canvas = document.getElementById('picCanvs');
+                canvas.style.border = "1px solid";
+                var body = document.getElementsByTagName("body")[i];
+                canvasLayer = document.getElementById("canvasLayer"+i);
+        }
+        console.log(canvasLayer);
+    </script>
+</html>

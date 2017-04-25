@@ -1,0 +1,31 @@
+#wrapper {
+	width: auto;
+	height: auto;
+	background-color: rgba(193,193,193,1.00);
+}
+#main{
+	width: 90%;
+	margin-left: 5%;
+	height: 1000px;
+	background-color: #7ec252;
+}
+h1{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align-last: center;
+	padding-top: 1em;
+}
+iframe{
+	width: 50%;
+	height: 400px;
+	margin-left: 2%;
+	float: left;
+}
+button{
+	float: left;
+	width: 15%;
+	margin-left: 10%;
+	margin-bottom: 3%;
+}
+

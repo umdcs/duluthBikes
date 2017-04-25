@@ -1,0 +1,24 @@
+{
+  "name": "duluthbikes",
+  "version": "1.0.0",
+  "description": "node server for our apps RESTfulAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start":"forever start -al forever.log -o log/out.log -e log/error.log index.js",
+	"stop":"forever stop index.js"  
+  },
+  "repository": {
+    "type": "git",
+    "url": "duluthbikes"
+  },
+  "author": "clark",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongodb": "^3.4.3",
+    "mongojs": "^2.4.0",
+    "socket.io": "^1.7.3"
+  }
+}

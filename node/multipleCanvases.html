@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title> Pictures </title>
+    </head>
+
+    <body width = 0 height = 0>
+        <h1 id = "h1">Picture Dashboard</h1>
+        <canvas id ="picCanvs" width="500" height="500"></canvas>
+    </body>
+
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+        for(var i = 0; i <100; i++) {
+                var canvas = document.createElement('picCanvs');
+                canvas.id = "CanvasLayer" + i;
+                canvas.style.border = "1px solid";
+                canvas.width = 500; // does not change size.
+                canvas.height = 500;
+                var body = document.getElementsByTagName("body")[0];
+                document.body.appendChild(canvas);
+                CanvasLayer = document.getElementById("CanvasLayer"+i);
+        }
+    </script>
+</html>

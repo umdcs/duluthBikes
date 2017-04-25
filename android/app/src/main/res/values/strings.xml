@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">DuluthBikes</string>
+    <string name="title_activity_maps">Duluth Bikes</string>
+
+    <string-array name="Options">
+        <item>Events</item>
+        <item>Reports</item>
+        <item>Get a Discount</item>
+        <item>Tours</item>
+        <item>About</item>
+    </string-array>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="settings">Settings</string>
+    <string name="settings2">Settings2</string>
+    <string name="settings3">Settings3</string>
+
+
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to Drawer -->
+    <string name="home">Home</string>
+    <string name="events">Events</string>
+    <string name="report">Report Road</string>
+    <string name="tours">Tours</string>
+    <string name="discount">Get Discount</string>
+    <string name="reportApp">Report App</string>
+    <string name="about">About</string>
+    <string name="rideHistory">Ride History</string>
+
+    <!-- Other Strings -->
+    <string name="START">START</string>
+    <string name="Pause">Pause</string>
+    <string name="Resume">RESUME</string>
+    <string name="Stats">Stats</string>
+    <string name="Finish">Finish</string>
+    <string name="Speed">Speed</string>
+    <string name="Distance">Distance</string>
+    <string name="image">image</string>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="skip_sign_in">Skip Sign In</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+
+
+    <!-- Strings for stats-->
+    <string name="distanceLabel">Distance\n(km):</string>
+    <string name="timelapseLabel">Time Lapsed:</string>
+    <string name="avSpeedLabel">Avg Speed\n(km/hour):</string>
+    <string name="startFinish">Times:</string>
+    <string name="sTimeLabel">Start:</string>
+    <string name="fTimeLabel">Finish:</string>
+    <string name="totDistLabel">Total distance:</string>
+    <string name="totTimeLabel">Total time:</string>
+    <string name="DONE">DONE</string>
+
+    <string name="DisclaimerReportApp">This app is in a development stage.
+        However, we would like to hear what you think about it.
+        Please provide your feedback via Google Form by following the link below.
+        Thank you!</string>
+    <string name="feedbackLink"><a href="https://goo.gl/forms/NlAyjQBkhZ9iLqUm1">Feedback Form</a></string>
+
+    <string name="About1">This is a campaign app developed for Duluth Bikes Coalition to improve head count campaigns.
+The main goal is to collect information about rides and use that data for cycling advocacy in Duluth.</string>
+    <string name="About2">SECURITY</string>
+    <string name="About3">This app does not encrypt data when sending to a server.</string>
+    <string name="About4">RIDE RECORDING</string>
+    <string name="About5">After clicking START, you need to click FINISH for the ride to be sent up to a database.
+        The app will ask you to give permission to use location.</string>
+    <string name="About6">REPORT ROADS</string>
+    <string name="About7">Report road issues by sending a photo and description of a problem to Duluth Bikes.</string>
+    <string name="About8">REPORT APP</string>
+    <string name="About9">For testing purposes, report issues with the app using Google form.
+        Hyperlink is posted under Report App section.</string>
+    <string name="About10">EVENTS</string>
+    <string name="About11">Learn about news and upcoming cycling events.
+        Data is pulled from Duluth Bikes website.</string>
+    <string name="About12">DISCOUNTS</string>
+    <string name="About13">Look for businesses which provide discounts for cyclists.</string>
+
+    <string name="IntroMessage">Every ride that you record helps to make Duluth a place where
+        bicycling is easy, safe, and fun for everyone.\nThank you for driving change!</string>
+
+    <string name="lifetimeStats_file_key">com.example.duluthbikes.LIFETIMESTATS_FILE_KEY</string>
+    <string name="lifetimeStats_totDist">totalDistance</string>
+    <string name="lifetimeStats_totTime">totalTime</string>
+    <string name="lifetimeStats_rideNumber">rideNumber</string>
+    <string name="km">km</string>
+    <string name="miles">miles</string>
+    <string name="kmh">km/h</string>
+    <string name="milesh">miles/h</string>
+
+</resources>

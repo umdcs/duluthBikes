@@ -1,0 +1,96 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Duluth Bikes Map</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+<body>
+
+<div id='map'></div>
+<div id='data'></div>
+</body>
+<script>
+function init(callback){
+var socket = io();
+var myLatLng = new google.maps.LatLng(46.814923,-92.080371);
+  var mapOptions = {
+    zoom: 15,
+    center: myLatLng,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
+var heatmap = new HeatmapOverlay(map,
+        {
+        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+        "radius": .000035,
+        "maxOpacity": .9,
+	"minOpacity": .1,
+        // scales the radius based on map zoom
+        "scaleRadius":true,
+        // if set to false the heatmap uses the global maximum for colorization
+        // if activated: uses the data maximum within the current map boundaries
+        //   (there will always be a red spot with useLocalExtremas true)
+        "useLocalExtrema": false,
+	gradient:{'.95':'blue','.995':'green','.999':'red'},
+	blur:1,
+        // which field name in your data represents the latitude - default "lat"
+        latField: 'lat',
+        // which field name in your data represents the longitude - default "lng"
+        lngField: 'lng',
+	valueField:'count'
+        }
+        );
+
+socket.on('FullRidesRecorded',function(result){
+        var arrayRide = [];
+        var ra = [];
+
+        for(var i=0;i<result.length;i++)
+        {
+        arrayRide = result[i]['ride'];
+	var a = arrayRide
+        if(a!=null){
+	ra = ra.concat(arrayRide);
+        }
+	}
+
+        var data = {
+	data:ra
+        }
+
+        heatmap.setData(data);
+	document.getElementById("data").innerHTML = heatmap.getData();
+	
+});
+
+}
+
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ">
+    </script>
+<script src="/heatmapfiles"></script>
+<script src="/heatmapfilesgmaps"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+    init();
+  });
+</script>
+</html>

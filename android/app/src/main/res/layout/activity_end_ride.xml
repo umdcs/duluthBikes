@@ -1,0 +1,235 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:text="DD/MM/YY"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:id="@+id/label"
+            android:layout_margin="5dp"
+            android:layout_below="@id/dateLabel">
+
+            <TextView
+                android:id="@+id/distanceLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back"
+                android:text="@string/distanceLabel"
+                android:textAlignment="4"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/avSpeedLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back"
+                android:textSize="20sp"
+                android:text="@string/avSpeedLabel"
+                android:textAlignment="4"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:id="@+id/labeltext"
+            android:layout_below="@+id/label"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0.00"
+                android:textAlignment="4"
+                android:textSize="60dp"
+                android:background="@drawable/back"/>
+
+            <TextView
+                android:id="@+id/averageSpeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="4"
+                android:layout_weight="1"
+                android:text="0.00"
+                android:textSize="60dp"
+                android:background="@drawable/back"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_below="@+id/labeltext"
+            android:id="@+id/times"
+            android:layout_margin="5dp"
+            android:background="@drawable/back">
+
+            <TextView
+                android:id="@+id/startTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sTimeLabel"
+                android:layout_weight=".2"
+                android:textAlignment="textEnd"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/startTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".8"
+                android:text="00:00:00"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/finishTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="@string/fTimeLabel"
+                android:textAlignment="textEnd"
+                android:layout_weight=".2"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/endTime"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_weight=".8"
+                android:text="00:00:00"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/times"
+            android:weightSum="2"
+            android:orientation="vertical"
+            android:id="@+id/elapsedtime"
+            android:background="@drawable/back"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/timeLapseLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/timelapseLabel"
+                android:textSize="25dp"
+                android:textAlignment="4"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/timeLapsed"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="4"
+                android:layout_weight="1"
+                android:text="00:00:00"
+                android:textSize="50sp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="doneWithRide"
+            android:text="@string/DONE"
+            android:layout_below="@id/elapsedtime"
+            android:background="@drawable/buttons"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button2"
+            android:id="@+id/timeTotals"
+            android:weightSum="2"
+            android:background="@drawable/back"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/totTimeLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/totTimeLabel"
+                android:textAlignment="textEnd"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_weight=".7"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/totalTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:text="00:00"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeTotals"
+            android:weightSum="2"
+            android:background="@drawable/back"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:id="@+id/totDistanceLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/totDistLabel"
+                android:textAlignment="textEnd"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/totalDistance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:text="0.00"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

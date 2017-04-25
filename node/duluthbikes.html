@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Duluth Bikes</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+#wrapper {
+        width: 95%;
+        height: 96%;
+	position:absolute;
+	margin-left:2%;
+        background-color: rgba(193,193,193,1.00);
+}
+#main{
+        width: 93%;
+	height: 96%;
+	margin-left: 3%;
+	margin-top:1%;
+	position:absolute;
+        background-color: #191919;
+}
+h1{
+        width: 98%;
+	height: 19%;
+	margin-left: 1%;
+        text-align: center;
+	background-color:#707177;
+}
+iframe{
+        width: 78%;
+	height: 77%;
+	position:absolute; 
+        margin-left: 1%;
+	background-color:rgba(193,193,193,1.00);
+}
+button{
+        width: 9%;
+	height: 50px;
+	float: left;
+	margin-left:80%;
+        margin-bottom: 10px;
+}
+#RB{
+	width: 9%;
+	height: 50px;
+	float: left;
+	margin-left: 1%;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+<div id="wrapper">
+
+	<div id="main">
+	
+	<div id="border">
+	<h1 class="haha"><a href="http://duluthbikes.org">Duluth Bikes</a><br/>App Dashboard</h1>
+	</div>
+
+	<div>
+	<iframe id="map" src='http://ukko.d.umn.edu:23405/maps'></iframe>
+	</div>
+	
+	<div>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/maps')">
+	Heat Map</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/fullride')">
+    R Rides</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/rides')">
+	Polyline</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/raw')">
+	R Points</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/heatmaps')">
+	Heat GMap</button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/fulllatlng')">
+	R LatLng</button>
+	<button onClick="changeContent('http://ukko.d.umn.edu:23405/pictures')">
+	Pictures </button>
+	<button id="RB" onClick="changeContent('http://ukko.d.umn.edu:23405/usernames')">
+	Users </button>
+	</div>
+
+	</div>
+</div>
+<script src="/heatmapfiles"></script>
+<script>
+var heat = h337.create({
+	container:document.querySelector('.haha'),
+	radius: 10,
+	opacity:.5,
+	blur:1
+	
+});
+document.querySelector('.haha').onmousemove = function(e){
+
+	heat.addData({
+		x: e.layerX,
+		y: e.layerY,
+		value: 1
+});
+};
+
+</script>
+<script>
+	function changeContent(theSRC){
+		document.getElementById('map').src = theSRC;
+	}
+	</script>
+</body>
+</html>

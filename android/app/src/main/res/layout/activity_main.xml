@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/nav_bar_drawable"
+        android:weightSum="3">
+
+        <ToggleButton
+            android:id="@+id/togglePause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttons"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:background="@drawable/ic_photo_camera_black_24dp"
+            android:layout_marginBottom="-5dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/displayStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/buttons"
+            android:textColor="@color/white"
+            android:text="@string/Stats"
+            android:onClick="changeUI"/>
+
+            <!--android:onClick="pictureButton" HI CLARK-->
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tvStats"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:background="@color/lightgrey">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleStats"
+            android:text="@string/Stats"
+            android:textSize="30dp"
+            android:textAllCaps="true"
+            android:textColor="@color/navyBlue"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Speed: "
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                android:textColor="@color/duluthBikesDarkBlue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/speed"
+                android:text="@string/Speed"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="@color/navyBlue"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Distance: "
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                android:textColor="@color/duluthBikesDarkBlue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/distanceMain"
+                android:text="@string/Distance"
+                android:layout_weight="1"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:textColor="@color/navyBlue"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    </FrameLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:tools="http://schemas.android.com/tools">
+
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context="com.example.sam.duluthbikes.MainActivity" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/greyOpacityScreen"
+            android:id="@+id/cancelGrey"
+            android:orientation="horizontal"></LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:id="@+id/cancelButton">
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel\nRide"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:onClick="cancelTheRide"
+                    android:background="@drawable/cancel_button"
+                    android:textColor="@color/white"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="40dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="165sp"
+                    android:textColor="#55000000"
+                    android:layout_marginTop="-39dp"/>
+
+            </FrameLayout>
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/finish_button"
+            android:onClick="endRide"
+            android:text="@string/Finish"
+            android:textColor="@color/white" />
+        </RelativeLayout>
+
+</LinearLayout>

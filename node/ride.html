@@ -1,0 +1,275 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Duluth Bikes Map</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map-canvas {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&libraries=visualization"></script>
+<script>
+var x=0;
+var map;
+var prepath;
+var path = null;
+var socket = io();
+function initialize() {
+  var myLatLng = new google.maps.LatLng(46.7867,-92.1005);
+  var mapOptions = {
+    zoom: 11,
+    center: myLatLng,
+    mapTypeId: google.maps.MapTypeId.TERRAIN,
+    styles:
+	[
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.natural",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.natural",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+]
+  };
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+}
+
+socket.on('FullRidesRecorded',function(result){
+	//var listRides = JSON.parse(result);
+	var arrayRide = [];
+	var n=0;
+	for(var i=0;i<result.length;i++)
+{
+	
+	var j = result.length;
+	arrayRide = result[i]['ride'];
+	arr = arrayRide;
+	if(arr!=null){
+	if(arr.length>10){
+	if(n==26||i==121||i==122){}
+	else if(n%12==0){
+	var poly = new google.maps.Polyline({
+			strokeColor: '#FF0000',
+			strokeOpacity:1.0,
+			strokeWeight:2,
+			path:arrayRide,
+			map:map	
+	});
+	}
+	else if(n%12==1){
+	var poly = new google.maps.Polyline({
+                        strokeColor: '#6D0000',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==2){
+	var poly = new google.maps.Polyline({
+                        strokeColor: '#000000',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==3){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#FF5000',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==4){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#32FF00',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==5){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#0000FF',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==6){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#8000FF',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==7){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#ff00ff',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==8){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#0f4f00',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==9){
+	var poly = new google.maps.Polyline({
+                        strokeColor: '#06ad68',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else if(n%12==10){
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#6eaa06',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+	else {
+        var poly = new google.maps.Polyline({
+                        strokeColor: '#ff7777',
+                        strokeOpacity:1.0,
+                        strokeWeight:2,
+                        path:arrayRide,
+                        map:map
+        });
+        }
+
+	n++;
+	}}
+
+}
+map.data.toGeoJson(function(doc){
+	var heat = new google.maps.visualization.HeatmapLayer({
+		data: doc,
+		map:map
+});
+
+});
+
+});
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaJOhfok46GKmQ0sqvqzBFJ8VyWcJltJQ&callback=initialize&libraries=visualization">
+    </script>
+
+
+  <body>
+     <div id='map-canvas'></div>
+	<div id='test'></div>
+  </body>
+</html>
