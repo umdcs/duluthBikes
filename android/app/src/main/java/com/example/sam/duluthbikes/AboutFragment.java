@@ -26,9 +26,10 @@ public class AboutFragment extends Fragment {
         description.setText(String.format(getString(R.string.About1)) + "\n\n" + String.format(getString(R.string.About2)) + "\n" +
         String.format(getString(R.string.About3))+ "\n\n"+
         String.format(getString(R.string.About4))+"\n" + String.format(getString(R.string.About5)) + "\n\n"+
-                String.format(getString(R.string.About8))+"\n" + String.format(getString(R.string.About9)) + "\n\n"+
-                String.format(getString(R.string.About10))+"\n" + String.format(getString(R.string.About11)) + "\n\n"+
-                String.format(getString(R.string.About12))+"\n" + String.format(getString(R.string.About13))
+        String.format(getString(R.string.About6))+"\n" + String.format(getString(R.string.About7)) + "\n\n"+
+        String.format(getString(R.string.About8))+"\n" + String.format(getString(R.string.About9)) + "\n\n"+
+        String.format(getString(R.string.About10))+"\n" + String.format(getString(R.string.About11)) + "\n\n"+
+        String.format(getString(R.string.About12))+"\n" + String.format(getString(R.string.About13))
         );
 
         return myView;
