@@ -11,7 +11,7 @@ public class UnitConverter {
         int min = (int) ((time / (1000*60)) % 60);
         int hours = (int) ((time / (1000*60*60)) % 24);
 
-        String converted = Integer.toString(hours)+"h "+Integer.toString(min)+"min "+Integer.toString(sec)+"sec";
+        String converted = Integer.toString(hours)+"H "+Integer.toString(min)+"M "+Integer.toString(sec)+"S";
         return converted;
     }
 
