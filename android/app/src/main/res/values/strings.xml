@@ -28,12 +28,13 @@
     <string name="tours">Tours</string>
     <string name="discount">Get Discount</string>
     <string name="reportApp">Report App</string>
-    <string name="about">About Us</string>
+    <string name="about">About</string>
     <string name="rideHistory">Ride History</string>
 
     <!-- Other Strings -->
     <string name="START">START</string>
     <string name="Pause">Pause</string>
+    <string name="Resume">RESUME</string>
     <string name="Stats">Stats</string>
     <string name="Finish">Finish</string>
     <string name="Speed">Speed</string>
@@ -58,13 +59,14 @@
 
 
     <!-- Strings for stats-->
-    <string name="distanceLabel">Distance (km): </string>
-    <string name="timelapseLabel">Time Lapsed: </string>
-    <string name="avSpeedLabel">Average Speed (km/hour): </string>
-    <string name="sTimeLabel">Start Time: </string>
-    <string name="fTimeLabel">Finish Time: </string>
-    <string name="totDistLabel">Total distance: </string>
-    <string name="totTimeLabel">Total time: </string>
+    <string name="distanceLabel">Distance\n(km):</string>
+    <string name="timelapseLabel">Time Lapsed:</string>
+    <string name="avSpeedLabel">Avg Speed\n(km/hour):</string>
+    <string name="startFinish">Times:</string>
+    <string name="sTimeLabel">Start:</string>
+    <string name="fTimeLabel">Finish:</string>
+    <string name="totDistLabel">Total distance:</string>
+    <string name="totTimeLabel">Total time:</string>
     <string name="DONE">DONE</string>
 
     <string name="DisclaimerReportApp">This app is in a development stage.
@@ -73,7 +75,7 @@
         Thank you!</string>
     <string name="feedbackLink"><a href="https://goo.gl/forms/NlAyjQBkhZ9iLqUm1">Feedback Form</a></string>
 
-    <string name="About1">This is a campaign developed for Duluth Bikes club to replace head count campaigns.
+    <string name="About1">This is a campaign app developed for Duluth Bikes club to replace head count campaigns.
 The main goal is to collect information about rides and use that data for cycling advocacy in Duluth.</string>
     <string name="About2">SECURITY</string>
     <string name="About3">This app does not encrypt data when sending to the server.</string>
@@ -90,6 +92,9 @@ The main goal is to collect information about rides and use that data for cyclin
         Data is pulled from Duluth Bikes webpage.</string>
     <string name="About12">DISCOUNTS</string>
     <string name="About13">Look for businesses which provide discounts for cyclists.</string>
+
+    <string name="IntroMessage">Every ride that you record helps to make Duluth a place where
+        bicycling is easy, safe, and fun for everyone.\nThank you driving a change!</string>
 
     <string name="lifetimeStats_file_key">com.example.duluthbikes.LIFETIMESTATS_FILE_KEY</string>
     <string name="lifetimeStats_totDist">totalDistance</string>
