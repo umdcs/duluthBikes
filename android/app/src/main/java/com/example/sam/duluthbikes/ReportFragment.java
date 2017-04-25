@@ -97,8 +97,10 @@ public class ReportFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 takePictureButton.setVisibility(View.INVISIBLE);
-                if (ContextCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                if ((ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)&&
+                        (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
                     LocationManager lm = (LocationManager)getContext().getSystemService(getContext().LOCATION_SERVICE);
                     Criteria criteria = new Criteria();
                     criteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -112,10 +114,11 @@ public class ReportFragment extends Fragment {
                     //Location loc = mPresenter.getLocationForCamera(); //WILL BE FIXING -sam
                     startCamera();
                 } else {
-                    CharSequence text = "You need to grant camera permissions";
+                    CharSequence text = "You need to grant camera and storage permissions";
                     Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_SHORT);
                     toast.show();
                     requestCameraPermission();
+                    takePictureButton.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -190,6 +193,12 @@ public class ReportFragment extends Fragment {
                     new String[]{Manifest.permission.CAMERA},
                     MY_PERMISSIONS_REQUEST_CAMERA);
         }
+        if (ContextCompat.checkSelfPermission(this.getContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this.getActivity(),
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+        }
     }
 
     public void compressImage() throws FileNotFoundException {
@@ -197,7 +206,7 @@ public class ReportFragment extends Fragment {
         bm = BitmapFactory.decodeFile(path);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,50,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG,35,baos);
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
     }
