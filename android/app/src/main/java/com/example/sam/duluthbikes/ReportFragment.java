@@ -206,7 +206,7 @@ public class ReportFragment extends Fragment {
         bm = BitmapFactory.decodeFile(path);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,35,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG,33,baos);
         byte[] b = baos.toByteArray();
         encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
     }
