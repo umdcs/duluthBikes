@@ -18,8 +18,7 @@
             android:layout_alignParentTop="true"
             android:textAlignment="center"
             android:textSize="40sp"
-            android:text="0000"/>
-
+            android:text="DD/MM/YY"/>
 
         <LinearLayout
             android:layout_width="fill_parent"

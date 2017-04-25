@@ -94,7 +94,7 @@ The main goal is to collect information about rides and use that data for cyclin
     <string name="About13">Look for businesses which provide discounts for cyclists.</string>
 
     <string name="IntroMessage">Every ride that you record helps to make Duluth a place where
-        bicycling is easy, safe, and fun for everyone.\nThank you driving a change!</string>
+        bicycling is easy, safe, and fun for everyone.\nThank you for driving change!</string>
 
     <string name="lifetimeStats_file_key">com.example.duluthbikes.LIFETIMESTATS_FILE_KEY</string>
     <string name="lifetimeStats_totDist">totalDistance</string>
