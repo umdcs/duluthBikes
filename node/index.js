@@ -173,7 +173,14 @@ app.post('/postpicture', function(req,res){
 });
 
 app.get('/pictures',function(req,res){
+	
+	// 1.// THE FOLLOWING IS FOR ACCESSING DB. ( CURRENTLY DOES NOT ACCESS - PICS HARDCODED.)
 	res.sendFile(__dirname +'/threepics.html'); // Will try and use if we can use Canvas element - HTML5
+	printPictures('PicturesSaved',function(doc){
+	io.emit('PicturesSaved',doc);
+	});
+
+	// 2.// THE FOLLOWING WILL PRINT THE RAW PICTURE DATA STORED IN DB
 	//var pics = printPictures('PicturesSaved',function(result){
     //    res.write('<HTML><head><title>Duluth Bikes DashBoard</title></head><BODY>'
     //        +'<H1>Pictures.</H1>');
