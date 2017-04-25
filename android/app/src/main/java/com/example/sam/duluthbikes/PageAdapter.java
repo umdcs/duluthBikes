@@ -20,14 +20,14 @@ public class PageAdapter  extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                PolyTabFragment polyTabFragment = new PolyTabFragment();
-                return polyTabFragment;
+                UserTabFragment userTabFragment = new UserTabFragment();
+                return userTabFragment;
             case 1:
                 HeatTabFragment heatTabFragment = new HeatTabFragment();
                 return heatTabFragment;
             case 2:
-                UserTabFragment userTabFragment = new UserTabFragment();
-                return userTabFragment;
+                PolyTabFragment polyTabFragment = new PolyTabFragment();
+                return polyTabFragment;
             default:
                 return null;
         }
