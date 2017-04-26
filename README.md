@@ -23,7 +23,6 @@ References
 Heatmap is created using Heatmap.js open source library - https://www.patrick-wied.at/static/heatmapjs/
 
 
-License
 -
 
 Current State of Project
